@@ -2,12 +2,10 @@ const mongoose = require('mongoose');
 
 const itemSchema = mongoose.Schema({
     name: {
-        type: String,
-        required: true
+        type: String, required: true
     },
     date: {
-        type: Date,
-        default: Date.now()
+        type: Date, default: Date.now()
     }
 });
 
