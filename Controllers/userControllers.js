@@ -23,23 +23,23 @@ passport.use(new GoogleStrategy({
     callbackURL: '/auth/google/redirect',
     clientID: keys.google.clientID,
     clientSecret: keys.google.clientSecret
-}, (accessToken, refreshToken, profile, done) => {
+}, (req, accessToken, refreshToken, profile, done) => {
     // Check if the User already exists in the database
     User.findOne({googleId: profile.id})
     .exec()
     .then(currentUser => {
         if(currentUser) {
-            console.log('This is the current User: ' + currentUser);
+            console.log('This is the current User from google: ' + currentUser);
             done(null, currentUser);
         } else {
             const newUser = new User({
-                username: profile.displayName,
+                g_username: profile.displayName,
                 googleId: profile.id,
-                image: profile._json.image.url
+                g_mage: profile._json.image.url
             });
             return newUser.save()
             .then(result => {
-                console.log('New User created ' + result);
+                console.log('New User created from google' + result);
                 done(null, result);
             })
             .catch(err => {
@@ -58,6 +58,32 @@ passport.use(new FacebookStrategy({
     clientSecret: keys.facebook.clientSecret,
     callbackURL: '/auth/facebook/redirect',
     profileFields: ['id', 'displayName', 'picture', 'email']
-}, (accessToken, refreshToken, profile, done) => {
+}, (req, accessToken, refreshToken, profile, done) => {
+    // Check if the User already exists in the database
+    User.findOne({facebookId: profile.id})
+    .exec()
+    .then(currentUser => {
+        if(currentUser) {
+            console.log('This is the current User from facebook: ' + currentUser);
+            done(null, currentUser);
+        } else {
+            const newUser = new User({
+                f_username: profile.displayName,
+                facebookId: profile.id,
+                f_image: profile.photos[0].value
+            });
+            return newUser.save()
+            .then(result => {
+                console.log('New User created from facebook' + result);
+                done(null, result);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        }
+    })
+    .catch(err => {
+        console.log(err);
+    });
    console.log(profile);
 }))

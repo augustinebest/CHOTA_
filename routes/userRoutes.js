@@ -20,6 +20,8 @@ router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
     res.redirect('/profile/' + req.user._id);
 })
 
+
+
 // For Facebook
 
 router.get('/facebook', passport.authenticate('facebook', { 
@@ -28,8 +30,9 @@ router.get('/facebook', passport.authenticate('facebook', {
 
 // Callback route for redirect
 router.get('/facebook/redirect', passport.authenticate('facebook'), (req, res) => {
-    // res.redirect('/profile/' + req.user._id);
-    res.send('You reached here');
+    res.redirect('/profile/'+req.user._id);
+    // res.send('You reached here');
+    // res.send(req.user);
 })
 
 module.exports = router;

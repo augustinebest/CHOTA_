@@ -8,7 +8,7 @@ const path = require('path');
 const passport = require('passport');
 const app = express();
 const passportSetup = require('./Controllers/userControllers');
-
+const keys = require('./config/keys');
 
 //require routes
 const itemRoutes = require('./routes/item');
@@ -17,17 +17,17 @@ const profileRoutes = require('./routes/profileRoutes');
 
 //Connecting to the local database
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/mernCart', { useNewUrlParser: true }); 
+// mongoose.connect('mongodb://localhost:27017/mernCart', { useNewUrlParser: true }); 
 
 // Connection to mlab
-// mongoose.connect('mongodb://chotaapp:chota123@ds033484.mlab.com:33484/chota', { useNewUrlParser: true })
+mongoose.connect(keys.mongodb, { useNewUrlParser: true });
 
 //Body-parser Middleware
 app.use(bodyparser.urlencoded({extended: false}));
 app.use(bodyparser.json());
 
 // View Engine
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs');   
 
 //Set public folder
 app.use(express.static(path.join(__dirname, 'public')));

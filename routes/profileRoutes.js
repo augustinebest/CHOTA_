@@ -31,7 +31,7 @@ router.get('/:id', (req, res) => {
     .catch(err => {
         console.log('There exists an error somewhere!');
     });
-    // res.send(req.user);
+    // res.send('you have reached '+req.user);
 });
 
 
