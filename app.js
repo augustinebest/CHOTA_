@@ -1,4 +1,5 @@
 const express = require('express');
+const expressSession = require('express-session');
 const bodyparser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -14,6 +15,7 @@ const keys = require('./config/keys');
 const itemRoutes = require('./routes/item');
 const userRoutes = require('./routes/userRoutes');
 const profileRoutes = require('./routes/profileRoutes');
+const interestRoutes = require('./routes/interestRoutes');
 
 //Connecting to the local database
 mongoose.Promise = global.Promise;
@@ -32,6 +34,12 @@ app.set('view engine', 'ejs');
 //Set public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(expressSession({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true
+}));
+
 // Initializing passport
 app.use(passport.initialize());
 app.use(passport.session());
@@ -40,7 +48,7 @@ app.use(passport.session());
 app.use('/item', itemRoutes);
 app.use('/auth', userRoutes);
 app.use('/profile', profileRoutes);
-
+app.use('/interest', interestRoutes);
 
 //CORS ERRORS
 app.use((req, res, next) => {
