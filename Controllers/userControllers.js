@@ -33,9 +33,10 @@ passport.use(new GoogleStrategy({
             done(null, currentUser);
         } else {
             const newUser = new User({
-                g_username: profile.displayName,
+                username: profile.displayName,
+                email: profile.emails[0].value,
                 googleId: profile.id,
-                g_mage: profile._json.image.url
+                image: profile._json.image.url
             });
             return newUser.save()
             .then(result => {
@@ -50,6 +51,7 @@ passport.use(new GoogleStrategy({
     .catch(err => {
         console.log(err);
     });
+    console.log(profile);
 }));
 
 // Facebook Authentication
@@ -57,9 +59,9 @@ passport.use(new FacebookStrategy({
     clientID: keys.facebook.clientID,
     clientSecret: keys.facebook.clientSecret,
     callbackURL: '/auth/facebook/redirect',
-    profileFields: ['id', 'displayName', 'picture', 'email']
+    profileFields: ['id', 'displayName', 'picture', 'emails']
 }, (req, accessToken, refreshToken, profile, done) => {
-    // Check if the User already exists in the database
+//     // Check if the User already exists in the database
     User.findOne({facebookId: profile.id})
     .exec()
     .then(currentUser => {
@@ -68,9 +70,10 @@ passport.use(new FacebookStrategy({
             done(null, currentUser);
         } else {
             const newUser = new User({
-                f_username: profile.displayName,
+                username: profile.displayName,
+                email: profile.emails[0].value,
                 facebookId: profile.id,
-                f_image: profile.photos[0].value
+                image: profile.photos[0].value
             });
             return newUser.save()
             .then(result => {
@@ -87,3 +90,20 @@ passport.use(new FacebookStrategy({
     });
    console.log(profile);
 }))
+
+// Search for a user 
+exports.searchUser = (req, res) => {
+    const userId = { _id: req.body.userid };
+    User.find(userid)
+    .exec()
+    .then(user => {
+        if(user) {
+            console.log(user);
+        } else {
+            console.log('This user does not exist!');
+        }
+    })
+    .catch();
+}
+
+// adding 
