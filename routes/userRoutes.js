@@ -12,12 +12,12 @@ router.get('/logout', (req, res) => {
 })
 
 router.get('/google', passport.authenticate('google', {
-    scope: ['profile']
+    scope: ['profile', 'email']
 }))
 
 // Callback route for redirect
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-    res.redirect('/profile/' + req.user._id);
+    res.redirect('/interest/');
 })
 
 
@@ -25,14 +25,12 @@ router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
 // For Facebook
 
 router.get('/facebook', passport.authenticate('facebook', { 
-    scope: ['user_friends', 'manage_pages'] 
+    scope: ['user_friends', 'manage_pages', 'email'] 
 }))
 
 // Callback route for redirect
 router.get('/facebook/redirect', passport.authenticate('facebook'), (req, res) => {
-    res.redirect('/profile/'+req.user._id);
-    // res.send('You reached here');
-    // res.send(req.user);
+    res.redirect('/interest/');
 })
 
 module.exports = router;
