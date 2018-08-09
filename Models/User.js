@@ -2,12 +2,13 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = mongoose.Schema({
-   g_username: { type: String, default: null },
-   googleId: { type: String, default: null },
-   g_image: { type: String, default: null },
-   f_username: { type: String, default: null },
-   facebookId: { type: String, default: null },
-   f_image: { type: String, default: null },
+    username: { type: String},
+    email: { type: String},
+    image: { type: String},
+    facebookId: { type: String},
+    googleId: { type: String},
+    interest: [{ type: mongoose.Schema.Types.ObjectId }],
+    friends: [{ type: mongoose.Schema.Types.ObjectId }]
 });
 
 
