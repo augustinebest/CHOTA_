@@ -51,7 +51,6 @@ passport.use(new GoogleStrategy({
     .catch(err => {
         console.log(err);
     });
-    console.log(profile);
 }));
 
 // Facebook Authentication
