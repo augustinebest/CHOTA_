@@ -4,14 +4,12 @@ const checkAuth = require('../checkAuth/checkAuth');
 const interestController = require('../Controllers/interestControllers');
 const path = require('path');
 const multer = require('multer');
-// const upload = multer({ dest: 'uploads/' });
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads/');
     },
     filename: function(req, file, cb) {
-        // cb(null, file.originalname);
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
 });
@@ -34,6 +32,7 @@ const upload = multer({
  
 router.post('/', upload.single('image'), interestController.addInterest);
 router.get('/', interestController.getAllInterest);
+router.patch('/:id', interestController.editInterest);
 router.delete('/:id', interestController.deleteInterest);
 
 module.exports = router;
