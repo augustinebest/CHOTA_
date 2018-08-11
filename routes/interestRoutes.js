@@ -31,8 +31,8 @@ const upload = multer({
  });
  
 router.post('/', upload.single('image'), interestController.addInterest);
-router.get('/', interestController.getAllInterest);
-router.patch('/:id', interestController.editInterest);
+router.get('/',  interestController.getAllInterest);
+router.patch('/:id', upload.single('image'), interestController.editInterest);
 router.delete('/:id', interestController.deleteInterest);
 
 module.exports = router;
