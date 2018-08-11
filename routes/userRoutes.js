@@ -30,6 +30,7 @@ router.get('/facebook', passport.authenticate('facebook', {
 
 // Callback route for redirect
 router.get('/facebook/redirect', passport.authenticate('facebook'), (req, res) => {
+    // console.log(req.user);
     res.redirect('/interest/');
 })
 
