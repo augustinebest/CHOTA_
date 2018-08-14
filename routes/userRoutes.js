@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const userController = require('../Controllers/userControllers');
+var jwt = require('jsonwebtoken');
+const secret = 'secretkey';
 
 // For google
 router.get('/login', (req, res) => {
@@ -36,7 +38,8 @@ router.get('/facebook', passport.authenticate('facebook', {
 // Callback route for redirect
 router.get('/facebook/redirect', passport.authenticate('facebook'), (req, res) => {
     // console.log(req.user);
-    res.redirect('/interest/');
+    const token = jwt.sign({email : req.user.email,image :req.user.image, username: req.user.username}, secret, {expiresIn: '24hr'});
+    res.redirect('/interest/' + token );
 })
 
 
