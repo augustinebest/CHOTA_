@@ -65,7 +65,7 @@ app.use((req, res, next) => {
 })
 
 app.get('/', function(req, res) {
-    res.send('<h1>Welcome to Chota!</h1>');
+    res.render("index");
 })
 
 app.use((req, res, next) => {
