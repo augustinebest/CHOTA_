@@ -42,6 +42,7 @@ exports.editInterest = (req, res, next) => {
         image: req.file.path
     }
     Interest.findById(id)
+    .select('name image _id')
     .exec()
     .then(result => {
         try{
