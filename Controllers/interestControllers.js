@@ -24,6 +24,7 @@ exports.addInterest = (req, res, next) => {
 
 exports.getAllInterest = (req, res, next) => {
     Interest.find({})
+    .select('name image _id')
     .exec()
     .then(interest => {
         res.status(200).json(interest);
