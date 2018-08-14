@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Interest = require('../Models/interest');
 
-const getImageById = (id) => {
+const getImageById = (id, req, res) => {
     Interest.findById(id)
     .exec()
     .then(result => {
