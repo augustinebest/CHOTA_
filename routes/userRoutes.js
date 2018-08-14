@@ -24,7 +24,8 @@ router.get('/google', passport.authenticate('google', {
 
 // Callback route for redirect
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-    res.redirect('/interest/');
+    const token = jwt.sign({email : req.user.email,image :req.user.image, username: req.user.username}, secret, {expiresIn: '24hr'});
+    res.redirect('/interest/' + token );
 })
 
 
@@ -33,7 +34,10 @@ router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
 
 router.get('/facebook', passport.authenticate('facebook', { 
     scope: ['user_friends', 'manage_pages', 'email'] 
-}))
+    
+}), function(req,res){
+    res.send(req);
+})
 
 // Callback route for redirect
 router.get('/facebook/redirect', passport.authenticate('facebook'), (req, res) => {

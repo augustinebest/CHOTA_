@@ -11,6 +11,20 @@ const app = express();
 const passportSetup = require('./Controllers/userControllers');
 const keys = require('./config/keys');
 
+//CORS ERRORS
+app.use((req, res, next) => {
+    console.log('this is it')
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+        "Access-Conrol-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    );
+    if(req.method === 'OPTIONS') {
+        res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, PATCH, DELETE');
+        return res.status(200).json({});
+    }
+    next();
+})
+
 //require routes
 const itemRoutes = require('./routes/item');
 const userRoutes = require('./routes/userRoutes');
@@ -51,20 +65,10 @@ app.use('/auth', userRoutes);
 app.use('/profile', profileRoutes);
 app.use('/interest', interestRoutes);
 
-//CORS ERRORS
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-        "Access-Conrol-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-    );
-    if(req.method === 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE');
-        return res.status(200).json({});
-    }
-    next();
-})
+
 
 app.get('/', function(req, res) {
+    console.log('this is  /')
     res.send('<h1>Hello World1133!</h1>');
 })
 
