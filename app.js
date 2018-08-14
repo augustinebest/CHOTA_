@@ -20,10 +20,10 @@ const interestRoutes = require('./routes/interestRoutes');
 //Connecting to the local database
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/mernCart', { useNewUrlParser: true }); 
+// mongoose.connect('mongodb://localhost:27017/mernCart', { useNewUrlParser: true }); 
 
 // Connection to mlab
-// mongoose.connect(keys.mongodb, { useNewUrlParser: true });
+mongoose.connect(keys.mongodb, { useNewUrlParser: true });
 
 //Body-parser Middleware
 app.use(bodyparser.urlencoded({extended: false}));
