@@ -16,6 +16,8 @@ const itemRoutes = require('./routes/item');
 const userRoutes = require('./routes/userRoutes');
 const profileRoutes = require('./routes/profileRoutes');
 const interestRoutes = require('./routes/interestRoutes');
+const placeRoutes = require('./routes/placeRoutes');
+
 
 //Connecting to the local database
 
@@ -50,6 +52,8 @@ app.use('/item', itemRoutes);
 app.use('/auth', userRoutes);
 app.use('/profile', profileRoutes);
 app.use('/interest', interestRoutes);
+app.use('/place', placeRoutes);
+
 
 //CORS ERRORS
 app.use((req, res, next) => {
