@@ -1,10 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const userController = require('../Controllers/userControllers');
 
 // For google
 router.get('/login', (req, res) => {
     res.render('login');
+})
+
+router.get('/signup', (req, res) => {
+    res.render('signup');
 })
 
 router.get('/logout', (req, res) => {
@@ -33,5 +38,9 @@ router.get('/facebook/redirect', passport.authenticate('facebook'), (req, res) =
     // console.log(req.user);
     res.redirect('/interest/');
 })
+
+
+// User Add Interest
+router.post('/addInterest', userController.userAddInterest);
 
 module.exports = router;

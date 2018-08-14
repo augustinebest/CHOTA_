@@ -18,6 +18,7 @@ const profileRoutes = require('./routes/profileRoutes');
 const interestRoutes = require('./routes/interestRoutes');
 
 //Connecting to the local database
+
 mongoose.Promise = global.Promise;
 // mongoose.connect('mongodb://localhost:27017/mernCart', { useNewUrlParser: true }); 
 
