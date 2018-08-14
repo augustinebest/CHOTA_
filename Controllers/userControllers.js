@@ -3,6 +3,8 @@ const GoogleStrategy = require('passport-google-oauth20');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const keys = require('../config/keys');
 const User = require('../Models/User');
+const secret = 'secretkey';
+const jwt = require('jsonwebtoken');
 
 passport.serializeUser((user, done) => {
     // console.log(user.id);
@@ -29,7 +31,7 @@ passport.use(new GoogleStrategy({
     .exec()
     .then(currentUser => {
         if(currentUser) {
-            console.log('This is the current User from google: ' + currentUser);
+            // console.log('This is the current User from google: ' + currentUser);
             done(null, currentUser);
         } else {
             const newUser = new User({
@@ -62,10 +64,14 @@ passport.use(new FacebookStrategy({
 }, (req, accessToken, refreshToken, profile, done) => {
 //     // Check if the User already exists in the database
     User.findOne({facebookId: profile.id})
-    .exec()
+    .exec(function(err, currentUser  ) {
+        
+    })
     .then(currentUser => {
         if(currentUser) {
-            console.log('This is the current User from facebook: ' + currentUser);
+            // console.log('This is the current User from facebook: ' + currentUser);
+            const token = jwt.sign(currentUser, secret, {expiresIn: '24hr'});
+            console.log(token);
             done(null, currentUser);
         } else {
             const newUser = new User({
@@ -87,7 +93,7 @@ passport.use(new FacebookStrategy({
     .catch(err => {
         console.log(err);
     });
-   console.log(profile);
+//    console.log(profile);
 }))
 
 // Search for a user 
@@ -105,4 +111,9 @@ exports.searchUser = (req, res) => {
     .catch();
 }
 
-// adding 
+// adding interest 
+exports.userAddInterest = (req, res, next) => {
+    const interestId = [...req.body.id];
+    // console.log(req.body);
+    console.log(interestId[0]);
+}
