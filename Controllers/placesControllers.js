@@ -21,6 +21,17 @@ exports.addPlaces = (req, res, next) => {
 
 };
 
-
+exports.getAllPlaces = (req, res, next) => {
+    Place.find({})
+    .exec()
+    .then(place => {
+        res.status(200).json({
+            message:'Check it out', place
+        });
+    })
+    .catch(err => {
+        res.status(500).json({error: err})
+    });
+}
 
 
