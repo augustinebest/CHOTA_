@@ -24,10 +24,9 @@ router.get('/google', passport.authenticate('google', {
 
 // Callback route for redirect
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-    res.redirect('/interest/');
+    const token = jwt.sign({email : req.user.email,image :req.user.image, username: req.user.username}, secret, {expiresIn: '24hr'});
+    res.redirect('/interest/' + token );
 })
-
-
 
 // For Facebook
 
