@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const placeSchema = mongoose.Schema({
     name: { type: String },
-    photos: [],
+    image: [],
     description: { type: String },
     ratings: { type: Number },
-    reviews: { type: mongoose.Types.Schema.ObjectId, ref: 'reviews' },
-    mapview: '',
-})
+    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Reviews' }]
+    // mapview: '',
+});
 
 module.exports = mongoose.model('Place', placeSchema);
