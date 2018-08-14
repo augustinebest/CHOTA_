@@ -31,6 +31,7 @@ const upload = multer({
  });
  
 router.post('/', upload.single('image'), placeController.addPlaces);
+router.get('/', placeController.getAllPlaces);
 
 
 module.exports = router;
