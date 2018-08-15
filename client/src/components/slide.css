@@ -1,0 +1,33 @@
+.slide{
+    display: inline-block;
+    vertical-align: top;
+    /* border-right: 1px solid red; */
+    height: 120px;
+    /* height: 50px; */
+    width: 100%;
+    padding: px;
+    white-space: normal;
+}
+
+.slide:last-child{
+    border-right: none;
+}
+
+
+.imagetextContainerz{
+    height:230px;
+    width: 95%;
+    margin: auto;
+    border: 1px solid green;
+}
+
+
+@media ( max-width: 414px) {
+    .slide{
+        width: 45%;
+        margin-left: 19px;
+    }
+    .imagetextContainerz{
+        height: 100px;
+    }
+}
