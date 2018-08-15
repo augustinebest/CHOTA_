@@ -4,21 +4,28 @@ const Place = require('../Models/Places');
 // const deleteImage = require('../functions/delete');
 
 exports.addPlaces = (req, res, next) => {
-    // const place = new Place({
-    //     name: req.body.name,
-    //     image: req.file.path,
-    //     description: req.body.description,
-    //     reviews: req.body.reviews,
-    //     ratings: req.body.ratings
-    // });
-    // place.save()
-    // .then(result => {
-    //     res.send(result);
-    // })
-    // .catch(err => {
-    //     console.log(err);
-    // });
-    console.log(req.files);
+    // const access = new Place();
+    // // access.image;
+    // console.log(access.image);
+    // console.log(req.files);
+    var place = new Place({
+        name: req.body.name,
+        image: [],
+        description: req.body.description,
+        reviews: req.body.reviews,
+        ratings: req.body.ratings
+    });
+    req.files.forEach(element => {
+        // console.log(element.path);
+        place.image.push(element.path)
+    })
+    place.save()
+    .then(result => {
+        res.send(result);
+    })
+    .catch(err => {
+        console.log(err);
+    });
 
 };
 
