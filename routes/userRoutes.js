@@ -32,7 +32,10 @@ router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
 
 router.get('/facebook', passport.authenticate('facebook', { 
     scope: ['user_friends', 'manage_pages', 'email'] 
-}))
+    
+}), function(req,res){
+    res.send(req);
+})
 
 // Callback route for redirect
 router.get('/facebook/redirect', passport.authenticate('facebook'), (req, res) => {
