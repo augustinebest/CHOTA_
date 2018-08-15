@@ -1,4 +1,5 @@
 const Place = require('../Models/Places');
+// const Category = require('../Models/Categories');
 
 exports.addPlaces = (req, res, next) => {
     var place = new Place({
@@ -6,6 +7,7 @@ exports.addPlaces = (req, res, next) => {
         image: [],
         description: req.body.description,
         date: req.body.date,
+        categoryId: req.body.categoryId,
         reviews: req.body.reviews,
         ratings: req.body.ratings
     });
@@ -59,13 +61,13 @@ exports.getById = (req, res, next) => {
 
 exports.patchPlaces = (req, res, next) => {
     const id = req.params.placeId;
-    // const updateOps = {}; 
-    // for (const ops of req.body) {
-    //     updateOps[ops.propName] = ops.value;
-    // }
-    // Place.update({_id: id}, {$set: updateOps})
+    const updateOps = {}; 
+    for (const ops of req.body) {
+        updateOps[ops.propName] = ops.value;
+    }
+    Place.update({_id: id}, {$set: updateOps})
     //use when updating all properties 
-    Place.update({_id: id}, {$set: {name: req.body.newName,}})
+    // Place.update({_id: id}, {$set: {name: req.body.newName, description: req.body.newDescription}})
     .exec()
     .then(result => {
         console.log(result);
