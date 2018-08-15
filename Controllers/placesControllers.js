@@ -5,11 +5,12 @@ exports.addPlaces = (req, res, next) => {
         name: req.body.name,
         image: [],
         description: req.body.description,
-        date: Date.now(),
+        date: req.body.date,
         reviews: req.body.reviews,
         ratings: req.body.ratings
     });
     req.files.forEach(element => {
+        // console.log(element.path);
         place.image.push(element.path)
     })
     place.save()
@@ -58,14 +59,13 @@ exports.getById = (req, res, next) => {
 
 exports.patchPlaces = (req, res, next) => {
     const id = req.params.placeId;
-    const updateOps = {}; 
-    for (const ops of req.body) {
-        updateOps[ops.propName] = ops.value;
-    }
-    Place.update({_id: id}, {$set: updateOps})
+    // const updateOps = {}; 
+    // for (const ops of req.body) {
+    //     updateOps[ops.propName] = ops.value;
+    // }
+    // Place.update({_id: id}, {$set: updateOps})
     //use when updating all properties 
-    // Product.update({_id: id}, {$set: {name: req.body.newName, image: req.body.newImage, 
-    //description: newDescription, reviews: newReviews, ratings: newRatings}})
+    Place.update({_id: id}, {$set: {name: req.body.newName,}})
     .exec()
     .then(result => {
         console.log(result);
