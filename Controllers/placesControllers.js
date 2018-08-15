@@ -58,7 +58,7 @@ exports.getById = (req, res, next) => {
 exports.patchPlaces = (req, res, next) => {
     const id = req.params.placeId;
     const updateOps = {}; 
-    for (const ops of req.body.name) {
+    for (const ops of req.body) {
         updateOps[ops.propName] = ops.value;
     }
     Place.update({_id: id}, {$set: updateOps})
@@ -79,10 +79,13 @@ exports.patchPlaces = (req, res, next) => {
 };
 
 exports.searchPlaces = (req, res) => {
-    var name = req.params.name
-    Place.find({"name": {$regex: name, $options: 'i'}}, (err, place) => {
-        if(err) throw err;
-        res.json(place);
+    const name =  req.params.name;
+    Place.find({'name': {$regex: name, $options: 'i'}})
+    .exec()
+    .then(place => {
+        res.status(200).json(place);
     })
-    
+    .catch(err => {
+        console.log(err);
+    });
 }
