@@ -30,7 +30,7 @@ const upload = multer({
     fileFilter: fileFilter
  });
  
-router.post('/', upload.single('image'), placeController.addPlaces);
+router.post('/', upload.array('image'), placeController.addPlaces);
 router.get('/', placeController.getAllPlaces);
 // router.get('/:placeId', placeController.getById);
 router.patch('/:placeId', placeController.patchPlaces);
