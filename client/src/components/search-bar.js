@@ -1,15 +1,15 @@
 import React from 'react';
 import './search-bar.css';
 // import {Button, Jumbotron} from "react-bootstrap"
-import search from './search.png'
 
 
 const SearchBar = () => {
     return(
-       <div>
+       <form>
            <input type="text" className='searchBar'></input>
-           <img src={search} alt='image' className='search-icon'/>
-       </div>
+          <button className='searchButton'zk > Search </button>
+          {/* <img src={search} alt='image' className='search-icon'/> */}
+       </form>
     );
 }
 
