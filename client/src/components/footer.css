@@ -7,7 +7,8 @@ footer{
     Font-Size: 16px;
     padding: 10px;
     font-style: Light;
-    text-emphasis-style: body;
+    text-emphasis-style: body;  
+    position: absolute;
 }
 button{
     height: 45px;
