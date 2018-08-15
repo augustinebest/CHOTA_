@@ -1,11 +1,11 @@
-const CategoryModel = require('../Models/Categories');
+const Category = require('../Models/Categories');
 // const bodyparser = require('body-parser');
 
 exports.addCategory = function(req, res) {
-    const categoryModel = new CategoryModel({
+    const category = new Category({
         categoryName: req.body.categoryName
     });
-    categoryModel
+    category
     .save()
     .then(result => {
         console.log(`This category have been added!`);
@@ -13,6 +13,8 @@ exports.addCategory = function(req, res) {
     })
     .catch(err => {
         console.log(err);
-        res.status(500).json({err: err});
+        res.status(500).json({
+            error: "Cannot add category, please try again", err
+        });
     });
 }
