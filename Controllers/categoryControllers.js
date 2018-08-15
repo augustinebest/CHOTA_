@@ -18,3 +18,14 @@ exports.addCategory = function(req, res) {
         });
     });
 }
+
+exports.getAllCategories = (req, res, next) => {
+    Category.find({}).select('_id categoryName')
+    .exec()
+    .then(categories => {
+        res.status(200).json(categories);
+    })
+    .catch(err => {
+        res.status(404).json(err);
+    });
+}
