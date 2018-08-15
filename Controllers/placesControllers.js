@@ -1,22 +1,15 @@
 const Place = require('../Models/Places');
-// const multer = require('multer');
-// const fs = require('fs');
-// const deleteImage = require('../functions/delete');
 
 exports.addPlaces = (req, res, next) => {
-    // const access = new Place();
-    // // access.image;
-    // console.log(access.image);
-    // console.log(req.files);
     var place = new Place({
         name: req.body.name,
         image: [],
         description: req.body.description,
+        date: Date.now(),
         reviews: req.body.reviews,
         ratings: req.body.ratings
     });
     req.files.forEach(element => {
-        // console.log(element.path);
         place.image.push(element.path)
     })
     place.save()
