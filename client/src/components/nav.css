@@ -1,0 +1,48 @@
+.navbar-header{
+    background-color: #E82A41;
+    border: none;
+    
+}
+.navbar-default{
+    border: none;
+    border-color: none;
+    border: 0;
+}
+
+
+.navbar-toggle{
+    width: 50px;
+    border: 0;
+    background-color: #E82A41;
+}
+
+.navbar-toggle:hover{
+    background-color: #011627 !important;
+}
+
+.navbar-collapse{
+    height: 200px;
+    /* position: absolute; */
+    background-color: #011627;
+    border: 0;
+}
+
+.btn{
+    left: 66.67%;
+    right: 14.67%;
+    top: 25%;
+    bottom: 25%;
+    margin-top: 7px;
+    background-color: #011627;
+    margin-left: 16%;
+    font-weight: 300;
+    line-height: 20px;
+    font-size: 14px;
+    color: #FEFEFE;
+    border-radius: 5px;
+}
+
+
+.navBarBorder{
+    border: none !important;
+}
