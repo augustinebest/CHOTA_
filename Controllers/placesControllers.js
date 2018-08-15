@@ -55,3 +55,29 @@ exports.getById = (req, res, next) => {
     });
 };
 
+exports.patchPlaces = (req, res, next) => {
+    const id = req.params.placeId;
+    const updateOps = {}; 
+    for (const ops of req.body) {
+        updateOps[ops.propName] = ops.value;
+    }
+    Place.update({_id: id}, {$set: updateOps})
+    //use when updating all properties 
+    // Product.update({_id: id}, {$set: {name: req.body.newName, image: req.body.newImage, 
+    //description: newDescription, reviews: newReviews, ratings: newRatings}})
+    .exec()
+    .then(result => {
+        console.log(result);
+        res.status(200).json({
+            message: 'data updated sucessfully'
+        })
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({error: err});
+    });
+};
+
+exports.searchPlace = (req, res, next) => {
+    
+}
