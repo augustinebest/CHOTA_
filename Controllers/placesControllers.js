@@ -38,26 +38,26 @@ exports.getAllPlaces = (req, res, next) => {
     });
 }
 
-exports.getById = (req, res, next) => {
-    const id = req.params.placeId;
-    Place.findById({_id: id})
-    // .populate('reviews')
-    .exec()
-    .then(place => {
-       // console.log(place);
-        res.status(200).json({
-            message: 'order details',
-            placeId: req.params.placeId
-        })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({
-            message: 'No place with specified ID found',
-            error: err
-        })
-    })
-    });
-};
+// exports.getById = (req, res, next) => {
+//     const id = req.params.placeId;
+//     Place.findById({_id: id})
+//     // .populate('reviews')
+//     .exec()
+//     .then(place => {
+//        // console.log(place);
+//         res.status(200).json({
+//             message: 'order details',
+//             placeId: req.params.placeId
+//         })
+//     .catch(err => {
+//         console.log(err);
+//         res.status(500).json({
+//             message: 'No place with specified ID found',
+//             error: err
+//         })
+//     })
+//     });
+// };
 
 exports.patchPlaces = (req, res, next) => {
     const id = req.params.placeId;
