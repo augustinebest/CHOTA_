@@ -27,6 +27,7 @@ exports.addPlaces = (req, res, next) => {
 
 exports.getAllPlaces = (req, res, next) => {
     Place.find({})
+    .select('_id name image description date')
     .exec()
     .then(place => {
         res.status(200).json( place );
@@ -82,6 +83,7 @@ exports.patchPlaces = (req, res, next) => {
 exports.searchPlaces = (req, res) => {
     const name =  req.params.name;
     Place.find({'name': {$regex: name, $options: 'i'}})
+    .select('_id name image description date')
     .exec()
     .then(place => {
         res.status(200).json(place);
