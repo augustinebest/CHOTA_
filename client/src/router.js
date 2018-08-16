@@ -16,6 +16,7 @@ import Notifie from './notification';
 import Profile from './profile';
 import Setting from './setting';
 import Friends from './friends';
+import Facebooklogin from './components/Facebooklogin.js'
 import Error from './error';
 
 const Router = () => {
@@ -39,6 +40,7 @@ const Router = () => {
           <Route path='/Profile' component={Profile}/>
           <Route path='/Setting' component={Setting}/>
           <Route path='/Friends' component={Friends}/>
+          <Route path="/Facebook" component = {Facebooklogin}/>
           <Route component={Error}/>
         </Switch>
       </BrowserRouter>
