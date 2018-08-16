@@ -1,0 +1,86 @@
+.carousel-container{
+    /* border: 2px solid black; */
+    display: flex;
+    position: relative;
+    height: 120px;
+    width:  auto;
+    margin: auto;
+}
+
+.carousel-viewport{
+    white-space: nowrap;
+    overflow-y: hidden;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    /* border: 1px solid blueviolet; */
+    /* removing scrollbar in firefox */
+    -ms-overflow-style: none;   
+    overflow: -moz-scrollbars-none;
+    flex-grow: 1;
+    z-index: 1;
+    position: relative;
+}
+
+/* This is for safari and chrome similer */
+.carousel-viewport::-webkit-scrollbar{
+    display: none;
+}
+
+.carousel-nav{
+    /* flex-shrink: 0;
+   flex-basis: 35px; */
+   /* position: absolute; */
+   width: 70px;
+   height: 250px;
+   top: 0;
+   bottom: 0;
+    cursor: pointer;
+    background-color: inherit;
+    padding: 0px;
+    outline: none;
+    opacity: .8;
+    /* border: 1px solid black; */
+    transition: opacity .2s ease-in-out;
+    z-index: 3;
+}
+
+
+.carousel-nav:focus:not(.carousel-nav-disabled) {
+    border: 1px solid darkgreen;
+}
+
+.carousel-nav:hover:not(.carousel-nav-disabled) {
+    opacity: 1;
+}
+
+
+
+.carousel-left-nav{
+    left: 0;
+    /* border-right: 1px solid rgb(117, 61, 204); */
+}
+
+.carousel-right-nav{
+    right: 0;
+    /* border-left: 1px solid rgb(117, 61, 204); */
+}
+
+.carousel-nav-disabled{
+    opacity: 0;
+    z-index: 0;
+    cursor: default;
+    user-select: none;
+    pointer-events: none;
+    transition: none;
+
+}
+
+
+@media ( max-width: 414px) {
+    .carousel-viewport{
+        height: 120px;
+    }
+    .carousel-nav{
+        height: 120px;
+    }
+}
