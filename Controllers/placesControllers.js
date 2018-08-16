@@ -16,6 +16,7 @@ exports.addPlaces = (req, res, next) => {
         place.image.push(element.path)
     })
     place.save()
+    .select('_id name image description date')
     .then(result => {
         res.send(result);
     })
