@@ -5,8 +5,9 @@
     height: 120px;
     /* height: 50px; */
     width: 100%;
-    padding: px;
+    padding-right: 13px;
     white-space: normal;
+
 }
 
 .slide:last-child{
@@ -16,7 +17,7 @@
 
 .imagetextContainerz{
     height:230px;
-    width: 95%;
+    width: 100%;
     margin: auto;
     border: 1px solid green;
 }

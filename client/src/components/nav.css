@@ -12,8 +12,11 @@
 
 .navbar-toggle{
     width: 50px;
+    margin-top: 10px;
     border: 0;
-    background-color: #E82A41;
+    background-color:inherit;
+    height: 30px;
+    border: 0 !important;
 }
 
 .navbar-toggle:hover{
@@ -28,18 +31,19 @@
 }
 
 .btn{
-    left: 66.67%;
+    /* left: 66.67%;
     right: 14.67%;
     top: 25%;
-    bottom: 25%;
-    margin-top: 7px;
+    bottom: 25%; */
+    margin-top: 10px;
     background-color: #011627;
     margin-left: 16%;
     font-weight: 300;
     line-height: 20px;
-    font-size: 14px;
+    font-size: 2em;
     color: #FEFEFE;
     border-radius: 5px;
+    height: 30px;
 }
 
 
