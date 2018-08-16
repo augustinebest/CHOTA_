@@ -1,10 +1,13 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 
 const userSchema = mongoose.Schema({
-   username: String,
-   googleId: String,
-   image: String
+    username: { type: String},
+    email: { type: String},
+    image: { type: String},
+    facebookId: { type: String},
+    googleId: { type: String},
+    interest: [{ type: mongoose.Schema.Types.ObjectId }],
+    friends: [{ type: mongoose.Schema.Types.ObjectId }]
 });
 
 
