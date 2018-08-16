@@ -30,7 +30,7 @@ exports.getAllPlaces = (req, res, next) => {
     .select('_id name image description date')
     .exec()
     .then(place => {
-        res.status(200).json( place );
+        res.status(200).json({place});
     })
     .catch(err => {
         res.status(500).json({error: err})

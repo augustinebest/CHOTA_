@@ -13,7 +13,6 @@ const keys = require('./config/keys');
 
 //CORS ERRORS
 app.use((req, res, next) => {
-    console.log('this is it')
     res.header("Access-Control-Allow-Origin", "*");
     res.header(
         "Access-Conrol-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization"
