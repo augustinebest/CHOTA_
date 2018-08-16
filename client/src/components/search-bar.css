@@ -1,0 +1,24 @@
+.searchBar{
+    /* position: absolute; */
+width: 275px;
+height: 44px;
+left: 50px;
+top: 208px;
+text-align: center;
+background: #F2F2F2;
+border-radius: 5px;
+}
+
+
+
+@media ( max-width: 414px){
+    .searchBar{
+        margin: auto;
+    }
+    .searchButton{
+        color: #F2F2F2;
+        background-color:#011627;
+        font-size: 2ex;
+        width: 30%
+    }
+}

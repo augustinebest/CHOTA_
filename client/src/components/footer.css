@@ -1,0 +1,22 @@
+footer{
+    width: 100%;
+    background-color: #011627;
+    height: auto;
+    text-align: center;
+    color: #FEFEFE;
+    Font-Size: 16px;
+    padding: 10px;
+    font-style: Light;
+    text-emphasis-style: body;  
+    position: absolute;
+}
+button{
+    height: 45px;
+    width: 125px;
+    border-radius: 5px;
+    background-color: #E71D36;
+    color: #FEFEFE;
+    font-size: 16px;
+    margin: 3px;
+    border: 0px;
+}

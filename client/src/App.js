@@ -3,6 +3,7 @@ import './App.css';
 import Home from "./components/Home";
 import {BrowserRouter,Switch,Route} from 'react-router-dom';
 import Facebooklogin from './components/Facebooklogin'
+import Router from './router';
 
 class App extends Component {
   render() {
@@ -12,7 +13,7 @@ class App extends Component {
           <Route path="/" exact  component = {Home}/> 
           <Route path="/Facebook" component = {Facebooklogin}/>
       </ Switch>
-
+      <Router/>
       </BrowserRouter>
     );
   }
