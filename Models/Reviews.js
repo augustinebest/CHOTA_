@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 
 const reviewSchema = mongoose.Schema({
-    name : { type: String, required: true },
-    image : { type: String, required: true },
-    comment : { type: String, required: true }
+    commentBody : { type: String, required: true },
+    placeId : { type: mongoose.Schema.Types.ObjectId, ref: 'Place' }
 });
 
 

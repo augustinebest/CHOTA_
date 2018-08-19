@@ -4,16 +4,14 @@ const bodyparser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
-// const cookieParser = require('cookie-parser');
-// const MongoStore = require('connect-mongo')(cookieSession);
 const passport = require('passport');
 const app = express();
 const passportSetup = require('./Controllers/userControllers');
 const keys = require('./config/keys');
+const auth = require("./functions/checkAuth");
 
 //CORS ERRORS
 app.use((req, res, next) => {
-    console.log('this is it')
     res.header("Access-Control-Allow-Origin", "*");
     res.header(
         "Access-Conrol-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization"
@@ -32,15 +30,15 @@ const profileRoutes = require('./routes/profileRoutes');
 const interestRoutes = require('./routes/interestRoutes');
 const placeRoutes = require('./routes/placeRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
-
+const reviewRoutes = require('./routes/reviews');
 
 //Connecting to the local database
 
 mongoose.Promise = global.Promise;
-// mongoose.connect('mongodb://localhost:27017/mernCart', { useNewUrlParser: true }); 
+mongoose.connect('mongodb://localhost:27017/Chota', { useNewUrlParser: true }); 
 
 // Connection to mlab
-mongoose.connect(keys.mongodb, { useNewUrlParser: true });
+// mongoose.connect(keys.mongodb, { useNewUrlParser: true });
 
 //Body-parser Middleware
 app.use(bodyparser.urlencoded({extended: false}));
@@ -69,12 +67,12 @@ app.use('/profile', profileRoutes);
 app.use('/interest', interestRoutes);
 app.use('/place', placeRoutes);
 app.use('/category', categoryRoutes);
-
+app.use('/reviews', reviewRoutes);
 
 
 
 app.get('/', function(req, res) {
-    res.render("index");
+    res.json({message: 'This is my backend!'});
 })
 
 app.use((req, res, next) => {
