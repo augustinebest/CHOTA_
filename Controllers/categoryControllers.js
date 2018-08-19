@@ -25,11 +25,7 @@ exports.getAllCategories = (req, res, next) => {
     .exec((err, categories) => {
         if(err) res.status(404).json({message: 'error occured somewhere'});
         else {
-            try {
-                res.status(200).json(categories);
-            } catch(error) {
-                res.status(200).json(error);
-            }
+                res.status(200).json({message: categories});
         }
     })
 }
