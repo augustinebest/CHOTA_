@@ -18,7 +18,7 @@ app.use((req, res, next) => {
     );
     if(req.method === 'OPTIONS') {
         res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, PATCH, DELETE');
-        return res.status(200).json({});
+      
     }
     next();
 })
@@ -35,10 +35,10 @@ const reviewRoutes = require('./routes/reviews');
 //Connecting to the local database
 
 mongoose.Promise = global.Promise;
-// mongoose.connect('mongodb://localhost:27017/Chota', { useNewUrlParser: true }); 
+mongoose.connect('mongodb://localhost:27017/Chota', { useNewUrlParser: true }); 
 
 // Connection to mlab
-mongoose.connect(keys.mongodb, { useNewUrlParser: true });
+// mongoose.connect(keys.mongodb, { useNewUrlParser: true });
 
 //Body-parser Middleware
 app.use(bodyparser.urlencoded({extended: false}));
@@ -73,6 +73,10 @@ app.use('/reviews', reviewRoutes);
 
 app.get('/', function(req, res) {
     res.json({message: 'This is my backend!'});
+})
+
+app.get('/be', function(req, res) {
+    res.json({message: 'this is working fine'});
 })
 
 app.use((req, res, next) => {
