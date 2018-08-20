@@ -6,9 +6,11 @@ exports.addReview = (req, res, next) => {
         commentBody: req.body.commentBody,
         placeId: req.body.placeId
     })
-    reviews.save().then(review => {
+    reviews.save()
+    .then(review => {
         res.status(200).json({message: 'This review have been added successfully!'});
-    }).catch(err => {
+    })
+    .catch(err => {
         res.status(404).json({message: 'Error occured while adding your review!'});
     });
 }
