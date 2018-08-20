@@ -12,7 +12,7 @@ const app = express();
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header(
-        "Access-Conrol-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+        "Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization"
     );
     if(req.method === 'OPTIONS') {
         res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, PATCH, DELETE');
