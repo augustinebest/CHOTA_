@@ -15,6 +15,7 @@ exports.addReview = (req, res, next) => {
 
 exports.getAllReviewsOnAPlace = (req, res, next) => {
     Reviews.find({})
+    .select('_id commentBody placeId')
     .exec()
     .then(reviews => {
         res.status(200).json({reviews});
