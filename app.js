@@ -6,9 +6,7 @@ const cors = require('cors');
 const path = require('path');
 const passport = require('passport');
 const app = express();
-const passportSetup = require('./Controllers/userControllers');
-const keys = require('./config/keys');
-const auth = require("./functions/checkAuth");
+
 
 //CORS ERRORS
 app.use((req, res, next) => {
@@ -22,6 +20,12 @@ app.use((req, res, next) => {
     }
     next();
 })
+
+const passportSetup = require('./Controllers/userControllers');
+const keys = require('./config/keys');
+const auth = require("./functions/checkAuth");
+
+
 
 //require routes
 const itemRoutes = require('./routes/item');
