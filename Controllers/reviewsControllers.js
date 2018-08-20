@@ -9,7 +9,7 @@ exports.addReview = (req, res, next) => {
     reviews.save().then(review => {
         res.status(200).json({message: 'This review have been added successfully!'});
     }).catch(err => {
-        res.status(404).json({message: 'Error occured while adding your comment!'});
+        res.status(404).json({message: 'Error occured while adding your review!'});
     });
 }
 
