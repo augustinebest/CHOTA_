@@ -3,7 +3,9 @@ const router = express.Router();
 const passport = require('passport');
 const userController = require('../Controllers/userControllers');
 var jwt = require('jsonwebtoken');
+const checkAuth = require('../functions/checkAuth');
 const secret = 'secretkey';
+
 
 // For google
 router.get('/login', (req, res) => {
@@ -25,7 +27,7 @@ router.get('/google', passport.authenticate('google', {
 // Callback route for redirect
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
     const token = jwt.sign({email : req.user.email,image :req.user.image, username: req.user.username}, secret, {expiresIn: '24hr'});
-    res.redirect('/interest/' + token );
+    res.redirect('localhost://3000/auth/facebook' + token );
 })
 
 // For Facebook
@@ -41,11 +43,16 @@ router.get('/facebook', passport.authenticate('facebook', {
 router.get('/facebook/redirect', passport.authenticate('facebook'), (req, res) => {
     // console.log(req.user);
     const token = jwt.sign({email : req.user.email,image :req.user.image, username: req.user.username}, secret, {expiresIn: '24hr'});
-    res.redirect('/interest/' + token );
+    res.json({tokengotten: token} );
 })
 
 
 // User Add Interest
-router.post('/addInterest', userController.userAddInterest);
+router.post('/select', checkAuth.AuthMiddeWare, userController.userAddInterest);
+router.post('/select', checkAuth.AuthMiddeWare, userController.addFriend);
+
+// local signup
+router.post('/signup', userController.signup);
+router.post('/login', userController.login);
 
 module.exports = router;
