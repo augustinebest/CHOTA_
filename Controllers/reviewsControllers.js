@@ -14,5 +14,13 @@ exports.addReview = (req, res, next) => {
 }
 
 exports.getAllReviewsOnAPlace = (req, res, next) => {
-    res.json('yay');
+    Reviews.find({})
+    .exec()
+    .then(reviews => {
+        res.status(200).json({reviews});
+    })
+    .catch(err => {
+        res.status(500).json({error: err})
+    });
 }
+    //console.log('yay');
