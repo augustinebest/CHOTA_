@@ -52,7 +52,7 @@ router.post('/select', checkAuth.AuthMiddeWare, userController.userAddInterest);
 router.post('/select', checkAuth.AuthMiddeWare, userController.addFriend);
 
 // local signup
-router.post('/signup', userController.signup);
-router.post('/login', userController.login);
+router.post('/create', userController.signup);
+router.post('/signin', userController.login);
 
 module.exports = router;
