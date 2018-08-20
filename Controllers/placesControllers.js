@@ -1,5 +1,5 @@
 const Place = require('../Models/Places');
-// const Category = require('../Models/Categories');
+var Category = require('../Models/Categories');
 
 exports.addPlaces = (req, res, next) => {
     var place = new Place({
@@ -17,13 +17,31 @@ exports.addPlaces = (req, res, next) => {
     })
     place.save()
     .then(result => {
-        res.send(result);
+        Category.findById(req.body.categoryId).exec()
+        .then(cat => {
+            cat.placeId.push(result._id);
+            cat.save();
+            res.status(200).json({result, message: 'This have been added to the database!'});
+        })
+        .catch(err => {
+            console.log(err);
+        });
     })
     .catch(err => {
         console.log(err);
     });
 
 };
+
+exports.getPlaceByParams = (req, res, next) => {
+    const place = {_id: req.params.id};
+    Place.findOne(place).exec((err, result) => {
+        if(err) res.status(404).json({message: 'this place does not exists!'});
+        else {
+            res.status(200).json()
+        }
+    })
+}
 
 exports.getAllPlaces = (req, res, next) => {
     Place.find({})

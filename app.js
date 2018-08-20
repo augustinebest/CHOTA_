@@ -4,12 +4,11 @@ const bodyparser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
-// const cookieParser = require('cookie-parser');
-// const MongoStore = require('connect-mongo')(cookieSession);
 const passport = require('passport');
 const app = express();
 const passportSetup = require('./Controllers/userControllers');
 const keys = require('./config/keys');
+const auth = require("./functions/checkAuth");
 
 //CORS ERRORS
 app.use((req, res, next) => {
@@ -19,7 +18,7 @@ app.use((req, res, next) => {
     );
     if(req.method === 'OPTIONS') {
         res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, PATCH, DELETE');
-        return res.status(200).json({});
+      
     }
     next();
 })
@@ -31,12 +30,12 @@ const profileRoutes = require('./routes/profileRoutes');
 const interestRoutes = require('./routes/interestRoutes');
 const placeRoutes = require('./routes/placeRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
-
+const reviewRoutes = require('./routes/reviews');
 
 //Connecting to the local database
 
 mongoose.Promise = global.Promise;
-// mongoose.connect('mongodb://localhost:27017/mernCart', { useNewUrlParser: true }); 
+// mongoose.connect('mongodb://localhost:27017/Chota', { useNewUrlParser: true }); 
 
 // Connection to mlab
 mongoose.connect(keys.mongodb, { useNewUrlParser: true });
@@ -68,12 +67,16 @@ app.use('/profile', profileRoutes);
 app.use('/interest', interestRoutes);
 app.use('/place', placeRoutes);
 app.use('/category', categoryRoutes);
-
+app.use('/reviews', reviewRoutes);
 
 
 
 app.get('/', function(req, res) {
-    res.render("index");
+    res.json({message: 'This is my backend!'});
+})
+
+app.get('/be', function(req, res) {
+    res.json({message: 'this is working fine'});
 })
 
 app.use((req, res, next) => {

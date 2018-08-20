@@ -23,11 +23,11 @@ exports.addInterest = (req, res, next) => {
 
 
 exports.getAllInterest = (req, res, next) => {
-    Interest.find({})
+    Interest.find()
     .select('name image _id')
     .exec()
     .then(interest => {
-        res.status(200).json(interest);
+        res.status(200).json({interest: interest});
     })
     .catch(err => {
         res.status(404).json(err);
