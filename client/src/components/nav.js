@@ -12,7 +12,7 @@ const nav = () => {
           <Navbar.Brand>
             <a href="/"> <img src={logo} alt='chota'/></a>
           </Navbar.Brand>
-          <button className='btn'> Login </button>
+         <a href = '/Login'> <button className='btn'> Login </button> </a>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse className=''>

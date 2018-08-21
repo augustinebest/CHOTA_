@@ -8,7 +8,8 @@ import Advertise from './advertise';
 import Privacy from './privacy';
 import Contact from './contact';
 import SelectInterests from './select-interests';
-import Login from './login';
+import Login from './components/LoginPage';
+import Signup from './components/SignupPage'
 import PinLocation from './pin-location';
 import PinDetails from './pin-details';
 import PinFeed from './pin-feed';
@@ -33,6 +34,7 @@ const Router = () => {
           <Route path='/Contact' component={Contact}/>
           <Route path='/SelectInterests' component={SelectInterests}/>
           <Route path='/Login' component={Login}/>
+          <Route path='/Signup' component={Signup}/>
           <Route path='/PinLocation' component={PinLocation}/>
           <Route path='/PinDetails' component={PinDetails}/>
           <Route path='/PinFeed' component={PinFeed}/>
