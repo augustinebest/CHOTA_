@@ -6,10 +6,18 @@ cloudinary.config({
     api_secret: 'pCWnCq-cSSiM4UEcBrnI2EGTguQ'
   })
 
-  cloudinary.v2.uploader.upload('1.jpg', (error, result) => {
-    if(error) {
-      console.log(error);
-    } else {
-      console.log(result);
-    }
-  })
+  exports.upload = function(file){
+    return new Promise(resolve => {
+        cloudinary.uploader.upload(file, function(result){
+            resolve({url: result.url, Id: result.public_id});
+        }, {resource_type: "auto"})
+   })
+}
+
+exports.delete = function(publicId){
+    return new Promise(resolve => {
+        cloudinary.uploader.destroy(publicId, function(result){
+            resolve(result);
+        }, {resource_type: "auto"})
+    })
+}
