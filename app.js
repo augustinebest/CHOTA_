@@ -6,15 +6,13 @@ const cors = require('cors');
 const path = require('path');
 const passport = require('passport');
 const app = express();
-const passportSetup = require('./Controllers/userControllers');
-const keys = require('./config/keys');
-const auth = require("./functions/checkAuth");
+
 
 //CORS ERRORS
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header(
-        "Access-Conrol-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+        "Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization"
     );
     if(req.method === 'OPTIONS') {
         res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, PATCH, DELETE');
@@ -22,6 +20,12 @@ app.use((req, res, next) => {
     }
     next();
 })
+
+const passportSetup = require('./Controllers/userControllers');
+const keys = require('./config/keys');
+const auth = require("./functions/checkAuth");
+
+
 
 //require routes
 const itemRoutes = require('./routes/item');
