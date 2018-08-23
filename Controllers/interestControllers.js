@@ -2,23 +2,26 @@ const Interest = require('../Models/interest');
 const multer = require('multer');
 const fs = require('fs');
 const deleteImage = require('../functions/delete');
+const cloud = require('../functions/cloudinary');
+
 
 exports.addInterest = (req, res, next) => {
     // console.log(req.file);
-    const interest = new Interest({
+    const interest = {
         name: req.body.name,
-        image: req.file.path
-    });
-    return interest.save()
-    .then(interest => {
-        // console.log(interest);
-        res.status(200).json({message: 'This interest have been added successfully!'});
+        image: req.file.path,
+        imageID: ''
+    }
+    cloud.upload(interest.image).then(result => {
+        interest.image = result.url;
+        interest.imageID = result.Id;
+        Interest.create(interest, (err, inst) => {
+            if(err) res.status(401).json({err: err, message: 'Unable to add this interest'});
+            else {
+                res.status(200).json({message: 'This interest have been added succesfully!'});
+            }
+        })
     })
-    .catch(err => {
-        console.log('Unable to add this interest!');
-        console.log(err);
-    });
-    
 }
 
 
@@ -74,24 +77,25 @@ exports.editInterest = (req, res, next) => {
 
 
 exports.deleteInterest = (req, res, next) => {
-    const id = req.params.id;
-    Interest.findById(id)
-    .exec()
-    .then(result => {
-        const image_path = result.image;
-        deleteImage(image_path);
-        Interest.remove({_id: req.params.id})
+    try {
+        const id = req.params.id;
+        Interest.findById(id)
         .exec()
-        .then(output => {
-            // console.log(output);
-            res.status(200).json({message: 'This have been deleted succesfully!'})
+        .then(interest => {
+            const imageID = interest.imageID;
+            cloud.delete(imageID);
+            Interest.remove({_id: req.params.id}).exec()
+            .then(result => {
+                res.status(200).json({err: 'This interest have been deleted!'});
+            })
+            .catch(err => {
+                res.status(405).json({err: err});
+            });
         })
         .catch(err => {
-            console.log(err);
-            res.status(404).json({err: 'Unable to delete this interest'});
+            res.status(500).json({err: 'Cannot delete this interest'});
         });
-    })
-    .catch(err => {
-        res.status(500).json({err: 'Cannot delete this interest'});
-    });
+    } catch(error) {
+        res.status(408).json(error);
+    }
 }
