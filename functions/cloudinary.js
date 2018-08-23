@@ -6,7 +6,7 @@ cloudinary.config({
     api_secret: 'pCWnCq-cSSiM4UEcBrnI2EGTguQ'
   })
 
-  exports.upload = function(file){
+exports.upload = function(file){
     return new Promise(resolve => {
         cloudinary.uploader.upload(file, function(result){
             resolve({url: result.url, Id: result.public_id});
@@ -14,10 +14,12 @@ cloudinary.config({
    })
 }
 
-exports.delete = function(publicId){
-    return new Promise(resolve => {
-        cloudinary.uploader.destroy(publicId, function(result){
-            resolve(result);
-        }, {resource_type: "auto"})
+exports.delete = function(publicId) {
+    cloudinary.uploader.destroy(publicId, function(err, result) {
+        if(err) {
+            console.log(err);
+        } else {
+            console.log('It have been deleted in cloudinary!');
+        }
     })
 }
