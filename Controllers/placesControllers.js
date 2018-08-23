@@ -45,37 +45,36 @@ exports.getPlaceByParams = (req, res, next) => {
 
 exports.getAllPlaces = (req, res, next) => {
     Place.find({})
+    .select('_id name image description date')
     .exec()
     .then(place => {
-        res.status(200).json({
-            message:'Check it out', place
-        });
+        res.status(200).json({place});
     })
     .catch(err => {
         res.status(500).json({error: err})
     });
 }
 
-exports.getById = (req, res, next) => {
-    const id = req.params.placeId;
-    Place.findById({_id: id})
-    // .populate('reviews')
-    .exec()
-    .then(place => {
-       // console.log(place);
-        res.status(200).json({
-            message: 'order details',
-            placeId: req.params.placeId
-        })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({
-            message: 'No place with specified ID found',
-            error: err
-        })
-    })
-    });
-};
+// exports.getById = (req, res, next) => {
+//     const id = req.params.placeId;
+//     Place.findById({_id: id})
+//     // .populate('reviews')
+//     .exec()
+//     .then(place => {
+//        // console.log(place);
+//         res.status(200).json({
+//             message: 'order details',
+//             placeId: req.params.placeId
+//         })
+//     .catch(err => {
+//         console.log(err);
+//         res.status(500).json({
+//             message: 'No place with specified ID found',
+//             error: err
+//         })
+//     })
+//     });
+// };
 
 exports.patchPlaces = (req, res, next) => {
     const id = req.params.placeId;
@@ -102,6 +101,7 @@ exports.patchPlaces = (req, res, next) => {
 exports.searchPlaces = (req, res) => {
     const name =  req.params.name;
     Place.find({'name': {$regex: name, $options: 'i'}})
+    .select('_id name image description date')
     .exec()
     .then(place => {
         res.status(200).json(place);
