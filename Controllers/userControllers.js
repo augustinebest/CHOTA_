@@ -118,7 +118,7 @@ exports.signup = (req, res, next) => {
                 User.findOne({username: req.body.username})
                 .then(username => {
                     if(username) {
-                        res.status(201).json({message: 'This username already exists!'});
+                        res.status(202).json({message: 'This username already exists!'});
                     } else {
                         bcrypt.hash(req.body.password, 10, (err, hash) => {
                             if(err) res.status(203).json(err);
@@ -164,7 +164,7 @@ exports.login = (req, res, next) => {
                     res.status(402).json({message: 'email or password invalid!'});
                 } else {
                     var token = jwt.sign({email: currentUser.email, id: currentUser._id}, secret.key, {expiresIn: '12h'});
-                    res.status(200).json({message: 'You have logged in successfully!' + token});
+                    res.status(200).json({message: 'You have logged in successfully!', token: token});
                 }
             }
         });
