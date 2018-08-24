@@ -1,6 +1,6 @@
 const express = require('express');
+const checkAuth = require('../functions/checkAuth');
 const router = express.Router();
-const checkAuth = require('../checkAuth/checkAuth');
 const interestController = require('../Controllers/interestControllers');
 const path = require('path');
 const multer = require('multer');
@@ -31,8 +31,8 @@ const upload = multer({
  });
  
 router.post('/', upload.single('image'), interestController.addInterest);
-router.get('/:id',  interestController.getAllInterest);
-router.patch('/:id', upload.single('image'), interestController.editInterest);
+router.get('/', checkAuth.AuthMiddeWare, interestController.getAllInterest);
+router.patch('/:id', checkAuth.AuthMiddeWare, upload.single('image'), interestController.editInterest);
 router.delete('/:id', interestController.deleteInterest);
 
 module.exports = router;
