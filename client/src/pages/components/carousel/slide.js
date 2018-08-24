@@ -10,12 +10,7 @@ class Slide extends Component {
         } = this.props;
         return(
             <div className='slide'>
-                <div className='imagetextContainerz'>
-                {name}
-                <div>
-                <p> get our { name } text on this</p>
-                </div>
-                </div>
+            <p>{name}</p>
             </div>
         );
     }

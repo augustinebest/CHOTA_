@@ -1,0 +1,32 @@
+.placediv{
+    width: 100%;
+    height: auto;
+    padding-bottom: 5px;
+    /* border: 1px solid coral; */
+    display: inline-flex;
+    box-shadow: 0px 4px 8px rgba(1, 22, 39, 0.15);
+    margin-top: 30px;
+    border-radius: 5px;
+    background-color: whitesmoke;
+
+}
+
+.placeImageDiv{
+    /* border: 1px solid yellow; */
+    width: 40%;
+    height: 135px;
+   
+}
+
+.placeDetailDiv{
+    /* border: 1px solid red; */
+    width: 60%;
+    height: 135px;
+    padding: 10px;
+}
+
+.placesImage{
+    width: 100%;
+    height: 135px;
+    border-radius: 5px;
+}

@@ -7,7 +7,7 @@
    
 }
 .nav{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     height: 50px;
 }
 .main-container{
@@ -64,10 +64,10 @@
 
     .bottomcContainer{
         width: 345px;
-        height: 600px;
+        height: auto;
         left: 15px;
         top: 670px;
-        border: 1px solid blue;
+        /* border: 1px solid blue; */
         margin: auto;
         padding-top: 10px
 

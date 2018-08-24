@@ -1,7 +1,7 @@
 .slide{
     display: inline-block;
     vertical-align: top;
-    /* border-right: 1px solid red; */
+    border-right: 1px solid red;
     height: 120px;
     /* height: 50px; */
     width: 100%;
@@ -27,6 +27,10 @@
     .slide{
         width: 45%;
         margin-left: 19px;
+    }
+    .slideimage{
+        height:100px;
+        width: 100px;
     }
     .imagetextContainerz{
         height: 100px;

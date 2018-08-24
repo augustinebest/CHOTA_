@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import { findDOMNode } from 'react-dom';
 import './carousel.css';
-import data from './data.json';
-import Slide from './slide';
 import scrollTo from './scrollToAnimate.js';
 import throttle from 'lodash.throttle';
 import classNames from 'classnames';
+import axios from 'axios';
+
+
+
+const API_KEY = '56f0450d2729d1d9861d643496069047'
 
 
 
@@ -22,6 +25,7 @@ class Carousel extends Component {
             numOfSlidesToScroll: 4,
             allTheWayLeft: false,
             allTheWayRight: false,
+            items: []
 
         }
     }
@@ -70,7 +74,13 @@ class Carousel extends Component {
         this.checkNumOfSlidesToScroll();
         this.checkIfSlidesAllTheWayOver();
         window.addEventListener('resize', this.throttleResize);
-        window.addEventListener('keydown', this.onKeydown)
+        window.addEventListener('keydown', this.onKeydown);
+        axios.get(`https://cors-anywhere.herokuapp.com/http://food2fork.com/api/search?key=${API_KEY}&q=shredded%20chicken&count=10`)
+        .then(res=>{
+            console.log(res)
+            this.setState({items: res.data.recipes})
+        });
+
     }
 
     componentWillUnmount(){
@@ -178,16 +188,16 @@ class Carousel extends Component {
 
 
 
-    renderSlides() {
-        return data.map((state)=>{
-            return (
-                <Slide
-                name={state.name}
-                key={state.abbreviation}
-                ref = {compSlide=> this.Slide = compSlide}
-            />);
-        })
-    }
+    // renderSlides() {
+    //     return data.map((state)=>{
+    //         return (
+    //             <Slide
+    //             name={state.name}
+    //             key={state.abbreviation}
+    //             ref = {compSlide=> this.Slide = compSlide}
+    //         />);
+    //     })
+    // }
 
 
     render() {
@@ -225,7 +235,13 @@ class Carousel extends Component {
               ref='carouselViewport'
               onScroll={this.throttleScroll}
               >
-                {this.renderSlides()}
+              <div>
+              {this.state.items.map(value=>(
+                  <div key={value.id} className='image-div'>
+                      <img src={value.image_url} alt={value.title} className='images'/>
+                  </div>
+              ))}
+              </div>
             </div>
             <button
               className={rightNavClasses}

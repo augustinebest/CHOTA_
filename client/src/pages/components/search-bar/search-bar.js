@@ -6,8 +6,8 @@ import './search-bar.css';
 const SearchBar = () => {
     return(
        <form>
-           <input type="text" className='searchBar'></input>
-          <button className='searchButton'zk > Search </button>
+           <input type="text" className='searchBar '></input>
+          <button className='searchButton'> Search </button>
           {/* <img src={search} alt='image' className='search-icon'/> */}
        </form>
     );

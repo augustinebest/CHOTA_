@@ -14,17 +14,17 @@
     -webkit-overflow-scrolling: touch;
     /* border: 1px solid blueviolet; */
     /* removing scrollbar in firefox */
-    -ms-overflow-style: none;   
+    /* -ms-overflow-style: none;   
     overflow: -moz-scrollbars-none;
     flex-grow: 1;
     z-index: 1;
-    position: relative;
+    position: relative; */
 }
 
 /* This is for safari and chrome similer */
-.carousel-viewport::-webkit-scrollbar{
+/* .carousel-viewport::-webkit-scrollbar{
     display: none;
-}
+} */
 
 .carousel-nav{
     /* flex-shrink: 0;
@@ -82,5 +82,16 @@
     }
     .carousel-nav{
         height: 120px;
+    }
+    .image-div{
+        height: 100px;
+        width: 100px;
+        display: inline-block;
+        /* border: 1px solid red; */
+        margin: 10px;
+    }
+    .images{
+        height: 100px;
+        width: 100px;
     }
 }
