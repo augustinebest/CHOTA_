@@ -1,5 +1,5 @@
 import React from 'react';
-import Nav from '../components/nav-bar/nav.js';
+import Nav from '../components/nav-bar/nav-bar.js';
 import './place-details.css';
 import Reviews from '../components/reviews/review.js';
 import Footer from '../components/footer/footer.js';

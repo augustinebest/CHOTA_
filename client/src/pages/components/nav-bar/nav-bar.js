@@ -1,7 +1,7 @@
 import React from 'react';
 import {Navbar, Nav, NavItem,} from "react-bootstrap";
 import './nav-bar.css';
-import logo from './logo_invt.png'
+import logo from './logo_dark.png'
 
 
 const nav = () => {
