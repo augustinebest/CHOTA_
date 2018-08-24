@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './../Login.css';
 // import {Browser,Switch,Route} from 'react-router-dom';
-// import axios from 'axios';
+import axios from 'axios';
 
 class Facebooklogin extends Component {
   
@@ -12,9 +12,10 @@ class Facebooklogin extends Component {
     }
         submit (e) {
             e.preventDefault();
-          //  axios.get('http://localhost:5000/').then(res => localStorage.setItem('cool-jwt', res.data                     
-          let url = 'http://localhost:5000/auth/facebook'
-          window.location = url ;
+           axios.get('http://localhost:5000/auth/facebook')
+           .then(res => console.log(res));                  
+        //   let url = 'http://localhost:5000/auth/facebook'
+        //   window.location = url ;
        
         }
 
