@@ -22,8 +22,6 @@ const Home = () => {
                 <div className='bottomcContainer'>
                 <h4> Trending </h4>
                     <Trends/>
-                    <Trends/>
-                    <Trends/>
                 </div>
             </div>
             <Footer/>

@@ -4,7 +4,7 @@ import React from 'react';
 const Setting = () => {
     return(
         <div>
-            <h1> Setting  gvgfcfttydjtj</h1>
+            <h1> Setting </h1>
         </div>
     );
 }

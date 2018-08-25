@@ -1,0 +1,26 @@
+.staticPageLinkButton{
+    height: 30px;
+    border-radius: 3px;
+    background-color:  rgba(1, 22, 39, 0.1);
+    margin: 2%;
+    width: auto;
+}
+.contentBody{
+    /* margin-top: 20%; */
+    padding: 20px;
+}
+.staticPageNavButtonContainer{
+    display: inline-block;
+    padding: 20px;
+    width: 100%;
+}
+.staticPageHeader{
+    display: inline-block;
+    font-weight: 500;
+    line-height: normal;
+    font-size: 22px;
+}
+
+.staticPageLinkButton:active{
+    background-color:  #011627;
+}

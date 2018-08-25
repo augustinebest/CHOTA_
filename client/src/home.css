@@ -64,10 +64,10 @@
 
     .bottomcContainer{
         width: 345px;
-        height: 600px;
+        /* height: 600px; */
         left: 15px;
         top: 670px;
-        border: 1px solid blue;
+        /* border: 1px solid blue; */
         margin: auto;
         padding-top: 10px
 
