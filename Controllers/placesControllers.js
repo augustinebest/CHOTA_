@@ -1,8 +1,9 @@
 const Place = require('../Models/Places');
 var Category = require('../Models/Categories');
+const cloud = require('../functions/cloudinary');
 
 exports.addPlaces = (req, res, next) => {
-    var place = new Place({
+    const place = new Place({
         name: req.body.name,
         image: [],
         description: req.body.description,
@@ -10,10 +11,12 @@ exports.addPlaces = (req, res, next) => {
         categoryId: req.body.categoryId,
         reviews: req.body.reviews,
         ratings: req.body.ratings
-    });
+    })
     req.files.forEach(element => {
         // console.log(element.path);
-        place.image.push(element.path)
+        cloud.upload(element.path, (error, result) => {
+            console.log(result);
+        })
     })
     place.save()
     .then(result => {
@@ -34,13 +37,14 @@ exports.addPlaces = (req, res, next) => {
 };
 
 exports.getPlaceByParams = (req, res, next) => {
-    const place = {_id: req.params.id};
-    Place.findOne(place).exec((err, result) => {
-        if(err) res.status(404).json({message: 'this place does not exists!'});
-        else {
-            res.status(200).json()
-        }
+    const place = {_id: req.params.placeId};
+    Place.findOne(place).populate('reviews categoryId', 'commentBody categoryName').exec()
+    .then(result => {
+        res.json(result);
     })
+    .catch(err => {
+        console.log('error occurred in finding this');
+    });
 }
 
 exports.getAllPlaces = (req, res, next) => {
@@ -54,27 +58,6 @@ exports.getAllPlaces = (req, res, next) => {
         res.status(500).json({error: err})
     });
 }
-
-// exports.getById = (req, res, next) => {
-//     const id = req.params.placeId;
-//     Place.findById({_id: id})
-//     // .populate('reviews')
-//     .exec()
-//     .then(place => {
-//        // console.log(place);
-//         res.status(200).json({
-//             message: 'order details',
-//             placeId: req.params.placeId
-//         })
-//     .catch(err => {
-//         console.log(err);
-//         res.status(500).json({
-//             message: 'No place with specified ID found',
-//             error: err
-//         })
-//     })
-//     });
-// };
 
 exports.patchPlaces = (req, res, next) => {
     const id = req.params.placeId;
