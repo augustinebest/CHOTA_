@@ -62,7 +62,7 @@ passport.use(new FacebookStrategy({
     callbackURL: '/auth/facebook/redirect',
     profileFields: ['id', 'displayName', 'picture', 'emails']
 }, (req, accessToken, refreshToken, profile, done) => {
-//     // Check if the User already exists in the database
+     // Check if the User already exists in the database
     User.findOne({facebookId: profile.id})
     .exec()
     .then(currentUser => {
@@ -89,21 +89,6 @@ passport.use(new FacebookStrategy({
         console.log(err);
     });
 }))
-
-// Search for a user 
-exports.searchUser = (req, res) => {
-    const userId = { _id: req.body.userid };
-    User.find(userid)
-    .exec()
-    .then(user => {
-        if(user) {
-            console.log(user);
-        } else {
-            console.log('This user does not exist!');
-        }
-    })
-    .catch();
-}
 
 // local signup
 exports.signup = (req, res, next) => {
@@ -150,6 +135,7 @@ exports.signup = (req, res, next) => {
     
 }
 
+// login
 exports.login = (req, res, next) => {
     if(req.body.email == null || req.body.password == null) {
         res.status(201).json({message: 'Fill the required fields'});
@@ -195,7 +181,46 @@ exports.userAddInterest = (req, res, next) => {
     })
 }
 
+// User profile
+exports.userProfile = (req, res, next) => {
+    const user_id = {_id: req.params.user_id};
+    try {
+        User.findOne(user_id, 'username email image').exec((err, user) => {
+            if(err) res.status(309).json({message: 'Unable to find this user!'});
+            if(!user) {
+                return res.status(304).json({message: 'This user does not exist!'});
+            }
+            res.status(200).json({user: user});
+        })
+        console.log(user_id)
+    } catch(error) {
+        res.status(408).json({error: error});
+    }
+}
+
 // adding friends
 exports.addFriend = (req, res, next) => {
-    console.log('Yay');
+    // console.log('Yay');
+    const friendId = {_id: req.params.friendId};
+    
+}
+
+// Search for a user 
+exports.searchUser = (req, res) => {
+    const userId = req.params.user_id;
+    try {
+        User.find({'username': {$regex: userId, $options: 'i'}})
+        .exec()
+        .then(user => {
+            if(user.length == 1) res.status(200).json({message: `we found ${user.length} user`, user: user});
+            else {
+                res.status(200).json({message: `we found ${user.length} users`, user: user})
+            }
+        })
+        .catch(err => {
+            res.status(404).json({err: 'User not found'});
+        });
+    } catch(error) {
+        res.status(405).json({error: error});
+    }
 }
