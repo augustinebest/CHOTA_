@@ -5,34 +5,57 @@ const cloud = require('../functions/cloudinary');
 exports.addPlaces = (req, res, next) => {
     const place = new Place({
         name: req.body.name,
-        image: [],
+        image: req.file.path,
+        imageID: '',
         description: req.body.description,
         date: req.body.date,
         categoryId: req.body.categoryId,
         reviews: req.body.reviews,
         ratings: req.body.ratings
     })
-    req.files.forEach(element => {
-        // console.log(element.path);
-        cloud.upload(element.path, (error, result) => {
+    // req.files.forEach(element => {
+    //     // console.log(element.path);
+    //     cloud.upload(element.path, (error, result) => {
+    //         console.log(result);
+    //     })
+    // })
+    try {
+        cloud.upload(place.image).then(result => {
+            place.image = result.url;
+            place.imageID = result.Id;
+            Place.create(place, (err, result) => {
+                if(err) res.status(209).json({message: 'Cannot add to the database!'});
+                Category.findById(req.body.categoryId).exec()
+                    .then(cat => {
+                        cat.placeId.push(result._id);
+                        cat.save();
+                        res.status(200).json({result, message: 'This have been added to the database!'});
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+            })
             console.log(result);
-        })
-    })
-    place.save()
-    .then(result => {
-        Category.findById(req.body.categoryId).exec()
-        .then(cat => {
-            cat.placeId.push(result._id);
-            cat.save();
-            res.status(200).json({result, message: 'This have been added to the database!'});
-        })
-        .catch(err => {
-            console.log(err);
         });
-    })
-    .catch(err => {
-        console.log(err);
-    });
+    } catch(error) {
+        res.status(405).json({error: error});
+    }
+    
+    // place.save()
+    // .then(result => {
+    //     Category.findById(req.body.categoryId).exec()
+    //     .then(cat => {
+    //         cat.placeId.push(result._id);
+    //         cat.save();
+    //         res.status(200).json({result, message: 'This have been added to the database!'});
+    //     })
+    //     .catch(err => {
+    //         console.log(err);
+    //     });
+    // })
+    // .catch(err => {
+    //     console.log(err);
+    // });
 
 };
 
