@@ -72,7 +72,7 @@ exports.getPlaceByParams = (req, res, next) => {
 
 exports.getAllPlaces = (req, res, next) => {
     Place.find({})
-    .select('_id name image description date')
+    .select('_id name image description date categoryId')
     .exec()
     .then(place => {
         res.status(200).json({place});
