@@ -19,6 +19,7 @@ import Setting from './setting';
 import Friends from './friends';
 import Facebooklogin from './components/Facebooklogin.js'
 import Error from './error';
+import ImageUpload from './components/ImageUpload'
 
 const Router = () => {
     return (
@@ -35,6 +36,7 @@ const Router = () => {
           <Route path='/SelectInterests' component={SelectInterests}/>
           <Route path='/Login' component={Login}/>
           <Route path='/Signup' component={Signup}/>
+          <Route path='/ImageUpload' component={ImageUpload}/>
           <Route path='/PinLocation' component={PinLocation}/>
           <Route path='/PinDetails' component={PinDetails}/>
           <Route path='/PinFeed' component={PinFeed}/>
