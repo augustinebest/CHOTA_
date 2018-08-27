@@ -7,23 +7,13 @@ exports.addPlaces = (req, res, next) => {
         name: req.body.name,
         image: req.file.path,
         imageID: '',
-        image: [],
         description: req.body.description,
         date: req.body.date,
         categoryId: req.body.categoryId,
         reviews: req.body.reviews,
         ratings: req.body.ratings
     });
-    cloud.upload(place.image).then(result => {
-        place.image = result.url;
-        place.imageID = result.Id;
-        place.create(place, (err, inst) => {
-            if(err) res.status(401).json({err: err, message: 'Unable to add this place'});
-            else {
-                res.status(200).json({message: 'This place have been added succesfully!'});
-            }
-        })
-    })
+    
     // req.files.forEach(element => {
     //     // console.log(element.path);
     //     cloud.upload(element.path, (error, result) => {
