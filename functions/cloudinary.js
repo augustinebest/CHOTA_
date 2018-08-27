@@ -1,9 +1,10 @@
 const cloudinary = require('cloudinary');
+const keys = require('../config/keys')
 
 cloudinary.config({
-    cloud_name: 'chotaapp',
-    api_key: '662324536894151',
-    api_secret: '-Ksmzou9SDOxTUBZxjqs5BeOw-k'
+    cloud_name: keys.cloudinary.class_name, 
+    api_key: keys.cloudinary.api_key,
+    api_secret: keys.cloudinary.api_secret
   })
 
 exports.upload = function(file){
