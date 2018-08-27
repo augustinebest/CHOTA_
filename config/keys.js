@@ -16,9 +16,9 @@ module.exports = {
     mongodb: 'mongodb://chotaapp:chota123@ds033484.mlab.com:33484/chota',
 
     cloudinary: {
-        cloud_name: 'chotaapp',
-        api_key: '662324536894151',
-        api_secret: '-Ksmzou9SDOxTUBZxjqs5BeOw-k'
+        cloud_name: 'chota',
+        api_key: '454241471689352',
+        api_secret: 'pCWnCq-cSSiM4UEcBrnI2EGTguQ'
     }
     
 }
