@@ -4,8 +4,9 @@ import Footer from './components/footer';
 import Nav from './components/nav-bar.js';
 import SearchBar from './components/search-bar';
 // import Trends from './components/trends';
-import SearchResults from './components/search-result.js'
-
+import SearchResults from './components/search-result.js';
+// import {withRouter} from 'react-router-dom';
+// import { browserHistory } from 'react-router';
 
 
 const API_KEY = '56f0450d2729d1d9861d643496069047'
@@ -13,18 +14,23 @@ const API_KEY = '56f0450d2729d1d9861d643496069047'
 
 class SearchResult extends Component {
 
-    state = {
+    constructor(props){
+        super(props);
+   this.state = {
         recipes: []
     }
+}
 
 getdata = async (event) =>{
-    const recipeName = event.target.elements.recipeName.value
+    const recipeName = event.target.elements.recipeName.value;
+    alert('hello')
     event.preventDefault();     //to prevent web page default method ie auto reloading
     const api_call = await fetch(`https://cors-anywhere.herokuapp.com/http://food2fork.com/api/search?key=${API_KEY}&q=${recipeName}&count=10`)
     const data = await api_call.json();
     this.setState({recipes: data.recipes})
     console.log(this.state.recipes)
-
+    // this.props.history.push("/SearchResults")
+    // this.props.browserHistory.push('/SearchResults')
 }
 
 
@@ -34,7 +40,7 @@ getdata = async (event) =>{
         return(
             <div className='wrapper'>
             <Nav/>
-            <SearchBar getData={this.getdata}/>
+            <SearchBar getData={this.getdata} where="search"/>
             <div className='detail-body'>
             <div className='body-div'>
                 <div className='Search-term'> trap House</div>

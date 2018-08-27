@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 
-const API_KEY = '56f0450d2729d1d9861d643496069047'
+// const API_KEY = '56f0450d2729d1d9861d643496069047'
 
 class Trends extends Component{
 
@@ -14,10 +14,10 @@ state ={
 
 
     componentDidMount(){
-        axios.get(`https://cors-anywhere.herokuapp.com/http://food2fork.com/api/search?key=${API_KEY}&q=shredded%20chicken&count=10`)
+        axios.get(`https://chota1.herokuapp.com/place`)
         .then(res=>{
-            console.log(res)
-            this.setState({items: res.data.recipes})
+            console.log(res.data.place)
+            this.setState({items: res.data.place})
         })
     }
 
@@ -28,10 +28,10 @@ state ={
             {this.state.items.map(value =>(
         <div key={value}  className='placediv'>
             <div className='placeImageDiv'>
-                <img src={value.image_url} alt={value.title} className='placesImage'/>
+                <img src={value.image} alt={value.name} className='placesImage'/>
             </div>
             <div className='placeDetailDiv' >
-            <h4>{value.title}</h4>
+            <h4>{value.name}</h4>
             <span> space for rating</span>
             <p>Gps location of place</p>
             </div>
