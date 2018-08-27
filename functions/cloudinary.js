@@ -1,11 +1,14 @@
+require('dotenv').config();
 const cloudinary = require('cloudinary');
-const keys = require('../config/keys')
+const key = process.env.cloud_name;
+const key1 = process.env.api_key;
+const key2 = process.env.api_secret;
 
-cloudinary.config({
-    cloud_name: keys.cloudinary.cloud_name,
-    api_key: keys.cloudinary.api_key,
-    api_secret: keys.cloudinary.api_secret
-  })
+// cloudinary.config({
+//     cloud_name: keys.cloudinary.cloud_name,
+//     api_key: keys.cloudinary.api_key,
+//     api_secret: keys.cloudinary.api_secret
+//   })
 
 exports.upload = function(file){
     return new Promise(resolve => {
