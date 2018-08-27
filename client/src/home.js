@@ -5,7 +5,7 @@ import './home.css';
 import Carousel from './components/carousel.js';
 import SearchBar from './components/search-bar.js';
 import Trends from './components/trends';
-import Footer from './components/footer'
+import Footer from './components/footer';
 
 
 const Home = () => {

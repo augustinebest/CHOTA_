@@ -33,21 +33,6 @@
    .homeTopGrid{
        height: 300px;
    }
-   h3{
-    /* position: absolute; */
-    width: 204px;
-    height: 53px;
-    left: 85px;
-    top: 125px;
-    margin: auto;
-
-    font-family: Rubik;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    font-size: 22px;
-    text-align: center;
-}
 
     .topContainer{
         width: 100%;
@@ -63,7 +48,7 @@
 
 
     .bottomcContainer{
-        width: 345px;
+        /* width: 345px; */
         /* height: 600px; */
         left: 15px;
         top: 670px;

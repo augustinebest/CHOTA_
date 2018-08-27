@@ -10,7 +10,9 @@ class Reviews extends Component {
             <div>
                 <div className='reviewdetails'>
                     <div className='personalDetail'>
-                    <div className='imageDivForProfile'></div>
+                    <div className='imageDivForProfile'>
+                    
+                    </div>
                     <p className='name'>Name</p>
                     </div>
                     <div className='reviews'>

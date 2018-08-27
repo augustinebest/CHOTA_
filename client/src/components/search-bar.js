@@ -3,10 +3,10 @@ import './search-bar.css';
 // import {Button, Jumbotron} from "react-bootstrap"
 
 
-const SearchBar = () => {
+const SearchBar = (props) => {
     return(
-       <form>
-           <input type="text" className='searchBar '></input>
+       <form onSubmit={props.getData}>
+           <input type="text" className='searchBar' name='recipeName'></input>
           <button className='searchButton'> Search </button>
           {/* <img src={search} alt='image' className='search-icon'/> */}
        </form>
