@@ -1,9 +1,12 @@
 const Place = require('../Models/Places');
 var Category = require('../Models/Categories');
+const cloud = require('..functions/cloudinary');
 
 exports.addPlaces = (req, res, next) => {
     var place = new Place({
         name: req.body.name,
+        image: req.file.path,
+        imageID: '',
         image: [],
         description: req.body.description,
         date: req.body.date,
@@ -11,6 +14,16 @@ exports.addPlaces = (req, res, next) => {
         reviews: req.body.reviews,
         ratings: req.body.ratings
     });
+    cloud.upload(place.image).then(result => {
+        place.image = result.url;
+        place.imageID = result.Id;
+        place.create(place, (err, inst) => {
+            if(err) res.status(401).json({err: err, message: 'Unable to add this place'});
+            else {
+                res.status(200).json({message: 'This place have been added succesfully!'});
+            }
+        })
+    })
     req.files.forEach(element => {
         // console.log(element.path);
         place.image.push(element.path)
