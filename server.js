@@ -1,7 +1,7 @@
 const app = require('./app');
 
 // require and load dotenv
-require('dotenv').load();
+// require('dotenv').load();
 
 const port = process.env.PORT || 5000;
 
