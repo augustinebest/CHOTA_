@@ -15,6 +15,9 @@
     background-color: #fff;
     border-radius: 15px;
     padding: 0.8rem;
+    margin-top: 489px;
+    margin-left: -28px;
+
 }
 
 .card > form{
@@ -52,4 +55,18 @@
 }
 .form-submit:hover{
    opacity: 0.6;
+}
+
+
+.styles_closeButton__20ID4 {
+
+    position: absolute;
+    top: 34px;
+    right: 55px;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    display: -ms-flexbox;
+    display: flex;
+
 }

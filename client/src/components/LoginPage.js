@@ -3,8 +3,10 @@ import axios from 'axios';
 import Validator from 'validator'
 import PropTypes from 'prop-types';
 import './../components/LoginPage.css';
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 import InlineError from './messages/InlineError';
+import Modal from 'react-responsive-modal';
+import Signup from './SignupPage';
 // import AuthService from './../components/AuthService';
 
 class Login extends Component {
@@ -15,8 +17,17 @@ class Login extends Component {
                   password: "",
                 },
                 errors: {},
+                open : false
         }
 
+        onOpenModal = () => {
+            this.setState({ open: true });
+          };
+
+        onCloseModal = () => {
+        this.setState({ open: false });
+        };
+          
             handleChange = (event) =>{
             this.setState({
              user: {...this.state.user, [event.target.name]: event.target.value }
@@ -28,14 +39,20 @@ class Login extends Component {
              .then(res =>{
              console.log(res.data.message);
              console.log(user)
-            //  if (res.status === 200){
-            //    console.log(res)
-            //    console.log(res.data.message);
-            //    alert(JSON.stringify(res.data.message));
-            //    sessionStorage.setItem('user', res.data.token);
-            //    console.log( sessionStorage.getItem('user'))
-            //    this.props.history.push('/')
-            //  }
+             if (res.status === 200){
+               console.log(res)
+               console.log(res.data.message);
+               alert(JSON.stringify(res.data.message));
+               sessionStorage.setItem('user', res.data.token);
+               console.log( sessionStorage.getItem('user'))
+               
+                this.setState({
+                    open:false
+                })
+                this.props.history.push('/profile');
+               
+               
+             }
              })
              console.log(user)
          
@@ -62,20 +79,28 @@ class Login extends Component {
 
         render(){
             const {errors} = this.state
+            const {open} = this.state
             return(
-                <div className="center">
-                    <div className="card">
-                        <h1> Login</h1>
-                        <form onSubmit={this.handleSubmit}>
-                            <label>Email:</label> <input className="form-item" type= "text"  name = "email" value={this.state.email} onChange={this.handleChange}/> 
-                            {errors.email && <InlineError text={errors.email}/>}
-                            <label>Password:</label> <input  className="form-item" type = 'password' name = "password" value={this.state.password} onChange={this.handleChange}/>
-                            {errors.password && <InlineError text={errors.password}/>}
-                            <br/>
-                                <button className="form-submit" value = "Submit" type = "submit">submit</button>
-                                <p className='message'>Don't have an account? <Link to = '/Signup'>Sign up</Link></p>
-                        </form>
-                    </div>
+                <div>
+                <button  className ="btn" onClick={this.onOpenModal}>  Login </button>
+                        <Modal open={open} onClose={this.onCloseModal} little>
+                           <div className="center">
+                                    <div className="card">
+                                    
+                                        <h1> Login</h1>
+                                        <form onSubmit={this.handleSubmit}>
+                                            <label>Email:</label> <input className="form-item" type= "text"  name = "email" value={this.state.email} onChange={this.handleChange}/> 
+                                            {errors.email && <InlineError text={errors.email}/>}
+                                            <label>Password:</label> <input  className="form-item" type = 'password' name = "password" value={this.state.password} onChange={this.handleChange}/>
+                                            {errors.password && <InlineError text={errors.password}/>}
+                                            <br/>
+                                                <button className="form-submit" value = "Submit" type = "submit">submit</button>
+                                                <p className='message'>Don't have an account?</p> <Signup/>
+                                                {/* <Link to = '/Signup'>Sign up</Link></p> */}
+                                        </form>
+                                    </div>
+                                </div>
+                        </Modal>
                 </div>
             );
        

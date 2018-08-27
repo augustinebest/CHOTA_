@@ -2,6 +2,7 @@ import React from 'react';
 import {Navbar, Nav, NavItem,} from "react-bootstrap";
 import './nav.css';
 import logo from './logo_invt.png'
+import Login from './LoginPage';
 
 
 const nav = () => {
@@ -12,7 +13,8 @@ const nav = () => {
           <Navbar.Brand>
             <a href="/"> <img src={logo} alt='chota'/></a>
           </Navbar.Brand>
-         <a href = '/Login'> <button className='btn'> Login </button> </a>
+          <Login />
+         {/* <a href = '/Login'> <button className='btn'> Login </button> </a> */}
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse className=''>
