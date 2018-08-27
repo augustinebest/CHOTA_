@@ -1,8 +1,8 @@
-require('dotenv').config();
+require('dotenv').config({path: '/config/secret'});
 const cloudinary = require('cloudinary');
-const key = process.env.cloud_name;
-const key1 = process.env.api_key;
-const key2 = process.env.api_secret;
+// const key = process.env.cloud_name;
+// const key1 = process.env.api_key;
+// const key2 = process.env.api_secret;
 
 // cloudinary.config({
 //     cloud_name: keys.cloudinary.cloud_name,
