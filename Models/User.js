@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const userSchema = mongoose.Schema({
     username: { type: String},
     email: {type: String, 
-        required: true, 
         unique: true,
         match: /[a-zs0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
     },

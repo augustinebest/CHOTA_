@@ -6,7 +6,6 @@ const cloud = require('../functions/cloudinary');
 
 
 exports.addInterest = (req, res, next) => {
-    // console.log(req.file);
     const interest = {
         name: req.body.name,
         image: req.file.path,

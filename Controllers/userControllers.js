@@ -92,68 +92,79 @@ passport.use(new FacebookStrategy({
 
 // local signup
 exports.signup = (req, res, next) => {
-    if(req.body.password == null || req.body.username == null || req.body.email == null) {
-        res.status(404).json({message: 'Fill the required fields'});
-    } else {
-        User.findOne({email: req.body.email})
-        .then(result => {
-            if(result) {
-                res.status(201).json({message: 'This email already exists!'});
-            } else {
-                User.findOne({username: req.body.username})
-                .then(username => {
-                    if(username) {
-                        res.status(202).json({message: 'This username already exists!'});
-                    } else {
-                        bcrypt.hash(req.body.password, 10, (err, hash) => {
-                            if(err) res.status(203).json(err);
-                            else {
-                                const user = new User({
-                                    email: req.body.email,
-                                    username: req.body.username,
-                                    password: hash
-                                });
-                                user.save()
-                                .then(user => {
-                                    res.status(200).json({message: 'This user have been registered'});
-                                })
-                                .catch(err => {
-                                    console.log({err: err});
-                                });
-                            }
-                        })
-                        
-                    }
-                })
-                .catch();
-            }
-        })
-        .catch(err => {
-            console.log({err: err});
-        }); 
+    try {
+        if(req.body.password == null || req.body.username == null || req.body.email == null) {
+            res.status(404).json({message: 'Fill the required fields'});
+        } else {
+            User.findOne({email: req.body.email})
+            .then(result => {
+                if(result) {
+                    res.status(201).json({message: 'This email already exists!'});
+                } else {
+                    User.findOne({username: req.body.username})
+                    .then(username => {
+                        if(username) {
+                            res.status(202).json({message: 'This username already exists!'});
+                        } else {
+                            bcrypt.hash(req.body.password, 10, (err, hash) => {
+                                if(err) res.status(203).json(err);
+                                else {
+                                    const user = new User({
+                                        email: req.body.email,
+                                        username: req.body.username,
+                                        password: hash
+                                    });
+                                    user.save()
+                                    .then(user => {
+                                        res.status(200).json({message: 'This user have been registered'});
+                                    })
+                                    .catch(err => {
+                                        res.status(205).json({err: err});
+                                    });
+                                }
+                            })
+                            
+                        }
+                    })
+                    .catch(err => {
+                        res.status(208).json({err: err});
+                    });
+                }
+            })
+            .catch(err => {
+                console.log({err: err});
+            }); 
+        }
+    } catch(error) {
+        res.status(307).json({error: error});
     }
+    
     
 }
 
 // login
 exports.login = (req, res, next) => {
-    if(req.body.email == null || req.body.password == null) {
-        res.status(201).json({message: 'Fill the required fields'});
-    } else {
-        User.findOne({email: req.body.email}).select('email password username').exec(function(err, currentUser) {
-            if(err) res.status(202).json({err: err});
-            if(!currentUser) {
-                res.status(404).json({message: 'This user does not exist!'});
-            } else {
-                const checkPassword = bcrypt.compareSync(req.body.password, currentUser.password);
-                if(!checkPassword) {
-                    res.status(402).json({message: 'email or password invalid!'});
+    try {
+        if(req.body.email == null || req.body.password == null) {
+            res.status(201).json({message: 'Fill the required fields'});
+        } else {
+            User.findOne({email: req.body.email}).select('email password username').exec(function(err, currentUser) {
+                if(err) res.status(202).json({err: err});
+                if(!currentUser) {
+                    res.status(404).json({message: 'This user does not exist!'});
                 } else {
-                    var token = jwt.sign({email: currentUser.email, id: currentUser._id}, secret.key, {expiresIn: '12h'});
-                    res.status(200).json({message: 'You have logged in successfully!', token: token});
+                    const checkPassword = bcrypt.compareSync(req.body.password, currentUser.password);
+                    if(!checkPassword) {
+                        res.status(402).json({message: 'email or password invalid!'});
+                    } else {
+                        var token = jwt.sign({email: currentUser.email, id: currentUser._id}, secret.key, {expiresIn: '12h'});
+                        res.status(200).json({message: 'You have logged in successfully!', token: token});
+                    }
                 }
-            }
-        });
+            });
+        }
+    } catch(error) {
+        res.status(308).json({error: error});
     }
 }
 
