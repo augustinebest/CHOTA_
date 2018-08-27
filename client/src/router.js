@@ -17,14 +17,17 @@ import Notifie from './notification';
 import Profile from './profile';
 import Setting from './setting';
 import Friends from './friends';
-import Facebooklogin from './components/Facebooklogin.js'
 import Error from './error';
+// import Facebooklogin from './components/Facebooklogin.js'
+// import searchResults from './search-results';
+// import SearchBar from './components/search-bar';
 
 const Router = () => {
     return (
       <div>
       <BrowserRouter>
          <Switch>
+          
           <Route path='/' component={Home} exact/>
           <Route path='/SearchResults' component={SearchResult}/>
           <Route path='/PlaceDetails' component={PlaceDetails}/>
@@ -42,7 +45,8 @@ const Router = () => {
           <Route path='/Profile' component={Profile}/>
           <Route path='/Setting' component={Setting}/>
           <Route path='/Friends' component={Friends}/>
-          <Route path="/Facebook" component = {Facebooklogin}/>
+          {/* <Route path="/Facebook" component = {Facebooklogin}/> */}
+          {/* <Route path='/resultFromSearch' component={SearchBar}/> */}
           <Route component={Error}/>
         </Switch>
       </BrowserRouter>

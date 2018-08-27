@@ -15,7 +15,7 @@ const Home = () => {
                     <Nav/>
                 <div className='topContainer'>
                     <h3> Search for the best places in town </h3>
-                    <SearchBar/>
+                    <SearchBar where="home"/>
                 </div> 
                 <h4>Find Quickly</h4>           
                 <Carousel/>
