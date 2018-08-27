@@ -54,5 +54,8 @@ router.post('/select', checkAuth.AuthMiddeWare, userController.addFriend);
 // local signup
 router.post('/create', userController.signup);
 router.post('/signin', userController.login);
+router.get('/profile/:user_id', userController.userProfile);
+router.get('/search/:user_id', userController.searchUser);
+router.get('/friend', userController.addFriend);
 
 module.exports = router;

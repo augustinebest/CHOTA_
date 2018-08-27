@@ -1,4 +1,5 @@
 const Reviews = require('../Models/Reviews');
+const Place = require('../Models/Places');
 
 // Adding of Reviews
 exports.addReview = (req, res, next) => {
@@ -8,7 +9,26 @@ exports.addReview = (req, res, next) => {
     })
     reviews.save()
     .then(review => {
-        res.status(200).json({message: 'This review have been added successfully!'});
+        try {
+            Place.findOne(review.placeId).exec((err, result) => {
+                // res.json(result);
+                    if(err) {
+                       console.log('There is an error!');
+                    } else {
+                        var check = result.reviews.push(review._id);
+                        if(check) {
+                            result.save();
+                            res.status(200).json({message: 'This review have been added successfully!'});
+                        } else {
+                            res.status(206).json({message: 'cannot add!'});
+                        }
+                        // result.save();
+                        // res.status(200).json({message: 'This review have been added successfully!'});
+                    }
+            })
+        } catch (error) {
+            res.status(309).json({error: error});
+        }
     })
     .catch(err => {
         res.status(404).json({message: 'Error occured while adding your review!'});
