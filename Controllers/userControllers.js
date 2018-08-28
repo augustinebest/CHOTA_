@@ -6,6 +6,7 @@ const User = require('../Models/User');
 const bcrypt = require('bcrypt');
 const secret = require('../functions/secret');
 const jwt = require('jsonwebtoken');
+const mailer = require('../functions/mailer');
 
 passport.serializeUser((user, done) => {
     done(null, user);
@@ -235,3 +236,29 @@ exports.searchUser = (req, res) => {
         res.status(405).json({error: error});
     }
 }
+
+exports.userForgotPassword = (req, res, next) => {
+    const email = {email:req.body.email};
+    const update = Math.floor(9372+Math.random()*10000).toString();
+    try {
+        User.findOne(email).exec((err, user) => {
+            if(err) res.status(404).json({message: 'Error ocurred while getting this user!'});
+            if(!user) res.status(404).json({message: 'This user cannot be found!'});
+            bcrypt.hash(update, 10, (err, hash) => {
+                if (err)  res.json({err: err});
+                User.findOneAndUpdate(email, {token: hash}).exec((err) => {
+                    if(err) res.json({err: err});
+                    mailer.recoveryPassword(email.email, (err, info) => {
+                        if(err) res.json({err: 'error occurred while sending this mail'});
+                        else {
+                            res.status(200).json({message: 'Please check your email on a link to add your new password!'});
+                         }
+                    }, hash);
+                })
+            })
+        })
+    } catch(error) {
+        res.status(504).json({error: error});
+    }
+}
+
