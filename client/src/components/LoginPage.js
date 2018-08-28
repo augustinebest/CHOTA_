@@ -49,6 +49,7 @@ class Login extends Component {
                 this.setState({
                     open:false
                 })
+                console.log(this.props.history);
                 this.props.history.push('/profile');
                
                

@@ -40,5 +40,4 @@ class Upload extends Component {
         )
     }
 }
-
 export default Upload 
