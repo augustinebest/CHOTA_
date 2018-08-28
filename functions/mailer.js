@@ -14,7 +14,8 @@ exports.recoveryPassword = function(email,callback,pass){
         to: email,
         subject: ' Chota Password Recovery',
         html: `<center><h2> <p>You have requested a password reset,<br> please use the number below to login and reset your password.</p></h2><center>
-                <br><br><h3><span style="color:rgb(222, 226, 224); background-color:blueviolet; padding: 20px; border-radius: 20px;">
+                <br><br><h3><span style="color:rgba(4, 5, 17, 1); background-color:rgba(141, 173, 231, 1); padding: 20px; 
+                border-radius: 20px; font-weight: bold; border-radius: 5px; border: 1px solid rgba(4, 5, 17, 1)">
                 <a href='http://localhost:5000/auth/recoverpassword/${pass}'>Confirm your password</a></span></h3>`
  };
  transporter.sendMail(mailOptions, callback);
