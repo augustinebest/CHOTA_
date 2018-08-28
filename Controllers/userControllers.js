@@ -211,7 +211,11 @@ exports.userProfile = (req, res, next) => {
 }
 
 // follow friends
-
+exports.addFriend = (req, res, next) => {
+    // console.log('Yay');
+    const friendId = {_id: req.params.friendId};
+    
+}
 
 
 
