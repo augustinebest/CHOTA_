@@ -217,7 +217,10 @@ exports.addFriend = (req, res, next) => {
     
 }
 
-
+// Unfollow friends
+exports.unfollowFriends = (req, res, next) => {
+    console.log('Yay!');
+}
 
 // Search for a user 
 exports.searchUser = (req, res) => {
