@@ -210,12 +210,10 @@ exports.userProfile = (req, res, next) => {
     }
 }
 
-// adding friends
-exports.addFriend = (req, res, next) => {
-    // console.log('Yay');
-    const friendId = {_id: req.params.friendId};
-    
-}
+// follow friends
+
+
+
 
 // Search for a user 
 exports.searchUser = (req, res) => {
@@ -242,19 +240,26 @@ exports.userForgotPassword = (req, res, next) => {
     const update = Math.floor(9372+Math.random()*10000).toString();
     try {
         User.findOne(email).exec((err, user) => {
-            if(err) res.status(404).json({message: 'Error ocurred while getting this user!'});
-            if(!user) res.status(404).json({message: 'This user cannot be found!'});
+            if(err) {
+                res.status(404).json({message: 'Error ocurred while getting this user!'});
+            }
+            if(!user) {
+                res.status(404).json({message: 'This user cannot be found!'});
+            }
             bcrypt.hash(update, 10, (err, hash) => {
-                if (err)  res.json({err: err});
-                User.findOneAndUpdate(email, {token: hash}).exec((err) => {
-                    if(err) res.json({err: err});
-                    mailer.recoveryPassword(email.email, (err, info) => {
-                        if(err) res.json({err: 'error occurred while sending this mail'});
-                        else {
-                            res.status(200).json({message: 'Please check your email on a link to add your new password!'});
-                         }
-                    }, hash);
-                })
+                if (err) {
+                    res.json({err: err});
+                } else {
+                    User.findOneAndUpdate(email, {token: hash}).exec((err) => {
+                        if(err) res.json({err: err});
+                        mailer.recoveryPassword(email.email, (err, info) => {
+                            if(err) res.json({err: 'error occurred while sending this mail'});
+                            else {
+                                res.status(200).json({message: 'Please check your email on a link to add your new password!'});
+                             }
+                        }, hash);
+                    })
+                }
             })
         })
     } catch(error) {
@@ -262,3 +267,37 @@ exports.userForgotPassword = (req, res, next) => {
     }
 }
 
+exports.getUserToken = (req, res, next) => {
+    try {
+        const password = { password: req.body.password };
+        const c_password = { c_password: req.body.c_password };
+        if(req.body.password == null || req.body.c_password == null || req.body.password == '' || req.body.c_password == '') {
+            res.status(404).json({message: 'You have to fill the required field(s)'});
+        } else {
+            if (req.body.password != req.body.c_password) {
+                res.status(404).json({message: 'Unmatched password!'});
+            } else {
+                const email = req.query.email;
+                const token = req.query.token;
+                    User.findOne({email: email}).exec((err, user)=> {
+                        if(err) res.status(200).json({message: 'Error occurred while getting this user'});
+                        if(user.token != token || user.email != email) {
+                            res.status(404).json({message: 'This does not exist!'});
+                        } else {
+                            bcrypt.hash(req.body.password, 10, (err, hash) => {
+                                if (err) {
+                                    res.json({err: err});
+                                } else {
+                                    user.password = hash;
+                                    user.save();
+                                    res.status(200).json({message: 'Your password have been updated!'});
+                                }
+                            })
+                        }
+                    })
+            }
+        }
+    } catch(error) {
+        res.status(307).json(error);
+    }
+}
