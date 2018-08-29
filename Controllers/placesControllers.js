@@ -40,22 +40,6 @@ exports.addPlaces = (req, res, next) => {
     } catch(error) {
         res.status(405).json({error: error});
     }
-    
-    // place.save()
-    // .then(result => {
-    //     Category.findById(req.body.categoryId).exec()
-    //     .then(cat => {
-    //         cat.placeId.push(result._id);
-    //         cat.save();
-    //         res.status(200).json({result, message: 'This have been added to the database!'});
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //     });
-    // })
-    // .catch(err => {
-    //     console.log(err);
-    // });
 
 };
 
@@ -63,7 +47,7 @@ exports.getPlaceByParams = (req, res, next) => {
     const place = {_id: req.params.placeId};
     Place.findOne(place).populate('reviews categoryId', 'commentBody categoryName').exec()
     .then(result => {
-        res.json(result);
+        res.json({message: `There are ${result.reviews.length} reviews in this place`, result: result});
     })
     .catch(err => {
         console.log('error occurred in finding this');
@@ -82,6 +66,19 @@ exports.getAllPlaces = (req, res, next) => {
     });
 }
 
+exports.getLatest = (req, res, next) => {
+    const value = parseInt(req.params.value);
+    Place.find({}).sort({'_id': -1}) /* -1 is descending order */
+    .select('_id name image description date categoryId').limit(value)
+    .exec()
+    .then(place => {
+        res.status(200).json({place});
+    })
+    .catch(err => {
+        res.status(500).json({error: err})
+    });
+}
+
 exports.patchPlaces = (req, res, next) => {
     const id = req.params.placeId;
     const updateOps = {}; 
@@ -89,8 +86,6 @@ exports.patchPlaces = (req, res, next) => {
         updateOps[ops.propName] = ops.value;
     }
     Place.update({_id: id}, {$set: updateOps})
-    //use when updating all properties 
-    // Place.update({_id: id}, {$set: {name: req.body.newName, description: req.body.newDescription}})
     .exec()
     .then(result => {
         console.log(result);
@@ -133,3 +128,16 @@ exports.deletePlaces = (req, res, next) =>{
         });
     })
 };
+
+exports.getTrendingPlaces = (req, res, next) => {
+    Place.find().exec((err, places) => {
+        // if(err) res.status(203).json({message: 'Error occurred while geting the place'});
+        // for (place of places) {
+        //     res.json(place);
+        // }
+        for (var i=0; i<places.length; i++) {
+            console.log(places[i].reviews.length);
+        }
+        // res.json(places);
+    })
+}
