@@ -31,7 +31,7 @@ const Router = () => {
           
           <Route path='/' component={Home} exact/>
           <Route path='/SearchResults' component={SearchResult}/>
-          <Route path='/PlaceDetails' component={PlaceDetails}/>
+          <Route path='/PlaceDetails/:id' component={PlaceDetails}/>
           <Route path='/About' component={About}/>
           <Route path='/Advertise' component={Advertise}/>
           <Route path='/Privacy' component={Privacy}/>
@@ -41,7 +41,7 @@ const Router = () => {
           <Route path='/Signup' component={Signup}/>
           <Route path='/ImageUpload' component={ImageUpload}/>
           <Route path='/PinLocation' component={PinLocation}/>
-          <Route path='/PinDetails' component={PinDetails}/>
+          <Route path='/PinDetails/' component={PinDetails}/>
           <Route path='/PinFeed' component={PinFeed}/>
           <Route path='/Notifie' component={Notifie}/>
           <Route path='/Profile' component={Profile}/>

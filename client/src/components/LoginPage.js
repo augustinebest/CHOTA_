@@ -83,7 +83,7 @@ class Login extends Component {
             const {open} = this.state
             return(
                 <div>
-                <button  className ="btn" onClick={this.onOpenModal}>  Login </button>
+                <button  className ="btn" onClick={this.onOpenModal} id='loginButton'>  Login </button>
                         <Modal open={open} onClose={this.onCloseModal} little>
                            <div className="center">
                                     <div className="card">

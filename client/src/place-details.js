@@ -3,17 +3,36 @@ import Nav from './components/nav-bar.js';
 import './place-details.css';
 import Reviews from './components/review.js';
 import Footer from './components/footer.js';
+import axios from 'axios'
 
+class PlaceDetails extends React.Component{
+    state={
+        places: []
+    }
+    componentDidMount(){
+        const location = this.props.match.params.id
+        console.log(location)
+        axios.get(`https://chota1.herokuapp.com/place/single/${location}`)
+        .then(res =>{
+            console.log(res)
+            this.setState({
+                places: res.data
+            })
+        })
+    }
 
-const PlaceDetails = () => {
+    render(){
+        const {places} = this.state
     return(
         <div>
            <Nav/>
-           <div className='placeImage'></div>
+           <div className='placeImage'>
+           <img src={places.image} alt={places.name} id='placeDetailImage'/>
+           </div>
            <div className='placedetails'>
                 <div className='placeMap'></div>
                 <div className='placeName'>
-                <h4> Name of place </h4>
+                <h4> {places.name} </h4>
                 <p>Rating</p>
                 <p>GPS location</p>
                 </div>
@@ -25,6 +44,7 @@ const PlaceDetails = () => {
            </div>
         </div>
     );
+}
 }
 
 
