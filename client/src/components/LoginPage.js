@@ -3,10 +3,13 @@ import axios from 'axios';
 import Validator from 'validator'
 import PropTypes from 'prop-types';
 import './../components/LoginPage.css';
-// import {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import InlineError from './messages/InlineError';
 import Modal from 'react-responsive-modal';
-import Signup from './SignupPage';
+// import Signup from './SignupPage';
+import logo from './logo_invt.png'
+// import './nav.css';
+import {Navbar, Nav, NavItem,} from "react-bootstrap";
 // import AuthService from './../components/AuthService';
 
 class Login extends Component {
@@ -17,7 +20,7 @@ class Login extends Component {
                   password: "",
                 },
                 errors: {},
-                open : false
+                open : true
         }
 
         onOpenModal = () => {
@@ -83,7 +86,32 @@ class Login extends Component {
             const {open} = this.state
             return(
                 <div>
-                <button  className ="btn" onClick={this.onOpenModal}>  Login </button>
+                     <Navbar className='navBarBorder'>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <a href="/"> <img src={logo} alt='chota'/></a>
+          </Navbar.Brand>
+          {/* <Login /> */}
+         <a href = '/'> <button className='btn'> Home </button> </a>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse className=''>
+          <Nav pullRight>
+            <NavItem eventKey={1} href="/about">
+             About
+            </NavItem>
+            <NavItem eventKey={2} href="/advertise">
+             Advertise
+            </NavItem>
+            <NavItem eventKey={3} href="/privacy">
+             Privacy
+            </NavItem>
+            <NavItem eventKey={4} href="/contact">
+             Contact
+            </NavItem>
+          </Nav>
+        </Navbar.Collapse>
+        </Navbar>
                         <Modal open={open} onClose={this.onCloseModal} little>
                            <div className="center">
                                     <div className="card">
@@ -96,13 +124,14 @@ class Login extends Component {
                                             {errors.password && <InlineError text={errors.password}/>}
                                             <br/>
                                                 <button className="form-submit" value = "Submit" type = "submit">submit</button>
-                                                <p className='message'>Don't have an account?</p> <Signup/>
-                                                {/* <Link to = '/Signup'>Sign up</Link></p> */}
+                                                {/* <p className='message'>Don't have an account?</p> <Signup/> */}
+                                               <p className='message'> Don't have an account? <Link to = '/Signup'>Sign up</Link></p>
                                         </form>
                                     </div>
                                 </div>
                         </Modal>
-                </div>
+                  </div>
+                
             );
        
         }

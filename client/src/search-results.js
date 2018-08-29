@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 // import './search-results.css';
 import Footer from './components/footer';
 import Nav from './components/nav-bar.js';
-import SearchBar from './components/search-bar';
+// import SearchBar from './components/search-bar';
 // import Trends from './components/trends';
 import SearchResults from './components/search-result.js';
 // import {withRouter} from 'react-router-dom';
@@ -11,7 +11,7 @@ import './search-results.css';
 import axios from 'axios'
 
 
-const API_KEY = '56f0450d2729d1d9861d643496069047'
+// const API_KEY = '56f0450d2729d1d9861d643496069047'
 
 
 class SearchResult extends Component {
