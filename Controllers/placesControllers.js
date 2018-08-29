@@ -108,7 +108,7 @@ exports.patchPlaces = (req, res, next) => {
 exports.searchPlaces = (req, res) => {
     const name =  req.params.name;
     Place.find({'name': {$regex: name, $options: 'i'}})
-    .select('_id name image description date')
+    .select('_id name image imageID description date categoryId reviews')
     .exec()
     .then(place => {
         res.status(200).json(place);
