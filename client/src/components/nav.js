@@ -2,10 +2,16 @@ import React from 'react';
 import {Navbar, Nav, NavItem,} from "react-bootstrap";
 import './nav.css';
 import logo from './logo_invt.png'
-import Login from './LoginPage';
+// import Login from './LoginPage';
 
 
-const nav = () => {
+class nav extends React.Component{
+  
+  onOpenModal = () => {
+    this.setState({ open: true });
+  };
+  render(){
+
     return(
       <div>
         <Navbar className='navBarBorder'>
@@ -13,8 +19,8 @@ const nav = () => {
           <Navbar.Brand>
             <a href="/"> <img src={logo} alt='chota'/></a>
           </Navbar.Brand>
-          <Login />
-         {/* <a href = '/Login'> <button className='btn'> Login </button> </a> */}
+          {/* <Login /> */}
+         <a href = '/Login'> <button className='btn' onClick={this.onOpenModal}> Login </button> </a>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse className=''>
@@ -35,8 +41,11 @@ const nav = () => {
         </Navbar.Collapse>
         </Navbar>
       </div>
-        
     )
+    }
+    
+        
+    
 }
 
 

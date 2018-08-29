@@ -13,7 +13,7 @@ class  Signup extends Component {
             email: "",
             password:"",
             loading:false,
-            open : false
+            open : true
         };
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -58,7 +58,7 @@ class  Signup extends Component {
         const { open } = this.state;
         return (
           <div>
-            <button className= 'btn' onClick={this.onOpenModal}>Signup</button>
+            {/* <button className= 'btn' onClick={this.onOpenModal}>Signup</button> */}
             <Modal open={open} onClose={this.onCloseModal} little>
               <div className="center">
                 <div className="card">
