@@ -1,4 +1,4 @@
 /node_modules
 /client/node_modules
-/config
+/config/keys
 /cloud_secret
