@@ -31,7 +31,7 @@ const Router = () => {
           
           <Route path='/' component={Home} exact/>
           <Route path='/SearchResults' component={SearchResult}/>
-          <Route path='/PlaceDetails' component={PlaceDetails}/>
+          <Route path='/PlaceDetails/:id' component={PlaceDetails}/>
           <Route path='/About' component={About}/>
           <Route path='/Advertise' component={Advertise}/>
           <Route path='/Privacy' component={Privacy}/>

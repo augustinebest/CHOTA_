@@ -1,7 +1,8 @@
 import React from 'react';
 import {Navbar, Nav, NavItem,} from "react-bootstrap";
 import './nav-bar.css';
-import logo from './logo_dark.png'
+import logo from './logo_dark.png';
+// import Login from './LoginPage';
 
 
 const nav = () => {
@@ -12,7 +13,9 @@ const nav = () => {
           <Navbar.Brand>
             <a href="/"> <img src={logo} alt='chota'/></a>
           </Navbar.Brand>
-          <button className='btn'> Login </button>
+          {/* <Login /> */}
+          {/* <button className='btn'> Login </button> */}
+          <a href = '/Login'> <button className='btn' onClick={this.onOpenModal}> Login </button> </a>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse className=''>

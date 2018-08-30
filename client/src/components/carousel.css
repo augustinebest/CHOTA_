@@ -76,7 +76,7 @@
 }
 
 
-@media ( max-width: 414px) {
+@media ( max-width: 417px) {
     .carousel-viewport{
         height: 120px;
     }

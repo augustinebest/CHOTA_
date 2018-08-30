@@ -29,7 +29,7 @@
 
 
 
-@media ( max-width: 414px) {
+@media ( max-width: 417px) {
    .homeTopGrid{
        height: 300px;
    }
@@ -61,12 +61,12 @@
     .seachIconArea{
         /* border: 1px solid black; */
         height: 70px;
-        width: 70px;
+        width: 135px;
         margin: auto;
         margin-top: 20px;
     }
     #searchIcon{
-        height: 70px;
-        width: 70px;
+        height: 35px;
+        width: 135px;
     }
 }

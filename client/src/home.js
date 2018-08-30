@@ -6,7 +6,7 @@ import Carousel from './components/carousel.js';
 // import SearchBar from './components/search-bar.js';
 import Trends from './components/trends';
 import Footer from './components/footer';
-import SearchIcon from './Search-icon1.png';
+import SearchIcon from './Button(1).png';
 import {Link} from 'react-router-dom';
 
 
