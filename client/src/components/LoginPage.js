@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 import InlineError from './messages/InlineError';
 import Modal from 'react-responsive-modal';
 // import Signup from './SignupPage';
-import logo from './logo_invt.png'
+import logo from './logo_dark.png';
 // import './nav.css';
 import {Navbar, Nav, NavItem,} from "react-bootstrap";
 // import AuthService from './../components/AuthService';
@@ -87,9 +87,9 @@ class Login extends Component {
             return(
                 <div>
                      <Navbar className='navBarBorder'>
-        <Navbar.Header>
+        <Navbar.Header  style={{backgroundColor: '#F2F2F2'}}>
           <Navbar.Brand>
-            <a href="/"> <img src={logo} alt='chota'/></a>
+          <a href="/"> <img src={logo} alt='chota'/></a>
           </Navbar.Brand>
           {/* <Login /> */}
          <a href = '/'> <button className='btn'> Home </button> </a>

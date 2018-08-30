@@ -41,7 +41,7 @@ const Router = () => {
           <Route path='/Signup' component={Signup}/>
           <Route path='/ImageUpload' component={ImageUpload}/>
           <Route path='/PinLocation' component={PinLocation}/>
-          <Route path='/PinDetails/' component={PinDetails}/>
+          <Route path='/PinDetails' component={PinDetails}/>
           <Route path='/PinFeed' component={PinFeed}/>
           <Route path='/Notifie' component={Notifie}/>
           <Route path='/Profile' component={Profile}/>
