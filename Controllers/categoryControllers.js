@@ -1,24 +1,43 @@
 const Category = require('../Models/Categories');
 const Place = require('../Models/Places');
+const cloud = require('../functions/cloudinary');
 
 exports.addCategory = function(req, res) {
-    const category = new Category({
-        categoryName: req.body.categoryName,
-        placeId: req.body.placeId
-    });
-    category
-    .save()
-    .then(result => {
-        // console.log(`This category have been added!`);
-        res.status(200).json({message: 'Successfully added!'});
+    // const category = new Category({
+        const category = {
+            categoryName: req.body.categoryName,
+            image: req.file.path,
+            imageID: '',
+            placeId: req.body.placeId
+        }
+        
+    // });
+
+    cloud.upload(category.image).then(result => {
+        category.image = result.url;
+        category.imageID = result.Id;
+        Category.create(category, (err, inst) => {
+            if(err) res.status(401).json({err: err, message: 'Cannot add category, try again', err});
+            else {
+                res.status(200).json({message: 'Category added succesfully!'});
+            }
+        })
     })
-    .catch(err => {
-        // console.log(err);
-        res.status(500).json({
-            error: "Cannot add category, please try again", err
-        });
-    });
 }
+
+//     category
+//     .save()
+//     .then(result => {
+//         // console.log(`This category have been added!`);
+//         res.status(200).json({message: 'Successfully added!'});
+//     })
+//     .catch(err => {
+//         // console.log(err);
+//         res.status(500).json({
+//             error: "Cannot add category, please try again", err
+//         });
+//     });
+// }
 
 exports.getAllCategories = (req, res, next) => {
     Category.find({}).select('_id categoryName')
