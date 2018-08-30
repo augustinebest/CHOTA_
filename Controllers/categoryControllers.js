@@ -65,3 +65,20 @@ exports.getACategory = (req, res, next) => {
         console.log(err);
     });
 }
+
+exports.deleteAllCategory = (req, res, next) =>{
+    const id = req.params.category;
+    Category.remove({})
+    .exec()
+    .then(place => {
+        res.status(200).json({
+            message: 'Yeap! Entry deleted successfully'
+        });
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(404).json({
+            error: 'Can\'t delete the specified place', err
+        });
+    })
+};
