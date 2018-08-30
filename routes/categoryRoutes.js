@@ -34,5 +34,6 @@ const upload = multer({
 router.post('/', upload.single('image'), category.addCategory);
 router.get('/', category.getAllCategories);
 router.get('/search/:category', category.getACategory);
+router.delete('/', category.deleteCategory);
 
 module.exports = router;
