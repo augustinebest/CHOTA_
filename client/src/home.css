@@ -47,15 +47,16 @@
     }
 
 
-    .bottomcContainer{
+    #bottomcContainer{
         /* width: 345px; */
         /* height: 600px; */
         left: 15px;
         top: 670px;
         /* border: 1px solid blue; */
-        margin: auto;
+        /* margin: auto; */
         padding-top: 10px;
         padding: 10px;
+        margin-top: 70px;
 
     }
     .seachIconArea{

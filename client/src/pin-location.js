@@ -3,8 +3,8 @@ import AdminNavBar from './components/admin-navbar';
 import './pin-location.css';
 import {storage} from './Firebase';
 import {config} from './Firebase/index';
-import firebase from 'firebase/app'
-import 'firebase/database'
+import firebase from 'firebase';
+import 'firebase/database';
 import Note from '../src/Notes/note';
 import Noteform from '../src/NoteForm/noteform'
 

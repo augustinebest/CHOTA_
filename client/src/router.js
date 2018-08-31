@@ -21,6 +21,7 @@ import AdminHome from './admin-home'
 import Error from './error';
 import ImageUpload from './components/ImageUpload';
 import Upload from './components/UploadPhoto'
+import ComponentPage from './component-page.js';
 // import Facebooklogin from './components/Facebooklogin.js'
 // import searchResults from './search-results';
 // import SearchBar from './components/search-bar';
@@ -49,6 +50,7 @@ const Router = () => {
           <Route path='/Profile' component={Profile}/>
           <Route path='/Setting' component={Setting}/>
           <Route path='/Friends' component={Friends}/>
+          <Route path='/Component-page:id' component={ComponentPage}/>
           <Route path='/admin-home' component={AdminHome}/>
           {/* <Route path="/Facebook" component = {Facebooklogin}/> */}
           {/* <Route path='/resultFromSearch' component={SearchBar}/> */}
