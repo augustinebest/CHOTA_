@@ -44,9 +44,6 @@ class nav extends React.Component{
               <NavItem eventKey={3} href="/privacy">
                Privacy
               </NavItem>
-              <NavItem eventKey={4} href="/contact">
-               Contact
-              </NavItem>
             </Nav>
           </Navbar.Collapse>
           </Navbar>
@@ -77,8 +74,8 @@ class nav extends React.Component{
                 <NavItem eventKey={3} href="/privacy">
                  Privacy
                 </NavItem>
-                <NavItem eventKey={4} href="/contact">
-                 Contact
+                <NavItem>
+                <Link to='/'><button onClick={this.Logout} className='logoutButton'>Logout</button></Link>
                 </NavItem>
               </Nav>
             </Navbar.Collapse>
