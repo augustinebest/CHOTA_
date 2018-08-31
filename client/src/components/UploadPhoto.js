@@ -10,14 +10,14 @@ class Upload extends Component {
     selectedPhotoHandler = event =>{
         // console.log(event.target.files[0]);
         this.setState({
-            selectedFile : event.target.file[0]
+            selectedFile : event.target.files[0]
         })
     }
 
     fileUploadHandler = () =>{
         const fd  = new FormData();
         fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
-        axios.post("",fd , {
+        axios.post("https://chota1.herokuapp.com/place",fd , {
             onUploadProgress : ProgressEvent => {
                 console.log('Upload pro' + Math.round(ProgressEvent.loaded/ProgressEvent.total * 100) + "%")
             }

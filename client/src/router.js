@@ -19,7 +19,8 @@ import Setting from './setting';
 import Friends from './friends';
 import AdminHome from './admin-home'
 import Error from './error';
-import ImageUpload from './components/ImageUpload'
+import ImageUpload from './components/ImageUpload';
+import Upload from './components/UploadPhoto'
 // import Facebooklogin from './components/Facebooklogin.js'
 // import searchResults from './search-results';
 // import SearchBar from './components/search-bar';
@@ -40,6 +41,7 @@ const Router = () => {
           <Route path='/Login' component={Login}/>
           <Route path='/Signup' component={Signup}/>
           <Route path='/ImageUpload' component={ImageUpload}/>
+          <Route path='/Upload' component={Upload}/>
           <Route path='/PinLocation' component={PinLocation}/>
           <Route path='/PinDetails' component={PinDetails}/>
           <Route path='/PinFeed' component={PinFeed}/>

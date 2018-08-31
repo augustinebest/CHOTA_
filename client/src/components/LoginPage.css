@@ -11,11 +11,21 @@
     align-items: center;
 }
 
-.card{
+/* .card{
     background-color: #fff;
     border-radius: 15px;
     padding: 0.8rem;
     margin-top: -100px;
+    margin-left: -28px;
+
+} */
+
+.card {
+
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 0.8rem;
+    margin-top: 523px;
     margin-left: -28px;
 
 }
@@ -57,7 +67,7 @@
    opacity: 0.6;
 }
 
-
+/* 
 .styles_closeButton__20ID4 {
 
     position: absolute;
@@ -68,7 +78,20 @@
     background-color: transparent;
     display: -ms-flexbox;
     display: flex;
+} */
+
+.styles_closeButton__20ID4 {
+
+    position: absolute;
+    top: 48px;
+    right: 55px;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    display: -ms-flexbox;
+    display: flex;
 }
+
 #loginButton{
     margin-left: 0px;
 }

@@ -1,10 +1,16 @@
 .locationImage{
-    border: 1px solid green;
-    height: 165px;
-    width: 90px;
+    border: 1px hidden green;
+    height: 200px;
+    width: 100px;
     margin: 7px;
     border-radius: 5px;
 }
+
+.ImageContent {
+    height: 200px;
+    width: 100px;
+}
+
 #add{
     border: 1px solid red;
     color: red;
@@ -55,3 +61,22 @@
     margin: auto;
     margin-top: 40px;
 }
+input, select, textarea {
+
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    width: 0px;
+    height: 30px;
+    
+
+}
+.notesBody {
+    padding-top: 1px;
+    display: flex;
+    flex: 1 1 85%;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    overflow: auto;
+  }
