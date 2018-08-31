@@ -36,6 +36,7 @@ router.get('/single/:placeId', placeController.getPlaceByParams);
 router.patch('/:placeId', placeController.patchPlaces);
 router.get('/search/:name', placeController.searchPlaces);
 router.delete('/:placeId', placeController.deletePlaces);
+router.delete('/', placeController.deleteAllPlaces);
 
 
 
