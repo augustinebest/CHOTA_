@@ -58,8 +58,10 @@ handleChange = (e) => {
         return(
             <div className='wrapper'>
             <Nav/>
-            <input type="text" className='searchBar' name='recipeName' onChange={this.handleChange} />
+            <div>
+            <input type="text" className='searchBar' name='recipeName' onChange={this.handleChange}  placeholder='Search...'/>
                 {/* <img src={search} alt='image' className='search-icon'/> */}
+            </div>
                 
             <div className='detail-body'>
                 <div className='body-div'>
