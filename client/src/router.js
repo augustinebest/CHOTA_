@@ -17,6 +17,7 @@ import Notifie from './notification';
 import Profile from './profile';
 import Setting from './setting';
 import Friends from './friends';
+import AdminHome from './admin-home'
 import Error from './error';
 import ImageUpload from './components/ImageUpload'
 // import Facebooklogin from './components/Facebooklogin.js'
@@ -28,7 +29,6 @@ const Router = () => {
       <div>
       <BrowserRouter>
          <Switch>
-          
           <Route path='/' component={Home} exact/>
           <Route path='/SearchResults' component={SearchResult}/>
           <Route path='/PlaceDetails/:id' component={PlaceDetails}/>
@@ -47,6 +47,7 @@ const Router = () => {
           <Route path='/Profile' component={Profile}/>
           <Route path='/Setting' component={Setting}/>
           <Route path='/Friends' component={Friends}/>
+          <Route path='/admin-home' component={AdminHome}/>
           {/* <Route path="/Facebook" component = {Facebooklogin}/> */}
           {/* <Route path='/resultFromSearch' component={SearchBar}/> */}
           <Route component={Error}/>

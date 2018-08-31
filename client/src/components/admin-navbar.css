@@ -52,8 +52,12 @@
 #navNotificationIcon{
     margin-top: 15px;
     margin-left: 35%;
+    height: 20px;
+    width: 20px;
 }
 #navProfileIcon{
     margin-top: 15px;
-    margin-left: 4%;   
+    margin-left: 4%;
+    height: 20px;
+    width: 20px;   
 }
