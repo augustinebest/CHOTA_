@@ -71,7 +71,7 @@ const nav = () => {
              Privacy
             </NavItem>
             <NavItem>
-             <button onClick={Logout}></button>
+            <Link to='/'><button onClick={Logout} className='logoutButton'>Logout</button></Link>
             </NavItem>
           </Nav>
         </Navbar.Collapse>

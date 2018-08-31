@@ -16,7 +16,7 @@ class PlaceDetails extends React.Component{
         .then(res =>{
             console.log(res)
             this.setState({
-                places: res.data
+                places: res.data.result
             })
         })
     }
