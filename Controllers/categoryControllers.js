@@ -40,12 +40,12 @@ exports.addCategory = function(req, res) {
 // }
 
 exports.getAllCategories = (req, res, next) => {
-    Category.find({}).select('_id categoryName')
+    Category.find().select('_id categoryName image')
     .exec((err, categories) => {
         if(err) res.status(404).json({message: 'error occured somewhere'});
         else {
             try {
-                res.status(200).json({message: categories});
+                res.status(200).json(categories);
             } catch(error) {
                 res.status(206).json(error);
             }
@@ -67,7 +67,7 @@ exports.getACategory = (req, res, next) => {
 }
 
 exports.deleteAllCategory = (req, res, next) =>{
-    const id = req.params.category;
+    const cat = req.params.category;
     Category.remove({})
     .exec()
     .then(place => {
