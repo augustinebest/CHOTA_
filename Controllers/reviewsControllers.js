@@ -5,7 +5,8 @@ const Place = require('../Models/Places');
 exports.addReview = (req, res, next) => {
     const reviews = new Reviews({
         commentBody: req.body.commentBody,
-        placeId: req.body.placeId
+        placeId: req.body.placeId,
+        date: req.body.date
     })
     reviews.save()
     .then(review => {
