@@ -30,8 +30,9 @@ const upload = multer({
     fileFilter: fileFilter
  });
  
-router.post('/', upload.single('image'), placeController.addPlaces);
+router.post('/', upload.any(), placeController.addPlaces);
 router.get('/', placeController.getAllPlaces);
+router.get('/latest/:value', placeController.getLatest);
 router.get('/single/:placeId', placeController.getPlaceByParams);
 router.patch('/:placeId', placeController.patchPlaces);
 router.get('/search/:name', placeController.searchPlaces);

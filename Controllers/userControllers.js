@@ -210,10 +210,22 @@ exports.userProfile = (req, res, next) => {
     }
 }
 
+exports.editProfile = (req, res, next) => {
+    const user_id = {_id: req.params.user_id};
+    const data = {
+        username : req.body.username,
+        // image : req.body.image
+    }
+    User.update(user_id, data).exec((err, result) => {
+        if(err) res.status(301).json({message: err});
+        if(!result) res.status(404).json({message: 'This user does not exists!'});
+        res.json({message: 'This user have been updated!'});
+    })
+}
+
 // follow friends
 exports.addFriend = (req, res, next) => {
     // console.log('Yay');
-    const friendId = {_id: req.params.friendId};
     
 }
 
@@ -243,6 +255,7 @@ exports.searchUser = (req, res) => {
 }
 
 exports.userForgotPassword = (req, res, next) => {
+    // res.json('Change your password')
     const email = {email:req.body.email};
     const update = Math.floor(9372+Math.random()*10000).toString();
     try {

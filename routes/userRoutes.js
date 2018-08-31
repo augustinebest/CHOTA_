@@ -55,7 +55,11 @@ router.post('/select', checkAuth.AuthMiddeWare, userController.addFriend);
 router.post('/create', userController.signup);
 router.post('/signin', userController.login);
 router.get('/profile/:user_id', userController.userProfile);
+router.patch('/profile/:user_id/edit', userController.editProfile);
 router.get('/search/:user_id', userController.searchUser);
 router.get('/friend', userController.addFriend);
+router.get('/unfollow', userController.unfollowFriends);
+router.post('/recoverpassword', userController.userForgotPassword);
+router.post('/recover', userController.getUserToken);
 
 module.exports = router;

@@ -9,7 +9,8 @@ const placeSchema = mongoose.Schema({
     categoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category'},
     ratings: { type: Number },
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Reviews' }],
-    view: { type: Number, default: 0 }
+    view: { type: Number, default: 0 },
+    trendVol: { type: Number, default: 0 }
 });
 
 module.exports = mongoose.model('Place', placeSchema);
