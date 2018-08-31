@@ -23,7 +23,7 @@ const Home = () => {
                 </div> 
                 <h4>Find Quickly</h4>           
                 <Carousel/>
-                <div className='bottomcContainer'>
+                <div id='bottomcContainer'>
                 <h4> Trending </h4>
                     <Trends/>
                 </div>

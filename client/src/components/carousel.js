@@ -8,7 +8,7 @@ import axios from 'axios';
 
 
 
-const API_KEY = '56f0450d2729d1d9861d643496069047'
+// const API_KEY = '56f0450d2729d1d9861d643496069047'
 
 
 
@@ -75,10 +75,10 @@ class Carousel extends Component {
         this.checkIfSlidesAllTheWayOver();
         window.addEventListener('resize', this.throttleResize);
         window.addEventListener('keydown', this.onKeydown);
-        axios.get(`https://cors-anywhere.herokuapp.com/http://food2fork.com/api/search?key=${API_KEY}&q=shredded%20chicken&count=10`)
+        axios.get(`https://chota1.herokuapp.com/category`)
         .then(res=>{
-            console.log(res)
-            this.setState({items: res.data.recipes})
+            console.log(res.data)
+            this.setState({items: res.data})
         });
 
     }
@@ -238,7 +238,8 @@ class Carousel extends Component {
               <div>
               {this.state.items.map(value=>(
                   <div key={value.id} className='image-div'>
-                      <img src={value.image_url} alt={value.title} className='images'/>
+                      <img src={value.image} alt={value.title} className='images'/>
+                      <p>{value.categoryName}</p>
                   </div>
               ))}
               </div>
