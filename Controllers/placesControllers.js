@@ -3,9 +3,10 @@ var Category = require('../Models/Categories');
 const cloud = require('../functions/cloudinary');
 
 exports.addPlaces = (req, res, next) => {
+    console.log(req.files);
     const place = new Place({
         name: req.body.name,
-        image: req.file.path,
+        image: req.files.path,
         imageID: '',
         description: req.body.description,
         date: req.body.date,
@@ -35,7 +36,6 @@ exports.addPlaces = (req, res, next) => {
                         console.log(err);
                     });
             })
-            console.log(result);
         });
     } catch(error) {
         res.status(405).json({error: error});
@@ -47,7 +47,10 @@ exports.getPlaceByParams = (req, res, next) => {
     const place = {_id: req.params.placeId};
     Place.findOne(place).populate('reviews categoryId', 'commentBody categoryName').exec()
     .then(result => {
+        result.view++;
+        result.trendVol = result.view + result.reviews.length;
         res.json({message: `There are ${result.reviews.length} reviews in this place`, result: result});
+        result.save();
     })
     .catch(err => {
         console.log('error occurred in finding this');
@@ -128,16 +131,3 @@ exports.deletePlaces = (req, res, next) =>{
         });
     })
 };
-
-exports.getTrendingPlaces = (req, res, next) => {
-    Place.find().exec((err, places) => {
-        // if(err) res.status(203).json({message: 'Error occurred while geting the place'});
-        // for (place of places) {
-        //     res.json(place);
-        // }
-        for (var i=0; i<places.length; i++) {
-            console.log(places[i].reviews.length);
-        }
-        // res.json(places);
-    })
-}
