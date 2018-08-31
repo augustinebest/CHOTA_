@@ -1,9 +1,18 @@
+// require('dotenv').config({path: '/config/secret'});
 const cloudinary = require('cloudinary');
+const keys = require('../config/keys');
+
+// const key = process.env.cloud_name;
+// const key1 = process.env.api_key;
+// const key2 = process.env.api_secret;
 
 cloudinary.config({
-    cloud_name: 'chota',
-    api_key: '454241471689352',
-    api_secret: 'pCWnCq-cSSiM4UEcBrnI2EGTguQ'
+    // cloud_name = 'chota',
+    // api_key = '454241471689352',
+    // api_secret = 'pCWnCq-cSSiM4UEcBrnI2EGTguQ'
+    cloud_name: keys.cloudinary.cloudName,
+    api_key: keys.cloudinary.apiKey,
+    api_secret: keys.cloudinary.apiSecret
   })
 
 exports.upload = function(file){

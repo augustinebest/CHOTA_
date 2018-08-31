@@ -13,7 +13,8 @@ exports.addPlaces = (req, res, next) => {
         categoryId: req.body.categoryId,
         reviews: req.body.reviews,
         ratings: req.body.ratings
-    })
+    });
+    
     // req.files.forEach(element => {
     //     // console.log(element.path);
     //     cloud.upload(element.path, (error, result) => {
@@ -105,7 +106,7 @@ exports.patchPlaces = (req, res, next) => {
 exports.searchPlaces = (req, res) => {
     const name =  req.params.name;
     Place.find({'name': {$regex: name, $options: 'i'}})
-    .select('_id name image description date')
+    .select('_id name image imageID description date categoryId reviews')
     .exec()
     .then(place => {
         res.status(200).json(place);
@@ -128,6 +129,23 @@ exports.deletePlaces = (req, res, next) =>{
         console.log(err);
         res.status(404).json({
             error: 'Can\'t delete the specified place', err
+        });
+    })
+};
+
+exports.deleteAllPlaces = (req, res, next) =>{
+    const places = req.params.place;
+    Place.remove({})
+    .exec()
+    .then(place => {
+        res.status(200).json({
+            message: 'Yeap! places deleted successfully'
+        });
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(404).json({
+            error: 'Can\'t delete all places', err
         });
     })
 };
