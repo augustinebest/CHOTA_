@@ -1,8 +1,9 @@
 import firebase from 'firebase/app';
 import 'firebase/storage';
+import 'firebase/database';
 
 // Initialize Firebase
-export const config = {
+var config = {
     apiKey: "AIzaSyC46lxeuMFUFpZKAXz43kNJLz2ikcG456A",
     authDomain: "chota-dae5f.firebaseapp.com",
     databaseURL: "https://chota-dae5f.firebaseio.com",
@@ -13,8 +14,9 @@ export const config = {
 firebase.initializeApp(config);
 
 const storage = firebase.storage();
+export const database = firebase.database();
 
 export {
-    storage,firebase,config as default 
+    storage,firebase,database as default 
 }
 

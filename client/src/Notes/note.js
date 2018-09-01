@@ -22,8 +22,8 @@ class Note extends  Component{
     }
 }
 
-Note.PropTypes = {
+Note.propTypes = {
     noteContent : PropTypes.string
 }
 
-export default Note 
+export default Note;

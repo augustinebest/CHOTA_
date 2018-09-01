@@ -83,7 +83,7 @@ class Login extends Component {
 
         render(){
             const {errors} = this.state
-            const {open} = this.state
+            const {open} = this.state 
             return(
                 <div>
                      <Navbar className='navBarBorder'>

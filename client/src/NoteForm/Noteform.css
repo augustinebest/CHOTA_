@@ -21,9 +21,9 @@
     transition: 0.2s ease-out;
 }
 
-.noteInput{
-    width: 800px;
-    min-width: 800px;
+.noteInput {
+    width: 350px;
+    min-width: 350px;
     font-size: 1.3em;
     padding-left: 20px;
     border-top-left-radius: 4px;
@@ -31,7 +31,10 @@
     font-family: 'Droid Sans', sans-serif;
     background-color: rgba(34,49,63,0.8);
     color: #fff;
+    -webkit-transition: 0.2s ease-out;
+    -o-transition: 0.2s ease-out;
     transition: 0.2s ease-out;
+
 }
 
 .noteInput:focus{
