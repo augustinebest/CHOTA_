@@ -1,12 +1,12 @@
 const Place = require('../Models/Places');
 var Category = require('../Models/Categories');
 const cloud = require('../functions/cloudinary');
+const Reviews = require('../Models/Reviews');
 
 exports.addPlaces = (req, res, next) => {
-    console.log(req.files);
     const place = new Place({
         name: req.body.name,
-        image: req.files.path,
+        image: req.file.path,
         imageID: '',
         description: req.body.description,
         date: req.body.date,
@@ -149,3 +149,36 @@ exports.deleteAllPlaces = (req, res, next) =>{
         });
     })
 };
+
+exports.addReview = (req, res, next) => {
+    const placeId = {_id: req.params.placeId};
+    const review = new Reviews({
+        commentBody: req.body.commentBody,
+        date: req.body.date,
+        place_id: {}
+    });
+    review.save();
+    try {
+        Place.findOne(placeId).exec((err, place) => {
+            if(err) {
+                res.status(308).json({err: err});
+            }
+            if(!place) {
+                res.status(306).json({message: 'This place does not exist!'});
+            }
+            var check = place.reviews.push(review._id);
+            if(check) {
+                place.save();
+                res.status(200).json({message: 'This review have been added successfully!'});
+            } else {
+                res.status(206).json({message: 'cannot add!'});
+            }
+        })
+    } catch(error) {
+        res.json({error: error});
+    }
+}
+
+exports.getAllReviews = (req, res, next) => {
+    console.log('Yay');
+}
