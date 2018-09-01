@@ -11,6 +11,7 @@ const userSchema = mongoose.Schema({
     googleId: { type: String},
     interest: [{ type: mongoose.Schema.Types.ObjectId }],
     friends: [{ type: mongoose.Schema.Types.ObjectId }],
+    pinedPlaces: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Place' }],
     password: {type:String, required:true},
     token: {type:String}
 });
