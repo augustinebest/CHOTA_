@@ -34,6 +34,7 @@ const placeRoutes = require('./routes/placeRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const reviewRoutes = require('./routes/reviews');
 const trendRoutes = require('./routes/trend');
+const feedbackRoutes = require('./routes/feedback');
 
 //Connecting to the local database
 
@@ -71,6 +72,7 @@ app.use('/place', placeRoutes);
 app.use('/category', categoryRoutes);
 app.use('/reviews', reviewRoutes);
 app.use('/trending', trendRoutes);
+app.use('/feedback', feedbackRoutes);
 
 
 
