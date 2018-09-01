@@ -71,18 +71,21 @@ exports.getACategory = (req, res, next) => {
 
 exports.getCategory = (req, res, next) => {
     const category = req.params.category;
-    Category.findOne({'categoryName': category})
-    .populate('placeId')
-    .exec()
-    .then(result => {
-        if(!result) {
-            res.status(208).json({err: 'Oops! There is no result for your search'});
-        }
-        res.status(200).json({result: result});
+    Category.find({'categoryName': category}).populate('placeId')
+    .exec((err, result) => {
+        if(err) res.status(302).json({message: err});
+        res.json(result);
     })
-    .catch(err => {
-        res.status(208).json({err: err});
-    });
+    // .exec()
+    // .then(result => {
+    //     if(!result) {
+    //         res.status(208).json({err: 'Oops! There is no result for your search'});
+    //     }
+    //     res.status(200).json({result: result});
+    // })
+    // .catch(err => {
+    //     res.status(208).json({err: err});
+    // });
 }
 
 exports.deleteAllCategory = (req, res, next) =>{
