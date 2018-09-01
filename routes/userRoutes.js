@@ -5,7 +5,7 @@ const userController = require('../Controllers/userControllers');
 var jwt = require('jsonwebtoken');
 const checkAuth = require('../functions/checkAuth');
 const secret = 'secretkey';
-
+const upload = require('../functions/uploads');
 
 // For google
 router.get('/login', (req, res) => {
@@ -54,8 +54,8 @@ router.post('/select', checkAuth.AuthMiddeWare, userController.addFriend);
 // local signup
 router.post('/create', userController.signup);
 router.post('/signin', userController.login);
-router.get('/profile/:user_id', userController.userProfile);
-router.patch('/profile/:user_id/edit', userController.editProfile);
+router.get('/profile/:user_id', checkAuth.AuthMiddeWare, userController.userProfil);
+router.patch('/profile/:user_id/edit', checkAuth.AuthMiddeWare, upload.upload.single('image'), userController.editProfile);
 router.get('/search/:user_id', userController.searchUser);
 router.get('/friend', userController.addFriend);
 router.get('/unfollow', userController.unfollowFriends);
