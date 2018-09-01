@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
 const FacebookStrategy = require('passport-facebook').Strategy;
@@ -7,6 +8,7 @@ const bcrypt = require('bcrypt');
 const secret = require('../functions/secret');
 const jwt = require('jsonwebtoken');
 const mailer = require('../functions/mailer');
+const cloud = require('../functions/cloudinary');
 
 passport.serializeUser((user, done) => {
     done(null, user);
@@ -159,7 +161,7 @@ exports.login = (req, res, next) => {
                         res.status(402).json({message: 'email or password invalid!'});
                     } else {
                         var token = jwt.sign({email: currentUser.email, id: currentUser._id}, secret.key, {expiresIn: '12h'});
-                        res.status(200).json({message: 'You have logged in successfully!', token: token});
+                        res.status(200).json({message: 'You have logged in successfully!', _id: currentUser._id, email: currentUser.email, username: currentUser.username, token: token});
                     }
                 }
             });
@@ -194,17 +196,16 @@ exports.userAddInterest = (req, res, next) => {
 }
 
 // User profile
-exports.userProfile = (req, res, next) => {
+exports.userProfil = (req, res, next) => {
     const user_id = {_id: req.params.user_id};
     try {
-        User.findOne(user_id, 'username email image').exec((err, user) => {
+        User.findOne(user_id, '-password -interest -friends').exec((err, user) => {
             if(err) res.status(309).json({message: 'Unable to find this user!'});
             if(!user) {
                 return res.status(304).json({message: 'This user does not exist!'});
             }
             res.status(200).json({user: user});
         })
-        console.log(user_id)
     } catch(error) {
         res.status(408).json({error: error});
     }
@@ -214,13 +215,21 @@ exports.editProfile = (req, res, next) => {
     const user_id = {_id: req.params.user_id};
     const data = {
         username : req.body.username,
-        // image : req.body.image
+        image : req.file.path,
+        imageID: ''
     }
-    User.update(user_id, data).exec((err, result) => {
-        if(err) res.status(301).json({message: err});
-        if(!result) res.status(404).json({message: 'This user does not exists!'});
-        res.json({message: 'This user have been updated!'});
+    User.findOne(new mongoose.Types.ObjectId(req.userData.id)).exec((err, result) => {
+        console.log(result);
     })
+    // cloud.upload(data.image).then(result => {
+    //     data.image = result.url;
+    //     data.imageID = result.Id;
+    //     User.update(user_id, data).exec((err, result) => {
+    //         if(err) res.status(301).json({message: err});
+    //         if(!result) res.status(404).json({message: 'This user does not exists!'});
+    //         res.json({message: 'This user have been updated!'});
+    //     })
+    // })
 }
 
 // follow friends
