@@ -11,7 +11,7 @@ const Footer = () => {
             <div className="container">
                 <div className="row">
                     <p> Find interesting places around you! </p>
-                    <button> Get Started </button>
+                    <Link to='/Login'><button id='pinButton'> Get Started </button></Link>
                 </div>
             </div>
             </footer>
@@ -23,7 +23,8 @@ const Footer = () => {
             <div className="container">
                 <div className="row">
                     <p> Have you been to an interesting place recently? </p>
-                    <Link to='/PinLocation'><button> Pin Location </button></Link>
+                    <Link to='/PinLocation'><button id='pinButton'> Pin Location </button></Link>
+                    {/* <Link to='/drop-Comment'> <button id='reviewApp'> Review App </button></Link> */}
                 </div>
             </div>
             </footer>

@@ -3,7 +3,7 @@ import Nav from './components/nav-bar.js';
 import './place-details.css';
 import Reviews from './components/review.js';
 import Footer from './components/footer.js';
-import axios from 'axios'
+import axios from 'axios';
 
 class PlaceDetails extends React.Component{
     state={

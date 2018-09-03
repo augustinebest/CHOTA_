@@ -20,7 +20,8 @@ class Login extends Component {
                   password: "",
                 },
                 errors: {},
-                open : true
+                open : true,
+                userId: []
         }
 
         onOpenModal = () => {
@@ -33,50 +34,53 @@ class Login extends Component {
           
             handleChange = (event) =>{
             this.setState({
-             user: {...this.state.user, [event.target.name]: event.target.value }
+              user: {...this.state.user, [event.target.name]: event.target.value }
             });
-           };
-           
-           submit = user =>{
-             axios.post("https://chota1.herokuapp.com/auth/signin", user)
-             .then(res =>{
-             console.log(res.data.message);
-             console.log(user)
-             if (res.status === 200){
-               console.log(res)
-               console.log(res.data.message);
-               alert(JSON.stringify(res.data.message));
-               sessionStorage.setItem('user', res.data.token);
-               console.log( sessionStorage.getItem('user'))
-               
+          };
+          
+          submit = user =>{
+            axios.post("https://chota1.herokuapp.com/auth/signin", user)
+            .then(res =>{
+              //  console.log(res.data.message);
+              console.log(user)
+              if (res.status === 200){
+                //  console.log(res.data)
+                //  console.log(res.data.message);
+                alert(JSON.stringify(res.data.message));
+                sessionStorage.setItem('user', res.data.token);
+                sessionStorage.setItem('username', res.data.username);
+                // sessionStorage.setItem('email', res.data.email);
+                //  console.log( sessionStorage.getItem('user'));
+                this.setState({userId: res.data})
+                //  sessionStorage.setItem('username', this.state.userId)
                 this.setState({
-                    open:false
+                  open:false
                 })
-                console.log(this.props.history);
+                // console.log(this.props.history);
                 this.props.history.push('/profile');
-               
-               
-             }
-             })
-             console.log(user)
-         
-             // this.props.history.push('/');
-           }
-       
-           handleSubmit = (e) =>{
-             e.preventDefault();
-             const errors = this.validate(this.state.user);
-             this.setState({ loading: true})
-             this.setState({errors});
-             if(Object.keys(errors).length ===0){
-               this.submit(this.state.user)
-             }
-           };
-       
-           validate = (user) => {
+                
+                
+              }
+            })
+            console.log(user)
+            
+            // this.props.history.push('/');
+          }
+          
+          handleSubmit = (e) =>{
+            e.preventDefault();
+            const errors = this.validate(this.state.user);
+            this.setState({ loading: true})
+            this.setState({errors});
+            if(Object.keys(errors).length ===0){
+              this.submit(this.state.user)
+            }
+          };
+          
+          validate = (user) => {
             const errors = {};
             if (!Validator.isEmail(user.email)) errors.email = "Invalid Email";
-           if (!user.password) errors.password = "cant be blank";
+            if (!user.password) errors.password = "cant be blank";
            return errors;
            
            }  

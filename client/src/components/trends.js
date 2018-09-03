@@ -52,7 +52,7 @@ state ={
                         {this.state.items.map(value =>(
                         <div key={value}  className='placediv'>
                             <div className='placeImageDiv'>
-                                <img src={value.image} alt={value.name} className='placesImage'/>
+                                <Link to='/Login'><img src={value.image} alt={value.name} className='placesImage'/></Link>
                             </div>
                             <div className='placeDetailDiv' >
                             <h4>{value.name}</h4>
