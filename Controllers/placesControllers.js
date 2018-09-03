@@ -3,10 +3,9 @@ var Category = require('../Models/Categories');
 const cloud = require('../functions/cloudinary');
 
 exports.addPlaces = (req, res, next) => {
-    console.log(req.files);
     const place = new Place({
         name: req.body.name,
-        image: req.files.path,
+        image: req.file.path,
         imageID: '',
         description: req.body.description,
         date: req.body.date,
@@ -116,22 +115,46 @@ exports.searchPlaces = (req, res) => {
     });
 }
 
-exports.deletePlaces = (req, res, next) =>{
-    const id = req.params.placeId;
-    Place.remove({ _id: id})
-    .exec()
-    .then(place => {
-        res.status(200).json({
-            message: 'Yeap! Entry deleted successfully'
+exports.deletePlaces = (req, res, next) => {
+    try {
+        const id = req.params.id;
+        Place.findById(id)
+        .exec()
+        .then(place => {
+            const imageID = place.imageID;
+            cloud.delete(imageID);
+            Place.remove({_id: req.params.id}).exec()
+            .then(result => {
+                res.status(200).json({message: 'Yeap! This place have been deleted successfully'});
+            })
+            .catch(err => {
+                res.status(405).json({err: err});
+            });
+        })
+        .catch(err => {
+            res.status(500).json({err: 'Can\'t delete this place'});
         });
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(404).json({
-            error: 'Can\'t delete the specified place', err
-        });
-    })
-};
+    } catch(error) {
+        res.status(408).json(error);
+    }
+}
+
+// exports.deletePlaces = (req, res, next) =>{
+//     const id = req.params.placeId;
+//     Place.remove({ _id: id})
+//     .exec()
+//     .then(place => {
+//         res.status(200).json({
+//             message: 'Yeap! Entry deleted successfully'
+//         });
+//     })
+//     .catch(err => {
+//         console.log(err);
+//         res.status(404).json({
+//             error: 'Can\'t delete the specified place', err
+//         });
+//     })
+// };
 
 exports.deleteAllPlaces = (req, res, next) =>{
     const places = req.params.place;
