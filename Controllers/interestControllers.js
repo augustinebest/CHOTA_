@@ -26,7 +26,7 @@ exports.addInterest = (req, res, next) => {
 
 exports.getAllInterest = (req, res, next) => {
     Interest.find()
-    .select('name image _id')
+    .select('name image _id imageID')
     .exec()
     .then(interest => {
         res.status(200).json({interest: interest});
@@ -85,7 +85,7 @@ exports.deleteInterest = (req, res, next) => {
             cloud.delete(imageID);
             Interest.remove({_id: req.params.id}).exec()
             .then(result => {
-                res.status(200).json({err: 'This interest have been deleted!'});
+                res.status(200).json({message: 'This interest have been deleted!'});
             })
             .catch(err => {
                 res.status(405).json({err: err});
