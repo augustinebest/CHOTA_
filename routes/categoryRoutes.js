@@ -36,5 +36,6 @@ router.get('/', category.getAllCategories);
 router.get('/search/:category', category.getACategory);
 router.get('/get/:category', category.getCategory);
 router.delete('/', category.deleteAllCategory);
+router.delete('/:id', category.deleteCategory);
 
 module.exports = router;
