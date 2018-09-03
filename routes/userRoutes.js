@@ -49,7 +49,7 @@ router.get('/facebook/redirect', passport.authenticate('facebook'), (req, res) =
 
 // User Add Interest
 router.post('/select', checkAuth.AuthMiddeWare, userController.userAddInterest);
-router.post('/select', checkAuth.AuthMiddeWare, userController.addFriend);
+// router.post('/select', checkAuth.AuthMiddeWare, userController.addFriend);
 
 // local signup
 router.post('/create', userController.signup);
@@ -57,8 +57,8 @@ router.post('/signin', userController.login);
 router.get('/profile/:user_id', checkAuth.AuthMiddeWare, userController.userProfil);
 router.patch('/profile/:user_id/edit', checkAuth.AuthMiddeWare, upload.upload.single('image'), userController.editProfile);
 router.get('/search/:user_id', userController.searchUser);
-router.get('/friend', userController.addFriend);
-router.get('/unfollow', userController.unfollowFriends);
+router.post('/profile/:user_id/follow', checkAuth.AuthMiddeWare, userController.addFriend);
+router.post('/profile/:user_id/unfollow', checkAuth.AuthMiddeWare, userController.unfollowFriends);
 router.post('/recoverpassword', userController.userForgotPassword);
 router.post('/recover', userController.getUserToken);
 

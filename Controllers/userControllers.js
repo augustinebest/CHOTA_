@@ -199,7 +199,7 @@ exports.userAddInterest = (req, res, next) => {
 exports.userProfil = (req, res, next) => {
     const user_id = {_id: req.params.user_id};
     try {
-        User.findOne(user_id, '-password -interest -friends').exec((err, user) => {
+        User.findOne(user_id, '-password -interest').exec((err, user) => {
             if(err) res.status(309).json({message: 'Unable to find this user!'});
             if(!user) {
                 return res.status(304).json({message: 'This user does not exist!'});
@@ -234,13 +234,67 @@ exports.editProfile = (req, res, next) => {
 
 // follow friends
 exports.addFriend = (req, res, next) => {
-    // console.log('Yay');
-    
+    const toFollowUser_id = {_id: req.params.user_id};
+    User.findOne({_id: req.userData}).exec((err, user) => {
+        if(err) return res.status(304).json({err: err});
+        if(!user) return res.status(404).json({message: 'This user cannot be found!'});
+        if(req.userData == req.params.user_id) {
+            res.status(202).json({message: 'You cannot follow yourself'});
+        } else {
+            let friends_list = user.friends;
+            var exist = false;
+            for (element of friends_list) {
+                if (element == req.params.user_id) {
+                    exist = true;
+                    break;
+                } else {
+                    exist = false;
+                }
+            }
+            if (exist) {
+                return res.status(500).json({message: 'You are already following this user'});
+            } else {
+                user.friends.push(req.params.user_id);
+                user.save();
+                return res.status(200).json({ "your profile": user});
+            }
+        }
+    })
 }
 
 // Unfollow friends
 exports.unfollowFriends = (req, res, next) => {
-    console.log('Yay!');
+    const unfollowUser_id = req.params.user_id;
+    User.findOne({_id: req.userData}).exec((err, user) => {
+        if(err) return res.status(304).json({err: err});
+        if(!user) return res.status(404).json({message: 'This user cannot be found!'});
+        if(req.userData == req.params.user_id) {
+            res.status(202).json({message: 'You cannot unfollow yourself'});
+        } else {
+            var friends_list = user.friends;
+            var exist = false;
+            for (element of friends_list) {
+                if (element == unfollowUser_id) {
+                    exist = true;
+                    break;
+                } else {
+                    exist = false;
+                }
+            }
+            if (exist) {
+                var check = friends_list.indexOf(req.body.friend_id);
+                if(check < -1) {
+                    res.status(501).json({error: 'This does not exist!'});
+                } else {
+                    friends_list.splice(check, 1);
+                    res.status(200).json({message: 'You have successfully unfollow this user'});
+                    user.save();
+                }
+            } else {
+                return res.status(404).json({message: "You are not following this User"});
+            }
+        }
+    })
 }
 
 // Search for a user 
@@ -263,6 +317,7 @@ exports.searchUser = (req, res) => {
     }
 }
 
+// Recover password
 exports.userForgotPassword = (req, res, next) => {
     // res.json('Change your password')
     const email = {email:req.body.email};
@@ -296,6 +351,7 @@ exports.userForgotPassword = (req, res, next) => {
     }
 }
 
+// Get token recover from sent mail
 exports.getUserToken = (req, res, next) => {
     try {
         const password = { password: req.body.password };

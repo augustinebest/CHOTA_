@@ -71,7 +71,7 @@ exports.getACategory = (req, res, next) => {
 
 exports.getCategory = (req, res, next) => {
     const category = req.params.category;
-    Category.find({'categoryName': category}).populate('placeId')
+    Category.findOne({'categoryName': category}).populate('placeId')
     .exec((err, result) => {
         if(err) res.status(302).json({message: err});
         res.json(result);
