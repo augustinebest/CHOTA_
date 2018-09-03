@@ -3,15 +3,12 @@ const Place = require('../Models/Places');
 const cloud = require('../functions/cloudinary');
 
 exports.addCategory = function(req, res) {
-    // const category = new Category({
         const category = {
             categoryName: req.body.categoryName,
             image: req.file.path,
             imageID: '',
             placeId: req.body.placeId
         }
-        
-    // });
 
     cloud.upload(category.image).then(result => {
         category.image = result.url;
@@ -24,20 +21,6 @@ exports.addCategory = function(req, res) {
         })
     })
 }
-
-//     category
-//     .save()
-//     .then(result => {
-//         // console.log(`This category have been added!`);
-//         res.status(200).json({message: 'Successfully added!'});
-//     })
-//     .catch(err => {
-//         // console.log(err);
-//         res.status(500).json({
-//             error: "Cannot add category, please try again", err
-//         });
-//     });
-// }
 
 exports.getAllCategories = (req, res, next) => {
     Category.find().select('_id categoryName image')
@@ -76,16 +59,6 @@ exports.getCategory = (req, res, next) => {
         if(err) res.status(302).json({message: err});
         res.json(result);
     })
-    // .exec()
-    // .then(result => {
-    //     if(!result) {
-    //         res.status(208).json({err: 'Oops! There is no result for your search'});
-    //     }
-    //     res.status(200).json({result: result});
-    // })
-    // .catch(err => {
-    //     res.status(208).json({err: err});
-    // });
 }
 
 exports.deleteAllCategory = (req, res, next) =>{

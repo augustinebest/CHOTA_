@@ -155,7 +155,7 @@ exports.addReview = (req, res, next) => {
     const review = new Reviews({
         commentBody: req.body.commentBody,
         date: req.body.date,
-        place_id: {}
+        user_id: req.body.user_id
     });
     review.save();
     try {
@@ -169,7 +169,7 @@ exports.addReview = (req, res, next) => {
             var check = place.reviews.push(review._id);
             if(check) {
                 place.save();
-                res.status(200).json({message: 'This review have been added successfully!'});
+                res.status(200).json({message: 'This review have been added successfully!', review: review});
             } else {
                 res.status(206).json({message: 'cannot add!'});
             }

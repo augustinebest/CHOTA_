@@ -1,12 +1,16 @@
 const Feedback = require('../Models/feedback');
 
 exports.addFeedback = (req, res, next) => {
-    const commentBody = {commentBody: req.body.commentBody};
+    const data = {
+        name: req.body.name,
+        email: req.body.email,
+        commentBody: req.body.commentBody
+    }
     try {
-        if(req.body.commentBody == null || req.body.commentBody == '') {
+        if(req.body.name == null || req.body.email == null || req.body.commentBody == null || req.body.name == '' || req.body.email == '' || req.body.commentBody == '') {
             res.json({message: 'You have to fill the required field!'});
         } else {
-            Feedback.create(commentBody, (err, feedback) => {
+            Feedback.create(data, (err, feedback) => {
                 if(err) res.status(308).json({message: 'error occurred while adding your feedback'});
                 else {
                     res.status(200).json({message: 'Thank you for your feedback!'});
@@ -16,7 +20,6 @@ exports.addFeedback = (req, res, next) => {
     } catch(error) {
         res.status(409).json({error: error});
     } 
-    
 }
 
 exports.getAllFeedback = (req, res, next) => {
