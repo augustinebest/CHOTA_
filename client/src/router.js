@@ -22,6 +22,7 @@ import Error from './error';
 import ImageUpload from './components/ImageUpload';
 import Upload from './components/UploadPhoto'
 import ComponentPage from './component-page.js';
+import Message from './components/message';
 // import Facebooklogin from './components/Facebooklogin.js'
 // import searchResults from './search-results';
 // import SearchBar from './components/search-bar';
@@ -33,6 +34,7 @@ const Router = () => {
          <Switch>
           <Route path='/' component={Home} exact/>
           <Route path='/SearchResults' component={SearchResult}/>
+          <Route path='/reviews' component={Message}/>
           <Route path='/PlaceDetails/:id' component={PlaceDetails}/>
           <Route path='/About' component={About}/>
           <Route path='/Advertise' component={Advertise}/>

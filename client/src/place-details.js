@@ -1,9 +1,10 @@
 import React from 'react';
 import Nav from './components/nav-bar.js';
 import './place-details.css';
-import Reviews from './components/review.js';
+// import Reviews from './components/review.js';
 import Footer from './components/footer.js';
-import axios from 'axios'
+import axios from 'axios';
+import Another from './components/anotherReview'
 
 class PlaceDetails extends React.Component{
     state={
@@ -38,7 +39,7 @@ class PlaceDetails extends React.Component{
                 </div>
            </div>
            <h3>Recent Reviews</h3>
-           <Reviews/>
+           <Another/>
            <div>
            <Footer/>
            </div>

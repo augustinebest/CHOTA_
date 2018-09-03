@@ -114,11 +114,11 @@ class PinLocation extends Component {
                 <progress value ={this.state.progress} max = '100' />
                 <div id='addingLocation'>
                         <div className='locationImage'>
-                        <img  className = 'ImageContent'src = {this.state.url} alt = 'Uploaded Images'/>
+                        <img  className = 'ImageContent'src = {this.state.url} alt = ''/>
                         </div>
                     {/* <div className='locationImage'></div> */}
-                    <input type='file' onChange = {this.handleChange}  ref ={ fileInput => this.fileInput = fileInput}/> 
-                    <button id='add' onClick ={ () => this.fileInput.click()}>+</button>
+                    <input type='file'  onChange = {this.handleChange} /> 
+                    <button id='add' onClick = {this.handleUpload} >+</button>
                     {/* <span style={{}}><p>add location</p></span> */}
                 </div>
                 
@@ -141,7 +141,7 @@ class PinLocation extends Component {
                     </div>
                 </div>
                     <div id='locationComandBtn'>
-                        <button id='pinLocation' onClick = {this.handleUpload}>PIN</button>
+                        <button id='pinLocation' >PIN</button>
                         <button id='cancelLocation'>CANCEL</button>
                     </div>
                 
