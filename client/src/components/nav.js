@@ -16,6 +16,7 @@ class nav extends React.Component{
 
   Logout = () =>{
     sessionStorage.removeItem('user')
+    sessionStorage.clear()
   }
   
 

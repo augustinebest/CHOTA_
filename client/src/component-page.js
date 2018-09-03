@@ -1,52 +1,60 @@
-import React from 'react';
+import React, {Component} from 'react';
+import axios from 'axios';
+import {Link} from 'react-router-dom';
 import Nav from './components/nav-bar.js';
-import './place-details.css';
-import Reviews from './components/review.js';
-import Footer from './components/footer.js';
-import axios from 'axios'
+import Footer from './components/footer';
+import './component-page.css';
 
-class ComponentPage extends React.Component{
-    state={
-        places: []
+
+
+// const API_KEY = '56f0450d2729d1d9861d643496069047'
+
+class ComponentPage extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            item: []
+        }
     }
+
+    
     componentDidMount(){
-        const location = this.props.match.params.id
-        console.log(location)
-        axios.get(`https://chota1.herokuapp.com/place/single/${location}`)
-        .then(res =>{
-            console.log(res)
-            this.setState({
-                places: res.data.result
+        axios.get(`https://chota1.herokuapp.com/category/get/${this.props.match.params.categoryName}`)
+        .then(res=>{
+            console.log(res.data.placeId)
+            this.setState({item: res.data.placeId
             })
         })
     }
 
     render(){
-        const {places} = this.state
-    return(
-        <div>
-           <Nav/>
-           <div className='placeImage'>
-           <img src={places.image} alt={places.name} id='placeDetailImage'/>
-           </div>
-           <div className='placedetails'>
-                <div className='placeMap'></div>
-                <div className='placeName'>
-                <h4> {places.name} </h4>
-                <p>Rating</p>
-                <p>GPS location</p>
+        // console.log(this.props.match.params)
+        return(
+            <div>
+                 <Nav/>
+                 <div id='categoryid'><h3>{this.props.match.params.categoryName}</h3></div>
+                 <div id='placeViewPart'>
+                {this.state.item.map(value =>(
+            <div key={value}  className='placediv'>
+                <div className='placeImageDiv'>
+                <Link to ={{pathname:`/PlaceDetails/${value._id}`,
+                           state: {place: value.name}}}>
+                        <img src={value.image} alt={value.name} className='placesImage'/> </Link>
                 </div>
-           </div>
-           <h3>Recent Reviews</h3>
-           <Reviews/>
-           <div>
-           <Footer/>
-           </div>
-        </div>
-    );
-}
-}
-
+                <div className='placeDetailDiv' >
+                <h4>{value.name}</h4>
+                <span> space for rating</span>
+                <p>Gps location of place</p>
+                </div>
+            </div>
+                ))}
+                </div>
+                <Footer/>
+            </div>
+        );
+        }
+   
+    }
 
 
 export default ComponentPage

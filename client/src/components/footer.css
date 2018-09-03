@@ -20,3 +20,14 @@ button{
     margin: 3px;
     border: 0px;
 }
+#pinButton{
+    height: 45px;
+    color: white;
+}
+#reviewApp{
+    height: 45px;
+    width: 125px;
+    background-color: #E71D36;
+    margin-left: 20px;
+    color: #FEFEFE;
+}

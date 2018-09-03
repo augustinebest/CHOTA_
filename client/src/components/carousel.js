@@ -5,6 +5,7 @@ import scrollTo from './scrollToAnimate.js';
 import throttle from 'lodash.throttle';
 import classNames from 'classnames';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 
 
@@ -238,7 +239,7 @@ class Carousel extends Component {
               <div>
               {this.state.items.map(value=>(
                   <div key={value.id} className='image-div'>
-                      <img src={value.image} alt={value.title} className='images'/>
+                      <Link to={`/Component-page/${value.categoryName}`}> <img src={value.image} alt={value.title} className='images'/></Link>
                       <p>{value.categoryName}</p>
                   </div>
               ))}

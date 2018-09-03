@@ -65,8 +65,8 @@ handleChange = (e) => {
                 
             <div className='detail-body'>
                 <div className='body-div'>
-                    <div className='Search-term'> trap House</div>
-                    <div className='Search-term'> enugu </div>
+                    {/* <div className='Search-term'> trap House</div>
+                    <div className='Search-term'> enugu </div> */}
                     <SearchResults items={this.state.place} place={this.state.place}/>
                 </div>
             </div>
