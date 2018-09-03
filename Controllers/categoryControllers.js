@@ -101,3 +101,29 @@ exports.deleteAllCategory = (req, res, next) =>{
         });
     })
 };
+
+exports.deleteCategory = (req, res, next) => {
+    try {
+        const id = req.params.id;
+        Category.findById(id)
+        .exec()
+        .then(category => {
+            const imageID = category.imageID;
+            cloud.delete(imageID);
+            Category.remove({_id: req.params.id}).exec()
+            .then(result => {
+                res.status(200).json({err: 'This category have been deleted!'});
+            })
+            .catch(err => {
+                res.status(405).json({err: err});
+            });
+        })
+        .catch(err => {
+            res.status(500).json({err: 'Cannot delete this category'});
+        });
+    } catch(error) {
+        res.status(408).json(error);
+    }
+}
+
+
