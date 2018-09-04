@@ -25,7 +25,7 @@ state ={
     render(){
         if (sessionStorage.getItem('user')){
             return(
-                <div>
+                <div className='trending'>
                     {this.state.items.map(value =>(
                 <div key={value}  className='placediv'>
                     <div className='placeImageDiv'>
@@ -48,7 +48,7 @@ state ={
         }
         else{
             return(
-                <div>
+                <div  className='trending'>
                         {this.state.items.map(value =>(
                         <div key={value}  className='placediv'>
                             <div className='placeImageDiv'>
