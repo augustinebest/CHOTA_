@@ -24,6 +24,7 @@ const Title = ({commentCount}) => {
 			e.preventDefault();
 			addComment(input.value);
 			input.value = '';
+			
 		}}>
 			<input className="form-control col-md-6" placeholder='Enter Reviews here' ref={node => {
 				input = node;
@@ -94,22 +95,22 @@ class Reviews extends React.Component{
         //   console.log(res.message.result)
 			this.setState({data:res.data});
         });
-    }
-    // Add comment handler
-    addComment(val){
-        const userId = sessionStorage.getItem('userId')
-        console.log(userId)
-      // Assemble data
-		const comment = {commentBody: val, user_id: userId}
-      // Update data
-		axios.post(this.apiUrl, comment)
-        .then((res) => {
-					console.log(res.data.user)
+				// Add comment handler
+			}
+				addComment(val){
+					const userId = sessionStorage.getItem('userId')
+					console.log(userId)
+					// Assemble data
+					const comment = {commentBody: val, user_id: userId}
+					// Update data
+					axios.post(this.apiUrl, comment)
+					.then((res) => {
+						console.log(res.data.user)
             // this.state.data.push(res.data);
             this.setState({data: res.data.user});
-        });
-    }
-
+					});
+				}
+				
 
     render(){
       // Render JSX

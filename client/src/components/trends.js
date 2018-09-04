@@ -38,6 +38,8 @@ state ={
                                         <Loader />
                                     </div>
                                 }
+                           
+                <div className='trending'>
                     {this.state.items.map(value =>(
                 <div key={value}  className='placediv'>
                     <div className='placeImageDiv'>
@@ -56,6 +58,7 @@ state ={
                 </div>
                     ))}
                 </div>
+                </div> 
             );
         }
         else{
@@ -67,6 +70,7 @@ state ={
                                         <Loader />
                                     </div>
                                 }
+                <div  className='trending'>
                         {this.state.items.map(value =>(
                         <div key={value}  className='placediv'>
                             <div className='placeImageDiv'>
@@ -79,6 +83,7 @@ state ={
                             </div>
                         </div>
                     ))}
+                </div>
                 </div>
             );
         }

@@ -22,7 +22,7 @@ class PlaceDetails extends React.Component{
         console.log(location)
         axios.get(`https://chota1.herokuapp.com/place/single/${location}`)
         .then(res =>{
-            console.log(res.data.result.description)
+            console.log(res.data.result.reviews)
             this.setState({
                 places: res.data.result.reviews,
                 place: res.data.result,
@@ -32,7 +32,8 @@ class PlaceDetails extends React.Component{
     }
 
     render(){
-        const {place,loading} = this.state
+        const {place,loading,places} = this.state
+        // const {place, places} = this.state
     return(
         <div>
            <Nav/>
@@ -60,7 +61,7 @@ class PlaceDetails extends React.Component{
            <Reviews
             pageId={ this.props.match.params.id}/>
             <Review
-            comment={this.state.places}
+            comment={places}
             />
            </div>
            <div>
