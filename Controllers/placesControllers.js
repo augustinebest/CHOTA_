@@ -2,6 +2,7 @@ const Place = require('../Models/Places');
 var Category = require('../Models/Categories');
 const cloud = require('../functions/cloudinary');
 const Reviews = require('../Models/Reviews');
+const User = require('../Models/User');
 
 exports.addPlaces = (req, res, next) => {
     const place = new Place({
@@ -166,13 +167,17 @@ exports.addReview = (req, res, next) => {
             if(!place) {
                 res.status(306).json({message: 'This place does not exist!'});
             }
-            var check = place.reviews.push(review._id);
-            if(check) {
-                place.save();
-                res.status(200).json({message: 'This review have been added successfully!', review: review});
-            } else {
-                res.status(206).json({message: 'cannot add!'});
-            }
+            User.findOne({_id: review.user_id}).select('username image').exec((err, user) => {
+                if(err) res.json(err);
+                var check = place.reviews.push(review._id);
+                if(check) {
+                    place.save();
+                    res.status(200).json({message: 'This review have been added successfully!', review: review, user: user});
+                } else {
+                    res.status(206).json({message: 'cannot add!'});
+                }
+            })
+            
         })
     } catch(error) {
         res.json({error: error});
