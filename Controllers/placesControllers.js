@@ -49,7 +49,7 @@ exports.getPlaceByParams = (req, res, next) => {
     const place = req.params.placeId;
     Place.findById(place).populate({
         path: 'categoryId reviews',
-        select: 'categoryName commentBody user_id',
+        select: 'categoryName commentBody user_id date',
         populate: {
             path: 'user_id',
             select: 'image username'
