@@ -3,7 +3,8 @@ import {Navbar, Nav, NavItem,} from "react-bootstrap";
 import './admin-navbar.css';
 import logo from './logo_dark.png';
 import NotificationIcon from './notification-icon.png';
-import ProfileIcon from './profile-icon.png';
+import ProfileIcon from './account-circle.png';
+import {Link} from 'react-router-dom';
 
 
 const AdminNavBar = () => {
@@ -12,7 +13,7 @@ const AdminNavBar = () => {
         <Navbar className='navBarBorder'>
         <Navbar.Header style={{backgroundColor: '#F2F2F2'}}>
           <Navbar.Brand>
-            <a href="/"> <img src={logo} alt='chota'/></a>
+            <Link to="/"> <img src={logo} alt='chota'/></Link>
           </Navbar.Brand>
          <img src={NotificationIcon} alt='' id='navNotificationIcon'/>
          <img src={ProfileIcon} alt='' id='navProfileIcon'/>

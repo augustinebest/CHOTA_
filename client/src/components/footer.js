@@ -24,7 +24,7 @@ const Footer = () => {
                 <div className="row">
                     <p> Have you been to an interesting place recently? </p>
                     <Link to='/PinLocation'><button id='pinButton'> Pin Location </button></Link>
-                    {/* <Link to='/drop-Comment'> <button id='reviewApp'> Review App </button></Link> */}
+                    <Link to='/drop-Comment'> <button id='reviewApp'> Review App </button></Link>
                 </div>
             </div>
             </footer>

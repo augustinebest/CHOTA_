@@ -51,8 +51,9 @@
     border: none !important;
 }
 
-.logoutButton{
+#logoutBtn{
     background-color: #011627;
     border: 0px;
-    color: gray
+    color: gray;
+    margin-left: -40px;
 }
