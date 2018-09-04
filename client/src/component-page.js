@@ -29,29 +29,58 @@ class ComponentPage extends Component{
 
     render(){
         // console.log(this.props.match.params)
-        return(
-            <div>
-                 <Nav/>
-                 <div id='categoryid'><h3>{this.props.match.params.categoryName}</h3></div>
-                 <div id='placeViewPart'>
-                {this.state.item.map(value =>(
-            <div key={value}  className='placediv'>
-                <div className='placeImageDiv'>
-                <Link to ={{pathname:`/PlaceDetails/${value._id}`,
-                           state: {place: value.name}}}>
-                        <img src={value.image} alt={value.name} className='placesImage'/> </Link>
+        if (sessionStorage.getItem('user')){
+            return(
+                <div>
+                     <Nav/>
+                     <div id='categoryid'><h3>{this.props.match.params.categoryName}</h3></div>
+                     <div id='placeViewPart'>
+                    {this.state.item.map(value =>(
+                <div key={value}  className='placediv'>
+                    <div className='placeImageDiv'>
+                    <Link to ={{pathname:`/PlaceDetails/${value._id}`,
+                               state: {place: value.name}}}>
+                            <img src={value.image} alt={value.name} className='placesImage'/> 
+                    </Link>
+                    </div>
+                    <div className='placeDetailDiv' >
+                    <h4>{value.name}</h4>
+                    <span> space for rating</span>
+                    <p>Gps location of place</p>
+                    </div>
                 </div>
-                <div className='placeDetailDiv' >
-                <h4>{value.name}</h4>
-                <span> space for rating</span>
-                <p>Gps location of place</p>
+                    ))}
+                    </div>
+                    <Footer/>
                 </div>
-            </div>
-                ))}
+            );
+        }
+        else {
+            return(
+                <div>
+                     <Nav/>
+                     <div id='categoryid'><h3>{this.props.match.params.categoryName}</h3></div>
+                     <div id='placeViewPart'>
+                    {this.state.item.map(value =>(
+                <div key={value}  className='placediv'>
+                    <div className='placeImageDiv'>
+                    <Link to='/Login'>
+                            <img src={value.image} alt={value.name} className='placesImage'/>
+                    </Link>
+                    </div>
+                    <div className='placeDetailDiv' >
+                    <h4>{value.name}</h4>
+                    <span> space for rating</span>
+                    <p>Gps location of place</p>
+                    </div>
                 </div>
-                <Footer/>
-            </div>
-        );
+                    ))}
+                    </div>
+                    <Footer/>
+                </div>
+            );
+        }
+       
         }
    
     }

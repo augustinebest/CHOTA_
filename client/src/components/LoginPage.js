@@ -47,11 +47,12 @@ class Login extends Component {
               //  console.log(res.data.message);
               console.log(user)
               if (res.status === 200){
-                //  console.log(res.data)
+                //  console.log(res.data._id)
                 //  console.log(res.data.message);
                 alert(JSON.stringify(res.data.message));
                 sessionStorage.setItem('user', res.data.token);
                 sessionStorage.setItem('username', res.data.username);
+                sessionStorage.setItem('userId', res.data._id)
                 // sessionStorage.setItem('email', res.data.email);
                 //  console.log( sessionStorage.getItem('user'));
                 this.setState({userId: res.data})
@@ -99,10 +100,10 @@ class Login extends Component {
                      <Navbar className='navBarBorder'>
         <Navbar.Header  style={{backgroundColor: '#F2F2F2'}}>
           <Navbar.Brand>
-          <a href="/"> <img src={logo} alt='chota'/></a>
+          <Link to="/"> <img src={logo} alt='chota'/></Link>
           </Navbar.Brand>
           {/* <Login /> */}
-         <a href = '/'> <button className='btn'> Home </button> </a>
+         <Link to= '/'> <button className='btn'> Home </button> </Link>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse className=''>
@@ -122,6 +123,7 @@ class Login extends Component {
           </Nav>
         </Navbar.Collapse>
         </Navbar>
+        <div> God is with me. you like it or NOT. lol</div>
                         <Modal open={open} onClose={this.onCloseModal} little>
                            <div className="center">
                                     <div className="card">

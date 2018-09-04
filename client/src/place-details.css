@@ -7,8 +7,10 @@
 .placedetails{
     width: 100%;
     height: 135px;
-    border: 1px solid green;
-    display: inline-flex;
+    /* border: 1px solid green; */
+    /* display: inline-flex; */
+    padding: 10px;
+    text-align: center;
 }
 
 .placeMap{
@@ -29,4 +31,12 @@
 
 #review{
     height: 400px;
+}
+
+#place-detail-bottom{
+    margin-bottom: 100px;
+    padding: 10px;
+}
+#placename{
+    font-size: 35px;
 }

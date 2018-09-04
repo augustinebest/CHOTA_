@@ -53,3 +53,8 @@
 .navBarBorder{
     border: none !important;
 }
+.logoutButton{
+    background-color: #011627;
+    border: 0px;
+    color: gray
+}
