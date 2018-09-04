@@ -46,19 +46,23 @@ exports.addPlaces = (req, res, next) => {
 };
 
 exports.getPlaceByParams = (req, res, next) => {
-    const place = {_id: req.params.placeId};
-    Place.findOne(place).populate('reviews categoryId', 'commentBody categoryName').exec()
-    .then(result => {
+    const place = req.params.placeId;
+    Place.findById(place).populate({
+        path: 'categoryId reviews',
+        select: 'categoryName commentBody user_id',
+        populate: {
+            path: 'user_id',
+            select: 'image username'
+        }
+    }).exec((err, result) => {
+        if(err) return res.status(500).json({err: 'error occurred in finding this'});
         result.view++;
         result.trendVol = result.view + result.reviews.length;
         res.json({message: `There are ${result.reviews.length} reviews in this place`, result: result});
         result.save();
     })
-    .catch(err => {
-        console.log('error occurred in finding this');
-    });
 }
-
+// 'reviews categoryId', 'commentBody user_id categoryName'
 exports.getAllPlaces = (req, res, next) => {
     Place.find({})
     .select('_id name image description date categoryId')
