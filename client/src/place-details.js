@@ -5,14 +5,19 @@ import Reviews from './components/review.js';
 import Review from './components/reviews';
 import Footer from './components/footer.js';
 import axios from 'axios';
-import Another from './components/anotherReview'
+// import Another from './components/anotherReview'
+import  Loader from './components/Loader';
 
 class PlaceDetails extends React.Component{
     state={
         places: [],
-        place:[]
+        place:[],
+        loader:false
     }
     componentDidMount(){
+        this.setState({
+            loading:true
+        })
         const location = this.props.match.params.id
         console.log(location)
         axios.get(`https://chota1.herokuapp.com/place/single/${location}`)
@@ -20,17 +25,24 @@ class PlaceDetails extends React.Component{
             console.log(res.data.result.description)
             this.setState({
                 places: res.data.result.reviews,
-                place: res.data.result
+                place: res.data.result,
+                loading:false
             })
         })
     }
 
     render(){
-        const {place} = this.state
+        const {place,loading} = this.state
     return(
         <div>
            <Nav/>
            <div className='placeImage'>
+           {
+            loading &&
+            <div style={{position: 'relative', top: '150px', left: '150px'}}>
+                <Loader />
+            </div>
+        }
            <img src={place.image} alt={place.name} id='placeDetailImage'/>
            </div>
            <div className='placedetails'>
@@ -43,6 +55,7 @@ class PlaceDetails extends React.Component{
                 </div>
            </div>
            <div id='place-detail-bottom'>
+          
            <h3>Recent Reviews</h3>
            <Reviews
             pageId={ this.props.match.params.id}/>

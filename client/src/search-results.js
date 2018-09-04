@@ -74,7 +74,7 @@ handleChange = (e) => {
                 <div className='body-div'>
         {
             loading &&
-            <div style={{position: 'relative', top: '150px', left: '120px'}}>
+            <div style={{position: 'relative', top: '150px', left: '150px'}}>
                 <Loader />
             </div>
         }

@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import Nav from './components/nav-bar.js';
 import Footer from './components/footer';
 import './component-page.css';
+import  Loader from './components/Loader';
 
 
 
@@ -13,28 +14,39 @@ class ComponentPage extends Component{
     constructor(props){
         super(props);
         this.state = {
-            item: []
+            item: [],
+            loader:false
         }
     }
 
     
     componentDidMount(){
+        this.setState({
+            loading:true
+        })
         axios.get(`https://chota1.herokuapp.com/category/get/${this.props.match.params.categoryName}`)
         .then(res=>{
             console.log(res.data.placeId)
-            this.setState({item: res.data.placeId
+            this.setState({item: res.data.placeId, loading:false
             })
         })
     }
 
     render(){
         // console.log(this.props.match.params)
+        const{loading} =this.state
         if (sessionStorage.getItem('user')){
             return(
                 <div>
                      <Nav/>
                      <div id='categoryid'><h3>{this.props.match.params.categoryName}</h3></div>
                      <div id='placeViewPart'>
+                     {
+            loading &&
+            <div style={{position: 'relative', top: '150px', left: '150px'}}>
+                <Loader />
+            </div>
+        }
                     {this.state.item.map(value =>(
                 <div key={value}  className='placediv'>
                     <div className='placeImageDiv'>

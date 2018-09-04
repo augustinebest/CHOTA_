@@ -123,7 +123,7 @@ class Login extends Component {
           </Nav>
         </Navbar.Collapse>
         </Navbar>
-        <div> God is with me. you like it or NOT. lol</div>
+        {/* <div> God is with me. you like it or NOT. lol</div> */}
                         <Modal open={open} onClose={this.onCloseModal} little>
                            <div className="center">
                                     <div className="card">

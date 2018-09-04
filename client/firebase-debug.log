@@ -1,0 +1,76 @@
+[debug] [2018-09-04T09:46:57.987Z] ----------------------------------------------------------------------
+[debug] [2018-09-04T09:46:58.002Z] Command:       C:\Program Files (x86)\nodejs\node.exe C:\Users\Ekwuno\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase deploy
+[debug] [2018-09-04T09:46:58.002Z] CLI Version:   4.2.0
+[debug] [2018-09-04T09:46:58.002Z] Platform:      win32
+[debug] [2018-09-04T09:46:58.002Z] Node Version:  v9.2.0
+[debug] [2018-09-04T09:46:58.002Z] Time:          Tue Sep 04 2018 10:46:58 GMT+0100 (W. Central Africa Standard Time)
+[debug] [2018-09-04T09:46:58.002Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-09-04T09:46:58.096Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-09-04T09:46:58.112Z] > authorizing via signed-in user
+[debug] [2018-09-04T09:46:58.112Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/chota-dae5f  
+ 
+[debug] [2018-09-04T09:47:01.417Z] <<< HTTP RESPONSE 200
+[debug] [2018-09-04T09:56:44.796Z] ----------------------------------------------------------------------
+[debug] [2018-09-04T09:56:44.796Z] Command:       C:\Program Files (x86)\nodejs\node.exe C:\Users\Ekwuno\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase deploy
+[debug] [2018-09-04T09:56:44.796Z] CLI Version:   4.2.0
+[debug] [2018-09-04T09:56:44.796Z] Platform:      win32
+[debug] [2018-09-04T09:56:44.796Z] Node Version:  v9.2.0
+[debug] [2018-09-04T09:56:44.812Z] Time:          Tue Sep 04 2018 10:56:44 GMT+0100 (W. Central Africa Standard Time)
+[debug] [2018-09-04T09:56:44.812Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-09-04T09:56:44.921Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-09-04T09:56:44.921Z] > authorizing via signed-in user
+[debug] [2018-09-04T09:56:44.937Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/chota-dae5f  
+ 
+[debug] [2018-09-04T09:56:51.045Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'chota-dae5f'...
+[info] 
+[info] i  deploying hosting
+[debug] [2018-09-04T09:56:51.086Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/chota-dae5f/versions  
+
+[debug] [2018-09-04T09:57:00.679Z] <<< HTTP RESPONSE 200
+[info] i  hosting[chota-dae5f]: beginning deploy...
+[info] i  hosting[chota-dae5f]: found 9 files in build
+[debug] [2018-09-04T09:57:04.329Z] [hosting] hash cache [YnVpbGQ] stored for 9 files
+[debug] [2018-09-04T09:57:04.329Z] [hosting][hash queue][FINAL]
+[debug] [2018-09-04T09:57:04.329Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/chota-dae5f/versions/2f4526a792bf3bc4:populateFiles  
+ <request body omitted>
+[debug] [2018-09-04T09:57:19.971Z] <<< HTTP RESPONSE 200
+[debug] [2018-09-04T09:57:19.986Z] [hosting][populate queue][FINAL]
+[debug] [2018-09-04T09:57:19.986Z] [hosting] uploads queued: 1
+[debug] [2018-09-04T09:57:32.206Z] [uploadQueue] Retrying task d6494fdff4c34f0bbca7f6c1bdb0ea9d9dc06822d2454d9a12b62cbb2941fef6
+[debug] [2018-09-04T09:57:36.853Z] [hosting][upload queue][FINAL]
+[info] +  hosting[chota-dae5f]: file upload complete
+[debug] [2018-09-04T09:57:36.853Z] [hosting] deploy completed after 36158ms
+[debug] [2018-09-04T09:57:36.853Z] [
+  {
+    "config": {
+      "public": "build",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "site": "chota-dae5f"
+    },
+    "site": "chota-dae5f",
+    "version": "sites/chota-dae5f/versions/2f4526a792bf3bc4"
+  }
+]
+[info] i  hosting[chota-dae5f]: finalizing version...
+[debug] [2018-09-04T09:57:36.853Z] >>> HTTP REQUEST PATCH https://firebasehosting.googleapis.com/v1beta1/sites/chota-dae5f/versions/2f4526a792bf3bc4?updateMask=status  
+
+[debug] [2018-09-04T09:57:57.891Z] Error: connect ETIMEDOUT 216.58.223.202:443
+    at Object._errnoException (util.js:1031:13)
+    at _exceptionWithHostPort (util.js:1052:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1195:14)
+[error] 
+[error] Error: Server Error. connect ETIMEDOUT 216.58.223.202:443
+[info] 
+[info] === Deploying to 'chota-dae5f'...
+[info] 
+[info] i  deploying hosting
+[debug] [2018-09-04T10:00:24.654Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/chota-dae5f/versions  
+
