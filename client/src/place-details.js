@@ -38,7 +38,7 @@ class PlaceDetails extends React.Component{
                 <p>GPS location</p>
                 </div>
            </div>
-           <h3>Recent Reviews</h3>
+           <h3 >Recent Reviews</h3>
            <Another/>
            <div>
            <Footer/>

@@ -75,7 +75,7 @@ class Another extends Component {
 
     render(){
         return(
-            <div>
+            <div style = {{marginBottom: '120px'}}>
            
                  <div className = 'notesBody'>
                 {

@@ -11,6 +11,8 @@ import logo from './logo_dark.png';
 // import './nav.css';
 import {Navbar, Nav, NavItem,} from "react-bootstrap";
 // import AuthService from './../components/AuthService';
+import  Loader from './Loader'
+
 
 class Login extends Component {
   
@@ -21,7 +23,8 @@ class Login extends Component {
                 },
                 errors: {},
                 open : true,
-                userId: []
+				userId: [],
+				loading: false
         }
 
         onOpenModal = () => {
@@ -68,6 +71,9 @@ class Login extends Component {
           }
           
           handleSubmit = (e) =>{
+			//   this.setState({
+			// 	  loading: true
+			//   })
             e.preventDefault();
             const errors = this.validate(this.state.user);
             this.setState({ loading: true})
@@ -86,8 +92,8 @@ class Login extends Component {
            }  
 
         render(){
-            const {errors} = this.state
-            const {open} = this.state 
+            const {errors, loading, open} = this.state
+            // const {open} = this.state 
             return(
                 <div>
                      <Navbar className='navBarBorder'>
@@ -119,7 +125,12 @@ class Login extends Component {
                         <Modal open={open} onClose={this.onCloseModal} little>
                            <div className="center">
                                     <div className="card">
-                                    
+                                    {
+										loading &&
+										<div style={{position: 'relative', top: '150px', left: '120px'}}>
+											<Loader />
+										</div>
+									}
                                         <h1> Login</h1>
                                         <form onSubmit={this.handleSubmit}>
                                             <label>Email:</label> <input className="form-item" type= "text"  name = "email" value={this.state.email} onChange={this.handleChange}/> 

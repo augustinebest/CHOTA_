@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './trends.css';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import Loader from './../components/Loader';
 
 
 
@@ -10,22 +11,33 @@ import {Link} from 'react-router-dom';
 class Trends extends Component{
 
 state ={
-    items: []
+    items: [],
+    loading:true
 }
 
 
     componentDidMount(){
+        this.setState({
+            loading:true
+        })
         axios.get(`https://chota1.herokuapp.com/place`)
         .then(res=>{
             console.log(res.data.place)
-            this.setState({items: res.data.place})
+            this.setState({items: res.data.place, loading: false})
         })
     }
 
     render(){
+        const {loading} = this.state
         if (sessionStorage.getItem('user')){
             return(
-                <div>
+                <div style = {{marginBottom: '90px'}}>
+                 {
+                                    loading &&
+                                    <div style={{position: 'relative', top: '56px', left: '155px'}}>
+                                        <Loader />
+                                    </div>
+                                }
                     {this.state.items.map(value =>(
                 <div key={value}  className='placediv'>
                     <div className='placeImageDiv'>
@@ -48,7 +60,13 @@ state ={
         }
         else{
             return(
-                <div>
+                <div style = {{marginBottom: '90px'}}>
+                 {
+                                    loading &&
+                                    <div style={{position: 'relative', top: '56px', left: '120px'}}>
+                                        <Loader />
+                                    </div>
+                                }
                         {this.state.items.map(value =>(
                         <div key={value}  className='placediv'>
                             <div className='placeImageDiv'>

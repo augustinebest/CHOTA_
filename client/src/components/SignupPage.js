@@ -4,7 +4,7 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 import './../components/LoginPage.css';
 import Modal from 'react-responsive-modal';
-
+import  Loader from './Loader'
 class  Signup extends Component {
     constructor(props){
         super(props)
@@ -55,13 +55,19 @@ class  Signup extends Component {
     }
 
     render(){
-        const { open } = this.state;
+        const { open,loading } = this.state;
         return (
           <div>
             {/* <button className= 'btn' onClick={this.onOpenModal}>Signup</button> */}
             <Modal open={open} onClose={this.onCloseModal} little>
               <div className="center">
                 <div className="card">
+                {
+										loading &&
+										<div style={{position: 'relative', top: '150px', left: '120px'}}>
+											<Loader />
+										</div>
+									}
                     <h1> Signup</h1>
                     <form onSubmit={this.handleSubmit}>
                         <label>Email:</label> <input className="form-item" type = "text"  name = "email" value={this.state.email} onChange={this.handleChange} />

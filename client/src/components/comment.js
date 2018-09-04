@@ -24,7 +24,7 @@ const Title = ({commentCount}) => {
 			addComment(input.value);
 			input.value = '';
 		}}>
-			<input className="form-control col-md-6" name='commentBody' placeholder='Enter Comments here' ref={node => {
+			<input className="form-control col-md-6"  placeholder='Enter Comments here' ref={node => {
 				input = node;
 			}} />
 		<br />
@@ -56,12 +56,12 @@ const Comment = ({comment}) => {
 }
 
 // Map through the comments
-const CommentList = ({comments}) => {
-	const commentNode = comments.map((comment) => {
-		return (<Comment comment={comment} key={comment.id}/>)
-	});
-	return (<div className='commentgroup' style={{marginTop:'30px'}}>{commentNode}</div>);
-}
+// const CommentList = ({comments}) => {
+// 	const commentNode = comments.map((comment) => {
+// 		return (<Comment comment={comment} key={comment.id}/>)
+// 	});
+// 	return (<div className='commentgroup' style={{marginTop:'30px'}}>{commentNode}</div>);
+// }
 
   // Contaner Component
   // Comment Id
@@ -76,7 +76,7 @@ class CommentComp extends React.Component{
 		this.state = {
 			data: []
 		}
-	this.apiUrl = 'chota1.herokuapp.com/feedback'
+	this.apiUrl = 'https://chota1.herokuapp.com/feedback'
 }
     // Lifecycle method
     componentDidMount(){
@@ -94,8 +94,9 @@ class CommentComp extends React.Component{
       // Update data
 		axios.post(this.apiUrl, comment)
         .then((res) => {
-            this.state.data.push(res.data);
-            this.setState({data: this.state.data});
+					console.log(res)
+            // this.state.data.push(res.data);
+            // this.setState({data: this.state.data});
         });
     }
 
@@ -106,7 +107,7 @@ class CommentComp extends React.Component{
 			<div style={{padding: 30}}>
 				<Title commentCount={this.state.data.length}/>
 				<CommentForm addComment={this.addComment.bind(this)}/>
-				<CommentList comments={this.state.data} />
+				{/* <CommentList comments={this.state.data} /> */}
 			</div>
 		);
     }

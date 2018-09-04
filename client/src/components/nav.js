@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 import Search from './search.png';
 import ProfileIcon from './account-circle.png';
 // import Login from './LoginPage';
+// import  Loader from './Loader'
 
 
 class nav extends React.Component{

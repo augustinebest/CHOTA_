@@ -8,7 +8,8 @@ import SearchResults from './components/search-result.js';
 // import {withRouter} from 'react-router-dom';
 // import { browserHistory } from 'react-router';
 import './search-results.css';
-import axios from 'axios'
+import axios from 'axios';
+import  Loader from './components/Loader'
 
 
 // const API_KEY = '56f0450d2729d1d9861d643496069047'
@@ -19,7 +20,8 @@ class SearchResult extends Component {
     constructor(){
         super();
    this.state = {
-        place: []
+        place: [],
+        loading: false
     }
 }
 
@@ -40,11 +42,15 @@ class SearchResult extends Component {
 // Hanle our search feature functionality
 
 handleChange = (e) => {
+    this.setState({
+        loading: true
+    })
     axios.get(`https://chota1.herokuapp.com/place/search/${e.target.value}`)
         .then(res => {
             console.log(res.data)
             this.setState({
-                place: res.data
+                place: res.data,
+                loading: false
             })
         })
 }
@@ -53,6 +59,7 @@ handleChange = (e) => {
 
 
     render() {
+        const {loading} = this.state
         // let { place } = this.state;
 
         return(
@@ -65,6 +72,12 @@ handleChange = (e) => {
                 
             <div className='detail-body'>
                 <div className='body-div'>
+        {
+            loading &&
+            <div style={{position: 'relative', top: '150px', left: '120px'}}>
+                <Loader />
+            </div>
+        }
                     {/* <div className='Search-term'> trap House</div>
                     <div className='Search-term'> enugu </div> */}
                     <SearchResults items={this.state.place} place={this.state.place}/>

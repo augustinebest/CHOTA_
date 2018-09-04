@@ -6,7 +6,7 @@ import throttle from 'lodash.throttle';
 import classNames from 'classnames';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-
+import Loader from './../components/Loader';
 
 
 // const API_KEY = '56f0450d2729d1d9861d643496069047'
@@ -26,7 +26,8 @@ class Carousel extends Component {
             numOfSlidesToScroll: 4,
             allTheWayLeft: false,
             allTheWayRight: false,
-            items: []
+            items: [],
+            loading: true
 
         }
     }
@@ -72,6 +73,9 @@ class Carousel extends Component {
 
 
     componentDidMount(){
+        this.setState({
+            loading:true
+        })
         this.checkNumOfSlidesToScroll();
         this.checkIfSlidesAllTheWayOver();
         window.addEventListener('resize', this.throttleResize);
@@ -79,7 +83,7 @@ class Carousel extends Component {
         axios.get(`https://chota1.herokuapp.com/category`)
         .then(res=>{
             console.log(res.data)
-            this.setState({items: res.data})
+            this.setState({items: res.data,  loading: false})
         });
 
     }
@@ -205,7 +209,8 @@ class Carousel extends Component {
 
         const {
             allTheWayLeft,
-            allTheWayRight
+            allTheWayRight,
+            loading
         } = this.state
 
         //using classNames method to store our classes (nav) for flexibility//
@@ -237,6 +242,12 @@ class Carousel extends Component {
               onScroll={this.throttleScroll}
               >
               <div>
+            {
+                                    loading &&
+                                    <div style={{position: 'relative', top: '56px', left: '120px'}}>
+                                        <Loader />
+                                    </div>
+                                }
               {this.state.items.map(value=>(
                   <div key={value.id} className='image-div'>
                       <Link to={`/Component-page/${value.categoryName}`}> <img src={value.image} alt={value.title} className='images'/></Link>
