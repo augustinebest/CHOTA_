@@ -30,20 +30,19 @@ exports.addPlaces = (req, res, next) => {
                         // const check = user.pinedPlaces.push(result._id);
                         // user.save();
                         // if(check) {
-                            // Category.findById(req.body.categoryId).exec()
-                            // .then(cat => {
-                            //     cat.placeId.push(result._id);
-                            //     cat.save();
-                            //     res.status(200).json({result, message: 'This have been added to the database!'});
-                            // })
-                            // .catch(err => {
-                            //     console.log(err);
-                            // });
+                            Category.findById(req.body.categoryId).exec()
+                            .then(cat => {
+                                cat.placeId.push(result._id);
+                                cat.save();
+                                res.status(200).json({result, message: 'This have been added to the database!'});
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            });
                         // } else {
                         //     res.status(206).json({result, message: 'Unable to pin place to user!'});
                         // }
                     // })
-                    res.json(result);
                 }
             })
         });
