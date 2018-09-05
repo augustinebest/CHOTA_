@@ -10,10 +10,10 @@ exports.addPlaces = (req, res, next) => {
         image: req.file.path,
         imageID: '',
         description: req.body.description,
-        date: req.body.date,
+        // date: req.body.date,
         categoryId: req.body.categoryId,
-        reviews: req.body.reviews,
-        ratings: req.body.ratings
+        // reviews: req.body.reviews,
+        // ratings: req.body.ratings
     });
     
     // req.files.forEach(element => {
