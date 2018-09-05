@@ -4,6 +4,8 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 import './../components/LoginPage.css';
 import Modal from 'react-responsive-modal';
+import {Navbar, Nav, NavItem,} from "react-bootstrap";
+import logo from './logo_dark.png';
 import  Loader from './Loader'
 class  Signup extends Component {
     constructor(props){
@@ -58,6 +60,32 @@ class  Signup extends Component {
         const { open,loading } = this.state;
         return (
           <div>
+              <Navbar className='navBarBorder'>
+        <Navbar.Header  style={{backgroundColor: '#F2F2F2'}}>
+          <Navbar.Brand>
+          <Link to="/"> <img src={logo} alt='chota'/></Link>
+          </Navbar.Brand>
+          {/* <Login /> */}
+         <Link to= '/'> <button className='btn'> Home </button> </Link>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse className=''>
+          <Nav pullRight>
+            <NavItem eventKey={1} href="/about">
+             About
+            </NavItem>
+            <NavItem eventKey={2} href="/advertise">
+             Advertise
+            </NavItem>
+            <NavItem eventKey={3} href="/privacy">
+             Privacy
+            </NavItem>
+            <NavItem eventKey={4} href="/contact">
+             Contact
+            </NavItem>
+          </Nav>
+        </Navbar.Collapse>
+        </Navbar>
             {/* <button className= 'btn' onClick={this.onOpenModal}>Signup</button> */}
             <Modal open={open} onClose={this.onCloseModal} little>
               <div className="center">
