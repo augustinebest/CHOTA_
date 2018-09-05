@@ -35,7 +35,7 @@ router.post('/', upload.single('image'), category.addCategory);
 router.get('/', category.getAllCategories);
 router.get('/search/:category', category.getACategory);
 router.get('/get/:category', category.getCategory);
-router.delete('/', category.deleteAllCategory);
 router.delete('/:id', category.deleteCategory);
+// router.patch('/:id', category.updateCategory);
 
 module.exports = router;
