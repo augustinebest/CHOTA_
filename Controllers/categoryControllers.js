@@ -25,7 +25,7 @@ exports.addCategory = function(req, res) {
 exports.getAllCategories = (req, res, next) => {
     Category.find().select('_id categoryName image')
     .exec((err, categories) => {
-        if(err) res.status(404).json({message: 'error occured somewhere'});
+        if(err) res.status(404).json({message: 'error occured somewhere1'});
         else {
             try {
                 res.status(200).json(categories);

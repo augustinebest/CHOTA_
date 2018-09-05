@@ -26,23 +26,26 @@ exports.addPlaces = (req, res, next) => {
             Place.create(place, (err, result) => {
                 if(err) res.status(209).json({message: 'Cannot add to the database!'});
                 else {
-                    // User.findOne({_id: place.user_id}).exec((err, user) => {
-                        // const check = user.pinedPlaces.push(result._id);
-                        // user.save();
-                        // if(check) {
+                    User.findOne({_id: place.user_id}).exec((err, user) => {
+                        if(!user) {
+                            res.status(404).json({message: 'This user does not exist!'});
+                        }
+                        const check = user.pinedPlaces.push(result._id);
+                        user.save();
+                        if(check) {
                             Category.findById(req.body.categoryId).exec()
                             .then(cat => {
                                 cat.placeId.push(result._id);
                                 cat.save();
-                                res.status(200).json({result, message: 'This have been added to the database!'});
+                                res.status(200).json({result, message: 'This location have been pinned!'});
                             })
                             .catch(err => {
                                 console.log(err);
                             });
-                        // } else {
-                        //     res.status(206).json({result, message: 'Unable to pin place to user!'});
-                        // }
-                    // })
+                        } else {
+                            res.status(206).json({result, message: 'Unable to pin place to user!'});
+                        }
+                    })
                 }
             })
         });
