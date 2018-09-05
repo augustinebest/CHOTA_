@@ -1,6 +1,7 @@
 import React from 'react';
 import Nav from './components/nav-bar.js';
 import Footer from './components/footer';
+import {Link} from 'react-router-dom';
 import './contact.css';
 
 
@@ -9,10 +10,10 @@ const Contact = () => {
         <div>
          <Nav/>
          <div className='staticPageNavButtonContainer'>
-             <a href='/about'><button className='staticPageLinkButton'>About</button></a>
-             <a href='/advertise'><button className='staticPageLinkButton'>Advertise</button></a>
-             <a href='/privacy'><button className='staticPageLinkButton'>Privacy</button></a>
-             <a href='/contact'><button className='staticPageLinkButton'>Contact</button></a>
+            <Link to='/about'><button className='staticPageLinkButton'>About</button></Link>
+            <Link to='/advertise'><button className='staticPageLinkButton'>Advertise</button></Link>
+            <Link to='/privacy'><button className='staticPageLinkButton'>Privacy</button></Link>
+            <Link to='/contact'><button className='staticPageLinkButton'>Contact</button></Link>
          </div>
          <div className='contentBody'>
              <div>

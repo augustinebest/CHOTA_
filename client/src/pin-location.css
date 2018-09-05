@@ -55,3 +55,12 @@
     margin: auto;
     margin-top: 40px;
 }
+.progressBar{
+    width: 100%;
+}
+#submitButton{
+    background-color: #011627;
+    color: white;
+    height: 30px;
+    margin-bottom: 20px;
+}

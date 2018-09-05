@@ -2,7 +2,7 @@ import React from 'react';
 import {Navbar, Nav, NavItem,} from "react-bootstrap";
 import './admin-navbar.css';
 import logo from './logo_dark.png';
-import NotificationIcon from './notification-icon.png';
+import Search from './search.png';
 import ProfileIcon from './account-circle.png';
 import {Link} from 'react-router-dom';
 
@@ -15,7 +15,7 @@ const AdminNavBar = () => {
           <Navbar.Brand>
             <Link to="/"> <img src={logo} alt='chota'/></Link>
           </Navbar.Brand>
-         <img src={NotificationIcon} alt='' id='navNotificationIcon'/>
+         <img src={Search} alt='' id='navNotificationIcon'/>
          <img src={ProfileIcon} alt='' id='navProfileIcon'/>
           <Navbar.Toggle />
         </Navbar.Header>
