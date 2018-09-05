@@ -7,6 +7,7 @@ const placeSchema = mongoose.Schema({
     description: { type: String },
     date: { type: Date, default: Date.now },
     categoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category'},
+    user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     ratings: { type: Number },
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Reviews' }],
     view: { type: Number, default: 0 },

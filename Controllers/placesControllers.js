@@ -10,12 +10,9 @@ exports.addPlaces = (req, res, next) => {
         image: req.file.path,
         imageID: '',
         description: req.body.description,
-        // date: req.body.date,
         categoryId: req.body.categoryId,
-        // reviews: req.body.reviews,
-        // ratings: req.body.ratings
+        user_id: req.body.user_id
     });
-    
     // req.files.forEach(element => {
     //     // console.log(element.path);
     //     cloud.upload(element.path, (error, result) => {
@@ -28,15 +25,28 @@ exports.addPlaces = (req, res, next) => {
             place.imageID = result.Id;
             Place.create(place, (err, result) => {
                 if(err) res.status(209).json({message: 'Cannot add to the database!'});
-                Category.findById(req.body.categoryId).exec()
-                    .then(cat => {
-                        cat.placeId.push(result._id);
-                        cat.save();
-                        res.status(200).json({result, message: 'This have been added to the database!'});
+                else {
+                    User.findOne({_id: place.user_id}).exec((err, user) => {
+                        const check = user.pinedPlaces.push(result._id);
+                        user.save();
+                        if(check) {
+                            Category.findById(req.body.categoryId).exec()
+                            .then(cat => {
+                                cat.placeId.push(result._id);
+                                cat.save();
+                                res.status(200).json({result, message: 'This have been added to the database!'});
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            });
+                        } else {
+                            res.status(206).json({result, message: 'Unable to pin place to user!'});
+                        }
                     })
-                    .catch(err => {
-                        console.log(err);
-                    });
+                }
+                
+                
+                
             })
         });
     } catch(error) {
