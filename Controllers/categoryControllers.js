@@ -85,6 +85,7 @@ exports.getCategory = (req, res, next) => {
     });
 }
 
+
 exports.deleteCategory = (req, res, next) => {
     try {
         const id = req.params.id;
@@ -95,7 +96,7 @@ exports.deleteCategory = (req, res, next) => {
             cloud.delete(imageID);
             Category.remove({_id: req.params.id}).exec()
             .then(result => {
-                res.status(200).json({err: 'This category have been deleted!'});
+                res.status(200).json({message: 'This category have been deleted!'});
             })
             .catch(err => {
                 res.status(405).json({err: err});
@@ -108,5 +109,6 @@ exports.deleteCategory = (req, res, next) => {
         res.status(408).json(error);
     }
 }
+
 
 
