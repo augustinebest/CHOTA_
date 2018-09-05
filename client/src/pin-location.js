@@ -26,12 +26,14 @@ class PinLocation extends Component{
 onSubmission(e){
     e.preventDefault();
     let { name, image, description, categoryId } = this.state;
+    const userId = sessionStorage.getItem('userId')
 
     let data = new FormData();
     data.append('name', name);
     data.append('image', image);
     data.append('description', description);
     data.append('categoryId', categoryId)
+    data.append('user_id', userId)
 
     axios({
         method: 'post',
@@ -51,6 +53,12 @@ onSubmission(e){
     })
     .then(res => {
         console.log(res)
+        if (res.status === 200){
+            //  console.log(res.data._id)
+            //  console.log(res.data.message);
+            alert(JSON.stringify(res.data.message));
+            if(!alert(JSON.stringify(res.data.message))){window.location.reload();}
+        }
     })
 
 }

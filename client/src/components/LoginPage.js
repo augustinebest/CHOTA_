@@ -41,12 +41,14 @@ class Login extends Component {
           submit = user =>{
             axios.post("https://chota1.herokuapp.com/auth/signin", user)
             .then(res =>{
-              //  console.log(res.data.message);
-              console.log(user)
+              //  console.log(res);
+              console.log(res)
+              // console.log(user)
               if (res.status === 200){
-                //  console.log(res.data._id)
+                //  console.log(res)
                 //  console.log(res.data.message);
                 alert(JSON.stringify(res.data.message));
+                if(!alert(JSON.stringify(res.data.message))){window.location.reload();}
                 sessionStorage.setItem('user', res.data.token);
                 sessionStorage.setItem('username', res.data.username);
                 sessionStorage.setItem('userId', res.data._id)
@@ -61,9 +63,10 @@ class Login extends Component {
                 this.props.history.push('/profile');
                 
                 
+              } else if(res.status === 402) {
+                alert(JSON.stringify(res.data.message));
               }
             })
-            console.log(user)
             
             // this.props.history.push('/');
           }
