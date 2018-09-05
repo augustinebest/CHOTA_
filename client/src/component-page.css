@@ -1,5 +1,7 @@
 #placeViewPart{
     padding: 10px;
+    height: auto;
+    padding-bottom: 100px;
 }
 #categoryid{
     margin-bottom: 0;

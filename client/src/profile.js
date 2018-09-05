@@ -36,7 +36,7 @@ class Profile extends React.Component {
                 <b>{name}</b>
                 {/* <p>okpoko</p> */}
                 </span>
-                <button id='followButton'> Follow + </button>
+                {/* <button id='followButton'> Follow + </button> */}
             </div>
             <div id='recentPlaces'>
                 <h3>Recent Places</h3>

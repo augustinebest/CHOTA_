@@ -1,12 +1,13 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import './search-result.css';
 
 
 
 const SearchResults = (props) =>{
     if (sessionStorage.getItem('user')){
         return(
-            <div>
+            <div id='searchRes'>
                     {props.items.map(value =>(
                     <div key={value}  className='placediv'>
                         <div className='placeImageDiv'>
@@ -31,7 +32,7 @@ const SearchResults = (props) =>{
     }
     else{
         return(
-            <div>
+            <div id='searchRes'>
                     {props.items.map(value =>(
                     <div key={value}  className='placediv'>
                         <div className='placeImageDiv'>

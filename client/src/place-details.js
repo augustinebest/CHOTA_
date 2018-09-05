@@ -22,7 +22,7 @@ class PlaceDetails extends React.Component{
         console.log(location)
         axios.get(`https://chota1.herokuapp.com/place/single/${location}`)
         .then(res =>{
-            console.log(res.data.result.reviews)
+            console.log(res.data.result)
             this.setState({
                 places: res.data.result.reviews,
                 place: res.data.result,

@@ -1,154 +1,130 @@
-import React , {Component}from 'react';
+import React, {Component} from 'react';
 import AdminNavBar from './components/admin-navbar';
 import './pin-location.css';
-import {storage} from './Firebase';
-import {database} from './Firebase';
-import 'firebase/database';
-// import {config} from './Firebase'
-// import {config} from './Firebase/index.js';
-// import firebase from 'firebase/app'
-// import {database} from './Firebase';
-// import 'firebase/database';
-import Note from '../src/Notes/note';
-import Noteform from '../src/NoteForm/noteform'
+import axios from 'axios';
 
 
-class PinLocation extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            image:'null',
-            url:'',
-            progress: 0,
-            notes: [
-                // {id : 1, noteContent: 'Note 1 here!'},
-                // {id : 2, noteContent: 'Note 2 here!'},
-            ],
-               
-        }
-        //  this.app = firebase.initializeApp(config)
-        this.db = database.ref().child('notes');
-        this.handleChange = this.handleChange.bind(this)
-        this.handleUpload = this.handleUpload.bind(this)
-        this.addNote = this.addNote.bind(this)
-        this.removeNote = this.removeNote.bind(this)
+class PinLocation extends Component{
+    state = {
+        image: null,
+        name: '',
+        description: '',
+        categoryId: '',
+        items: [],
+        progress : 0
     }
 
-    componentWillMount(){
-        const previousNotes = this.state.notes;
-        //DataSnapShot
-        
-        this.db.on('child_added',snap => {
-            previousNotes.push({
-                id :snap.key,
-                noteContent : snap.val().noteContent,
-            })
+
+    componentDidMount(){
+        axios.get('https://chota1.herokuapp.com/category')
+        .then(res=>{
+            // console.log(res.data)
+            this.setState({items: res.data})
+        })
+    }
+
+onSubmission(e){
+    e.preventDefault();
+    let { name, image, description, categoryId } = this.state;
+
+    let data = new FormData();
+    data.append('name', name);
+    data.append('image', image);
+    data.append('description', description);
+    data.append('categoryId', categoryId)
+
+    axios({
+        method: 'post',
+        url: 'https://chota1.herokuapp.com/place',
+        data: data,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        onUploadProgress: (prog) => {
+            let { loaded, total } = prog;
             this.setState({
-                notes: previousNotes
+                progress: Math.round((loaded/total) * 100)
             })
-        })
-        this.db.on('child_removed', snap =>{
-            for(var i=0; i < previousNotes.length; i++ ){
-                if(previousNotes[i].id === snap.key){
-                    previousNotes.splice(i,1);
-                }
-            }
-            this.setState({
-                notes: previousNotes
-            })
-        })
-    }
-
-    addNote(note){
-         //push note into array 
-
-        //  const previousNotes = this.state.notes
-        //  previousNotes.push({id: previousNotes.length +1, noteContent : note});
-        //  this.setState({
-        //    notes : previousNotes
-        //  })
-
-        // this.state.notes.push(note);
-
-        this.db.push().set({noteContent : note});
-        
-            }
-
-    removeNote(noteId){
-        // console.log('from the parent:' + noteId)
-        this.db.child(noteId).remove();
-
-    }
-
-    handleChange = e =>{
-        if(e.target.files[0]){
-            const image = e.target.files[0]
-            this.setState( () => ({image}))
         }
-    }
+        
+        
+    })
+    .then(res => {
+        console.log(res)
+    })
 
-    handleUpload = e =>{
-        const {image} = this.state
-      const  uploadTask =   storage.ref(`images/${image.name}`).put(image);
-      uploadTask.on('state_changed', (snapshot) => {
-        //progress function
-        const progress = Math.round(snapshot.bytesTransferred / snapshot.totalBytes ) * 100
-        this.setState({progress})
-      },(error) => {
-          // error message
-          console.log(error)
-      }, () =>{
-            //complete function...
-            storage.ref('images').child(image.name).getDownloadURL().then(url =>{
-                console.log(url)
-                this.setState({url})
-            })
-        })
 }
+
+
+    handleCheck = (e) => {
+        this.setState({
+            categoryId: e.target.value
+        })
+    }
+
+
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
     
+    handleFile = (event) => {
+        this.setState({
+            image: event.target.files[0]
+        })
+    }
+
+    
+
 
     render(){
-        return(
-            <div style={{backgroundColor:' #E5E5E5', height:'100%'}}>
-                <AdminNavBar/>
-                <progress value ={this.state.progress} max = '100' />
-                <div id='addingLocation'>
-                        <div className='locationImage'>
-                        <img  className = 'ImageContent'src = {this.state.url} alt = ''/>
-                        </div>
-                    {/* <div className='locationImage'></div> */}
-                    <input type='file'  onChange = {this.handleChange} /> 
-                    <button id='add' onClick = {this.handleUpload} >+</button>
-                    {/* <span style={{}}><p>add location</p></span> */}
+            return(
+                <div style={{backgroundColor:' #E5E5E5', height:'100%'}}>
+                    <AdminNavBar/>
+                    <div id='addingLocation'>
+                    <form encType="multipart/form-data" onSubmit={this.onSubmission.bind(this)}> 
+                    <input 
+                        type="file" 
+                        name='image'
+                        onChange={this.handleFile}
+                        className='file-input'
+                        />
+                     <input
+                        type='text'
+                        name='description'
+                        placeholder="description"
+                        value={this.state.description}
+                        onChange={this.handleChange}
+                        className="input-value description-text"
+                        />
+                     <input
+                        type='text'
+                        name='name'
+                        placeholder="name"
+                        value={this.state.name}
+                        onChange={this.handleChange}
+                        className="input-value description-text" 
+                        />
+                     {this.state.items.map(value =>(    
+                         <div key={value}>            
+                    <input
+                         type="radio" 
+                         id="component" 
+                         name="categoryId" 
+                         value={value._id}
+                         onChange={this.handleCheck}/>
+                    <label For="component">{value.categoryName}</label>
                 </div>
-                
-                <div id='reviewPortion'>
-                <div className = 'notesBody'>
-                {
-                    this.state.notes.map((note) => {
-                        return (
-                            <Note noteContent={note.noteContent} noteId={note.id} key={note.id} removeNote = {this.removeNote}/>
-                        )
-                       
-                    })
-                   
-                }
+                      ))}
+                     <button type="submit" id='submitButton'>Pin Location</button>
+                <progress value = {this.state.progress} max = '100' className='progressBar'/>
+                    </form>
+                        
                 </div>
                 </div>
-                <div id='ratingPortion'>
-                    <div className='notesFooter'>
-                        <Noteform addNote = {this.addNote}/>
-                    </div>
-                </div>
-                    <div id='locationComandBtn'>
-                        <button id='pinLocation' >PIN</button>
-                        <button id='cancelLocation'>CANCEL</button>
-                    </div>
-                
-            </div>
-        );
-    }
-    
+            );
+        }
 }
 
 

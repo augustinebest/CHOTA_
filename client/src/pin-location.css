@@ -61,45 +61,12 @@
     margin: auto;
     margin-top: 40px;
 }
-input, select, textarea {
-
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    width: 82px;
-    height: 22px;
-    
-
+.progressBar{
+    width: 100%;
 }
-.notesBody {
-    padding-top: 1px;
-    display: flex;
-    flex: 1 1 85%;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    align-content: flex-start;
-    overflow: auto;
-  }
-  .this {
-
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    width: 82px;
-    height: 22px;
-    
-
-}
-
-.inputbutton {
-
-    height: 22px;
-    width: 48px;
-    border-radius: 5px;
-    background-color: #E71D36;
-    color: #FEFEFE;
-    font-size: 16px;
-    margin: 3px;
-    border: 0px;
-
+#submitButton{
+    background-color: #011627;
+    color: white;
+    height: 30px;
+    margin-bottom: 20px;
 }
