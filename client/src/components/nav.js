@@ -62,7 +62,7 @@ class nav extends React.Component{
               </Navbar.Brand>
               {/* <Login /> */}
               <Link to='/SearchResults'><img src={Search} alt='' id='navNotificationIcon'/></Link>
-         <Link to='/Profile'><img src={ProfileIcon} alt='' id='navProfileIcon'/></Link>
+              <Link to='/Profile'><img src={ProfileIcon} alt='' id='navProfileIcon'/></Link>
               <Navbar.Toggle />
             </Navbar.Header>
             <Navbar.Collapse className=''>

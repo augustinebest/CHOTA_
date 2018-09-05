@@ -13,8 +13,8 @@ class Profile extends React.Component {
     }
 
 
-    componentDidMount(){
-        const user = this.props.match.params.id
+   componentDidMount(){
+        const user = sessionStorage.getItem('userId')
         console.log(user)
         axios.get(`http://chota1.herokuapp.com/auth/profile/${user}`)
         .then(res=>{
