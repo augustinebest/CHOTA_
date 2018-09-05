@@ -6,8 +6,9 @@ import './../components/LoginPage.css';
 import {Link} from 'react-router-dom';
 import InlineError from './messages/InlineError';
 import Modal from 'react-responsive-modal';
-// import Signup from './SignupPage';
+// import Signup from './SignupPage';d
 import logo from './logo_dark.png';
+import back from '../logo_white.png'
 // import './nav.css';
 import {Navbar, Nav, NavItem,} from "react-bootstrap";
 // import AuthService from './../components/AuthService';
@@ -124,6 +125,8 @@ class Login extends Component {
         </Navbar.Collapse>
         </Navbar>
         {/* <div> God is with me. you like it or NOT. lol</div> */}
+        <Link to="/"> <img src={back} style = {{margin : '131px'}} alt='chota'/></Link>
+        {/* <p> Go back to home please</p> */}
                         <Modal open={open} onClose={this.onCloseModal} little>
                            <div className="center">
                                     <div className="card">

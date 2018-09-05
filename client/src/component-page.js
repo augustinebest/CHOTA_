@@ -15,7 +15,7 @@ class ComponentPage extends Component{
         super(props);
         this.state = {
             item: [],
-            loader:false
+            loader:true
         }
     }
 
