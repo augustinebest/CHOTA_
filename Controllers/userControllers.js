@@ -199,7 +199,7 @@ exports.userAddInterest = (req, res, next) => {
 exports.userProfil = (req, res, next) => {
     const user_id = {_id: req.params.user_id};
     try {
-        User.findOne(user_id, '-password -interest').populate('pinedPlaces', 'name description image date').exec((err, user) => {
+        User.findOne(user_id, '-password -interest').exec((err, user) => {
             if(err) return res.status(404).json({message: 'Unable to find this user!'});
             if(!user) {
                 return res.status(404).json({message: 'This user does not exist!'});
