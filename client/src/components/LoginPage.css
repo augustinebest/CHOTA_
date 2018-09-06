@@ -100,25 +100,31 @@
     margin-left: 0px;
 }
 
-.closebutton{
+.closebuttonlogin {
+
     position: absolute;
-
-    top: -273px;
-    
-    right: 57px;
-    
+    top: -167px;
+    right: 55px;
     border: none;
-    
     padding: 0;
-    
     background-color: transparent;
-    
     display: -ms-flexbox;
-    
     display: flex;
-
     color: black;
+    font-size: 23px;
 
-    font-size : 28px;
+}
+.closebuttonsignup {
+
+    position: absolute;
+    top: -227px;
+    right: 55px;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    display: -ms-flexbox;
+    display: flex;
+    color: black;
+    font-size: 23px;
 
 }

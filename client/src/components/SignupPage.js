@@ -97,7 +97,7 @@ class  Signup extends Component {
 										</div>
 									}
                     <h1> Signup</h1>
-                    <Link to = '/'> <button className = 'closebutton'>X</button> </Link>
+                    <Link to = '/'> <button className = 'closebuttonsignup'>X</button> </Link>
                     <form onSubmit={this.handleSubmit}>
                         <label>Email:</label> <input className="form-item" type = "text"  name = "email" value={this.state.email} onChange={this.handleChange} />
     
@@ -109,7 +109,7 @@ class  Signup extends Component {
                         <label>Password:</label> <input  className="form-item" type = 'password' name = "password" value={this.state.password} onChange={this.handleChange} />
     
                        
-                            <button className="form-submit" value = "Submit" type = "submit">submit</button>
+                            <button className="form-submit" value = "Submit" type = "submit">Submit</button>
                             <p className='message'>Have an account? <Link to = '/Login'>LogIn</Link></p>
                             <br/>
                             <br/>

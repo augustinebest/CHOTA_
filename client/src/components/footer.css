@@ -11,7 +11,7 @@ footer{
     position: absolute;
 }
 button{
-    height: 45px;
+    height: 30px;
     width: 125px;
     border-radius: 5px;
     background-color: #E71D36;
@@ -21,11 +21,11 @@ button{
     border: 0px;
 }
 #pinButton{
-    height: 45px;
+    height: 30px;
     color: white;
 }
 #reviewApp{
-    height: 45px;
+    height: 30px;
     width: 125px;
     background-color: #E71D36;
     margin-left: 20px;

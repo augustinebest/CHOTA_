@@ -32,10 +32,21 @@
 
 .placesImage{
     width: 100%;
-    height: 140px;
-    /* border-radius: 5px; */
-    border-bottom-left-radius: 5px;
+
+height: 140px;
+
+/* border-radius: 5px; */
+
     border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+
+border-bottom-left-radius: 5px;
+
+border-top-left-radius: 5px;
+
+background-repeat: no-repeat;
+
+background-position: 50% 50%;
 }
 
 .trending{
@@ -43,3 +54,12 @@
     height: auto;
     padding-bottom: 19px;
 }
+
+.Datestyle{
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 11px;
+    line-height: 1.42857143;
+    color: #333;
+
+}
+

@@ -25,7 +25,8 @@ class Profile extends React.Component {
 
 
     render(){
-        const name = sessionStorage.getItem('username');
+        const name = sessionStorage.getItem('username')
+
         return(
             <div>
             <AdminNavBar/>

@@ -6,12 +6,12 @@
     width: auto;
 }
 .contentBody{
-    /* margin-top: 20%; */
+    margin-top: -11%;
     padding: 20px;
 }
 .staticPageNavButtonContainer{
     display: inline-block;
-    padding: 20px;
+    padding: 47px;
     width: 100%;
 }
 .staticPageHeader{

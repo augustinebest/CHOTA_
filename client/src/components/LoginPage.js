@@ -138,14 +138,14 @@ class Login extends Component {
 										</div>
 									}
                                         <h1> Login</h1>
-                                       <Link to = '/'> <button className = 'closebutton'>X</button> </Link>
+                                       <Link to = '/'> <button className = 'closebuttonlogin'>X</button> </Link>
                                         <form onSubmit={this.handleSubmit}>
                                             <label>Email:</label> <input className="form-item" type= "text"  name = "email" value={this.state.email} onChange={this.handleChange}/> 
                                             {errors.email && <InlineError text={errors.email}/>}
                                             <label>Password:</label> <input  className="form-item" type = 'password' name = "password" value={this.state.password} onChange={this.handleChange}/>
                                             {errors.password && <InlineError text={errors.password}/>}
                                             <br/>
-                                                <button className="form-submit" value = "Submit" type = "submit">submit</button>
+                                                <button className="form-submit" value = "Submit" type = "submit">Submit</button>
                                                 {/* <p className='message'>Don't have an account?</p> <Signup/> */}
                                                <p className='message'> Don't have an account? <Link to = '/Signup'>Sign up</Link></p>
                                         </form>

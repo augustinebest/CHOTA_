@@ -30,7 +30,7 @@ state ={
         axios.get(`https://chota1.herokuapp.com/trending`)
         .then(res=>{
             console.log(res.data)
-            this.setState({items: res.data})
+            this.setState({items: res.data , loading : false})
         })
     }
 
@@ -67,8 +67,8 @@ state ={
                     <img src={View} alt='' id='viewIcon'/>{value.view}
                     </div>
                     {/* <p>Gps location of place</p> */}
-                    <div>
-                    {(new Date(value.date)).toLocaleDateString('en-US', DATE_OPTIONS)}
+                    <div style = {{fontSize: '14px'}}>
+                    { (new Date(value.date)).toLocaleDateString('en-US', DATE_OPTIONS) }
                     </div>
                     </div>
                 </div>
@@ -102,7 +102,7 @@ state ={
                     <img src={View} alt='' id='viewIcon'/>{value.view}
                     </div>
                     {/* <p>Gps location of place</p> */}
-                    <div>
+                    <div  style = {{fontSize: '14px'}}>
                     {(new Date(value.date)).toLocaleDateString('en-US', DATE_OPTIONS)}
                     </div>
                     </div>
