@@ -22,8 +22,8 @@ class AdminNavBar extends Component {
           <Navbar.Brand>
             <Link to="/"> <img src={logo} alt='chota'/></Link>
           </Navbar.Brand>
-         <img src={Search} alt='' id='navNotificationIcon'/>
-         <img src={ProfileIcon} alt='' id='navProfileIcon'/>
+         <Link to ='/SearchResults'><img src={Search} alt='' id='navNotificationIcon'/></Link>
+         <Link to ='/profile'> <img src={ProfileIcon} alt='' id='navProfileIcon'/></Link>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse className=''>
