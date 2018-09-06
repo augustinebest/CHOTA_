@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Component} from 'react';
 import {Navbar, Nav, NavItem,} from "react-bootstrap";
 import './admin-navbar.css';
 import logo from './logo_dark.png';
@@ -7,7 +7,14 @@ import ProfileIcon from './account-circle.png';
 import {Link} from 'react-router-dom';
 
 
-const AdminNavBar = () => {
+class AdminNavBar extends Component {
+
+  Logout = () =>{
+    sessionStorage.removeItem('user')
+    sessionStorage.clear()
+  }
+  
+  render(){
     return(
       <div>
         <Navbar className='navBarBorder'>
@@ -33,12 +40,17 @@ const AdminNavBar = () => {
             <NavItem eventKey={4} href="/contact">
              Contact
             </NavItem>
+            <NavItem>
+                <Link to='/'><button onClick={this.Logout} id='logoutBtn'>Logout</button></Link>
+            </NavItem>
           </Nav>
         </Navbar.Collapse>
         </Navbar>
       </div>
         
     )
+  }
+   
 }
 
 

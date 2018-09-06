@@ -80,7 +80,8 @@
     padding: 0;
     background-color: transparent;
     display: -ms-flexbox;
-    display: flex;
+    display: none;
+
 }
 
 /* .styles_closeButton__20ID4 {
@@ -97,4 +98,27 @@
 
 #loginButton{
     margin-left: 0px;
+}
+
+.closebutton{
+    position: absolute;
+
+    top: -273px;
+    
+    right: 57px;
+    
+    border: none;
+    
+    padding: 0;
+    
+    background-color: transparent;
+    
+    display: -ms-flexbox;
+    
+    display: flex;
+
+    color: black;
+
+    font-size : 28px;
+
 }

@@ -8,7 +8,7 @@ import Trends from './components/trends';
 import Footer from './components/footer';
 import SearchIcon from './Button(1).png';
 import {Link} from 'react-router-dom';
-import  Loader from '././components/Loader'
+// import  Loader from '././components/Loader'
 
 
 class Home extends Component {

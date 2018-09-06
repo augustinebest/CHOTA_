@@ -19,15 +19,11 @@ const About = () => {
              <div>
              <h4 className='staticPageHeader'>About</h4>
              </div>
-             <p>It is a long established fact that a reader will be distracted by the readable
-                  content of a page when looking at its layout. The point of using Lorem 
-                  Ipsum is that it has a more-or-less normal distribution of letters, as 
-                  opposed to using 'Content here, content here', making it look like readable
-                   English. Many desktop publishing packages and web page editors now use
-                    Lorem Ipsum as their default model text, and a search for 'lorem ipsum' 
-                    will uncover many web sites still in their infancy. Various
-                  versions have evolved over the years, sometimes by accident, sometimes 
-                  on purpose (injected humour and the like).</p>
+             <p>
+                Find Places. Pin Experiences.
+                Chota is a platform that helps people find places of interest in a new city. It connects city visitors to interesting locations, and allows them pin their experiences to those locations.
+                Setting up an account is easy and you can be done in 30 seconds.
+            </p>
          </div>
          <div>
          <Footer/>

@@ -6,7 +6,7 @@ import './../components/LoginPage.css';
 import {Link} from 'react-router-dom';
 import InlineError from './messages/InlineError';
 import Modal from 'react-responsive-modal';
-// import Signup from './SignupPage';d
+// import Signup from './SignupPage';
 import logo from './logo_dark.png';
 import back from '../logo_white.png'
 // import './nav.css';
@@ -52,7 +52,7 @@ class Login extends Component {
                 //  console.log(res)
                 //  console.log(res.data.message);
                 alert(JSON.stringify(res.data.message));
-                if(!alert(JSON.stringify(res.data.message))){window.location.reload();}
+                if(!alert(JSON.stringify(res.data.message)))
                 sessionStorage.setItem('user', res.data.token);
                 sessionStorage.setItem('username', res.data.username);
                 sessionStorage.setItem('userId', res.data._id)
@@ -65,11 +65,9 @@ class Login extends Component {
                 })
                 // console.log(this.props.history);
                 this.props.history.push('/profile');
+                window.location.reload()
                 
-                
-              } else if(res.status === 402) {
-                alert(JSON.stringify(res.data.message));
-              }
+              } 
             })
             
             // this.props.history.push('/');
@@ -128,8 +126,8 @@ class Login extends Component {
         </Navbar.Collapse>
         </Navbar>
         {/* <div> God is with me. you like it or NOT. lol</div> */}
-        <Link to="/"> <img src={back} style = {{margin : '131px'}} alt='chota'/></Link>
-        {/* <p> Go back to home please</p> */}
+        <Link to="/"> <img src={back} style = {{marginTop : '139px', width: '347px'}} alt='chota'/></Link>
+        <div style = {{fontSize:'187%', fontFamily:'cambria', paddingLeft: '29px'}}> CLICK ICON TO GO TO HOME   </div>
                         <Modal open={open} onClose={this.onCloseModal} little>
                            <div className="center">
                                     <div className="card">
@@ -140,6 +138,7 @@ class Login extends Component {
 										</div>
 									}
                                         <h1> Login</h1>
+                                       <Link to = '/'> <button className = 'closebutton'>X</button> </Link>
                                         <form onSubmit={this.handleSubmit}>
                                             <label>Email:</label> <input className="form-item" type= "text"  name = "email" value={this.state.email} onChange={this.handleChange}/> 
                                             {errors.email && <InlineError text={errors.email}/>}

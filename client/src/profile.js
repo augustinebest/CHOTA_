@@ -1,5 +1,6 @@
 import React from 'react';
 import AdminNavBar from './components/admin-navbar';
+// import Nav from './components/nav';
 import './profile.css';
 import Trends from './components/trends';
 import ProfileIcon from './profile-icon.png';
@@ -28,6 +29,7 @@ class Profile extends React.Component {
         return(
             <div>
             <AdminNavBar/>
+            {/* <Nav/> */}
             <div id='Admin'>
                 <div>
                     <img src={ProfileIcon} alt=''/>

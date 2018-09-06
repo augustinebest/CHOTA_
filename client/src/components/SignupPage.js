@@ -97,6 +97,7 @@ class  Signup extends Component {
 										</div>
 									}
                     <h1> Signup</h1>
+                    <Link to = '/'> <button className = 'closebutton'>X</button> </Link>
                     <form onSubmit={this.handleSubmit}>
                         <label>Email:</label> <input className="form-item" type = "text"  name = "email" value={this.state.email} onChange={this.handleChange} />
     
