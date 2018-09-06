@@ -8,9 +8,7 @@ import View from './view.svg'
 
 
 
-// const API_KEY = '56f0450d2729d1d9861d643496069047'
-
-class Trends extends Component{
+class userPinnedLocation extends Component{
 
 state ={
     items: []
@@ -18,10 +16,11 @@ state ={
 
 
     componentDidMount(){
-        axios.get(`https://chota1.herokuapp.com/trending`)
+        const user = sessionStorage.getItem('userId')
+        axios.get(`http://chota1.herokuapp.com/auth/profile/${user}`)
         .then(res=>{
-            console.log(res.data)
-            this.setState({items: res.data})
+            console.log(res.data.user.pinedPlaces)
+            this.setState({items: res.data.user.pinedPlaces})
         })
     }
 
@@ -90,4 +89,4 @@ state ={
 }
 
 
-export default Trends
+export default userPinnedLocation
