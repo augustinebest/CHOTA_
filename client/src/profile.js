@@ -2,7 +2,7 @@ import React from 'react';
 import AdminNavBar from './components/admin-navbar';
 // import Nav from './components/nav';
 import './profile.css';
-import Trends from './components/trends';
+import UserPinnedLocation from './components/user-pinned-location.js';
 import ProfileIcon from './profile-icon.png';
 import axios from 'axios';
 
@@ -43,7 +43,7 @@ class Profile extends React.Component {
             </div>
             <div id='recentPlaces'>
                 <h3>Recent Places</h3>
-                <Trends/>
+                <UserPinnedLocation/>
             </div>
         </div>
     );

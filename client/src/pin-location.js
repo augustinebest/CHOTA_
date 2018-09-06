@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import AdminNavBar from './components/admin-navbar';
 import './pin-location.css';
 import axios from 'axios';
+import StarRating from './components/star-rating';
 
 
 class PinLocation extends Component{
@@ -92,30 +93,22 @@ onSubmission(e){
                     <AdminNavBar/>
                     <div id='addingLocation'>
                     <form encType="multipart/form-data" onSubmit={this.onSubmission.bind(this)}> 
-                     <input
-                        type='text'
-                        name='name'
-                        placeholder="name"
-                        value={this.state.name}
-                        onChange={this.handleChange}
-                        className="nameInput" 
-                        />
-                     <input
-                        type='text'
-                        name='description'
-                        placeholder="description"
-                        value={this.state.description}
-                        onChange={this.handleChange}
-                        className="nameInput"
-                        />
                     <input 
                         type="file" 
                         name='image'
                         onChange={this.handleFile}
                         className='file-input'
                         />
+                     <input
+                        type='text'
+                        name='name'
+                        placeholder="name of Location"
+                        value={this.state.name}
+                        onChange={this.handleChange}
+                        className="nameInput" 
+                        />
                     <div id='componentsView'>
-                    <h4>Select Category</h4>
+                    <h4>Choose Category</h4>
                      {this.state.items.map(value =>(    
                          <div key={value}>            
                     <input
@@ -128,8 +121,20 @@ onSubmission(e){
                 </div>
                       ))}
                     </div>
-                     <button type="submit" id='submitButton'>Pin Location</button>
+                    <h4>Review Location</h4>
+                     <input
+                        type='text'
+                        name='description'
+                        // placeholder="description"
+                        value={this.state.description}
+                        onChange={this.handleChange}
+                        className="nameInput"
+                        />
+                    <div>Star Rating 
+                    <StarRating/>
+                    </div>
                 <progress value = {this.state.progress} max = '100' className='progressBar'/>
+                     <button type="submit" id='submitButton'>Pin Location</button>
                     </form>
                         
                 </div>
