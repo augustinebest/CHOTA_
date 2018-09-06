@@ -4,7 +4,7 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 import Loader from './../components/Loader';
 import StarRating from './star-rating';
-import View from './view.svg'
+import View from './view.svg';
 
 
 

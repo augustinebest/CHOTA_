@@ -2,7 +2,7 @@ import React from 'react';
 import AdminNavBar from './components/admin-navbar';
 // import Nav from './components/nav';
 import './profile.css';
-import UserPinnedLocation from './components/user-pinned-location.js';
+import UserPinnedLocation from './components/userpin.js';
 import ProfileIcon from './profile-icon.png';
 import axios from 'axios';
 
@@ -10,7 +10,7 @@ import axios from 'axios';
 
 class Profile extends React.Component {
     state={
-        user: []
+        userpins: []
     }
 
 
@@ -19,7 +19,8 @@ class Profile extends React.Component {
         console.log(user)
         axios.get(`http://chota1.herokuapp.com/auth/profile/${user}`)
         .then(res=>{
-            console.log(res)
+            console.log(res.data.user.pinedPlaces)
+            this.setState({userpins: res.data.user.pinedPlaces})
         })
     }
 
@@ -43,7 +44,7 @@ class Profile extends React.Component {
             </div>
             <div id='recentPlaces'>
                 <h3>Recent Places</h3>
-                <UserPinnedLocation/>
+                <UserPinnedLocation item={this.state.userpins}/>
             </div>
         </div>
     );
