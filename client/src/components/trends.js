@@ -3,6 +3,9 @@ import './trends.css';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import Loader from './../components/Loader';
+import StarRating from './star-rating';
+import View from './view.svg'
+
 
 
 
@@ -17,19 +20,24 @@ state ={
 
 
     componentDidMount(){
-        this.setState({
-            loading:true
-        })
-        axios.get(`https://chota1.herokuapp.com/place`)
+        // this.setState({
+        //     loading:true
+        // })
+        // axios.get(`https://chota1.herokuapp.com/place`)
+        // .then(res=>{
+        //     console.log(res.data.place)
+        //     this.setState({items: res.data.place, loading: false})
+        axios.get(`https://chota1.herokuapp.com/trending`)
         .then(res=>{
-            console.log(res.data.place)
-            this.setState({items: res.data.place, loading: false})
+            console.log(res.data)
+            this.setState({items: res.data})
         })
     }
 
     render(){
         const {loading} = this.state
         if (sessionStorage.getItem('user')){
+            const DATE_OPTIONS = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
             return(
                 <div style = {{marginBottom: '90px'}}>
                  {
@@ -52,8 +60,16 @@ state ={
                     </div>
                     <div className='placeDetailDiv' >
                     <h4>{value.name}</h4>
-                    <span> space for rating</span>
-                    <p>Gps location of place</p>
+                    <span>
+                        <StarRating/>
+                    </span>
+                    <div>
+                    <img src={View} alt='' id='viewIcon'/>{value.view}
+                    </div>
+                    {/* <p>Gps location of place</p> */}
+                    <div>
+                    {(new Date(value.date)).toLocaleDateString('en-US', DATE_OPTIONS)}
+                    </div>
                     </div>
                 </div>
                     ))}
@@ -62,6 +78,7 @@ state ={
             );
         }
         else{
+            const DATE_OPTIONS = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
             return(
                 <div style = {{marginBottom: '90px'}}>
                  {
@@ -78,10 +95,18 @@ state ={
                             </div>
                             <div className='placeDetailDiv' >
                             <h4>{value.name}</h4>
-                            <span> space for rating</span>
-                            <p>Gps location of place</p>
-                            </div>
-                        </div>
+                            <span>
+                            <StarRating/>
+                            </span>
+                            <div>
+                    <img src={View} alt='' id='viewIcon'/>{value.view}
+                    </div>
+                    {/* <p>Gps location of place</p> */}
+                    <div>
+                    {(new Date(value.date)).toLocaleDateString('en-US', DATE_OPTIONS)}
+                    </div>
+                    </div>
+                </div>
                     ))}
                 </div>
                 </div>

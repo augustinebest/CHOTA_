@@ -25,19 +25,6 @@ class SearchResult extends Component {
     }
 }
 
-// getdata = async (event) =>{
-//     const recipeName = event.target.elements.recipeName.value;
-//     alert('hello')
-//     event.preventDefault();//to prevent web page default method ie auto reloading
-//     const api_call = await fetch(`https://cors-anywhere.herokuapp.com/http://food2fork.com/api/search?key=${API_KEY}&q=${recipeName}&count=10`)
-//     const data = await api_call.json();
-//     this.setState({place: data.place})
-//     console.log(this.state.place)
-//     // this.props.history.push("/SearchResults")
-//     // this.props.browserHistory.push('/SearchResults')
-// }
-
-
 
 // Hanle our search feature functionality
 
@@ -62,6 +49,7 @@ handleChange = (e) => {
         const {loading} = this.state
         // let { place } = this.state;
 
+       
         return(
             <div className='wrapper'>
             <Nav/>

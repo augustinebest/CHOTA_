@@ -5,10 +5,11 @@ import Nav from './components/nav-bar.js';
 import Footer from './components/footer';
 import './component-page.css';
 import  Loader from './components/Loader';
+import StarRating from './components/star-rating';
+import View from './components/view.svg'
 
 
 
-// const API_KEY = '56f0450d2729d1d9861d643496069047'
 
 class ComponentPage extends Component{
     constructor(props){
@@ -36,6 +37,7 @@ class ComponentPage extends Component{
         // console.log(this.props.match.params)
         const{loading} =this.state
         if (sessionStorage.getItem('user')){
+            const DATE_OPTIONS = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
             return(
                 <div>
                      <Nav/>
@@ -57,8 +59,15 @@ class ComponentPage extends Component{
                     </div>
                     <div className='placeDetailDiv' >
                     <h4>{value.name}</h4>
-                    <span> space for rating</span>
-                    <p>Gps location of place</p>
+                    <span>
+                    <StarRating/>
+                    </span>
+                    <div>
+                        <img src={View} alt='' id='viewIcon'/>{value.view}
+                    </div>
+                    <div>
+                        {(new Date(value.date)).toLocaleDateString('en-US', DATE_OPTIONS)}
+                    </div>
                     </div>
                 </div>
                     ))}
@@ -68,6 +77,7 @@ class ComponentPage extends Component{
             );
         }
         else {
+            const DATE_OPTIONS = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
             return(
                 <div>
                      <Nav/>
@@ -82,8 +92,15 @@ class ComponentPage extends Component{
                     </div>
                     <div className='placeDetailDiv' >
                     <h4>{value.name}</h4>
-                    <span> space for rating</span>
-                    <p>Gps location of place</p>
+                    <span>
+                    <StarRating/>
+                    </span>
+                    <div>
+                        <img src={View} alt='' id='viewIcon'/>{value.view}
+                    </div>
+                    <div>
+                        {(new Date(value.date)).toLocaleDateString('en-US', DATE_OPTIONS)}
+                    </div>
                     </div>
                 </div>
                     ))}
