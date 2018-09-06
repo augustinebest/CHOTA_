@@ -92,11 +92,13 @@ onSubmission(e){
                     <AdminNavBar/>
                     <div id='addingLocation'>
                     <form encType="multipart/form-data" onSubmit={this.onSubmission.bind(this)}> 
-                    <input 
-                        type="file" 
-                        name='image'
-                        onChange={this.handleFile}
-                        className='file-input'
+                     <input
+                        type='text'
+                        name='name'
+                        placeholder="name"
+                        value={this.state.name}
+                        onChange={this.handleChange}
+                        className="nameInput" 
                         />
                      <input
                         type='text'
@@ -104,16 +106,16 @@ onSubmission(e){
                         placeholder="description"
                         value={this.state.description}
                         onChange={this.handleChange}
-                        className="input-value description-text"
+                        className="nameInput"
                         />
-                     <input
-                        type='text'
-                        name='name'
-                        placeholder="name"
-                        value={this.state.name}
-                        onChange={this.handleChange}
-                        className="input-value description-text" 
+                    <input 
+                        type="file" 
+                        name='image'
+                        onChange={this.handleFile}
+                        className='file-input'
                         />
+                    <div id='componentsView'>
+                    <h4>Select Category</h4>
                      {this.state.items.map(value =>(    
                          <div key={value}>            
                     <input
@@ -125,6 +127,7 @@ onSubmission(e){
                     <label For="component">{value.categoryName}</label>
                 </div>
                       ))}
+                    </div>
                      <button type="submit" id='submitButton'>Pin Location</button>
                 <progress value = {this.state.progress} max = '100' className='progressBar'/>
                     </form>

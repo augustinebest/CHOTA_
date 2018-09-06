@@ -1,5 +1,6 @@
 import React from 'react';
 import './reviews.css';
+import StarRating from './star-rating';
 // import UserDetail from './user-detail';
 
 const Reviews = (props) => {
@@ -8,6 +9,7 @@ const Reviews = (props) => {
         <div>
             {props.comment &&
                 props.comment.map((value) =>{
+                    const DATE_OPTIONS = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
                     if(value.user_id){
 
                         return(
@@ -23,8 +25,10 @@ const Reviews = (props) => {
                                        <p>{value.commentBody}</p>
                                    </div>
                                    <div className='ratingDate'>
-                                   <div>Rating</div>
-                                   <div className='dateOfReview'> Date </div>
+                                   <div>
+                                   <StarRating/>  
+                                   </div>
+                                    <div className='dateOfReview'>{(new Date(value.date)).toLocaleDateString('en-US', DATE_OPTIONS)}</div>
                                    </div>
                
                                </div>

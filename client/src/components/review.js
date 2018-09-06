@@ -25,11 +25,12 @@ const Title = ({commentCount}) => {
 			addComment(input.value);
 			input.value = '';
 			
+			
 		}}>
 			<input className="form-control col-md-6" placeholder='Enter Reviews here' ref={node => {
 				input = node;
 			}} />
-		<br />
+			<button  type="submit" >Review</button>
 		</form>
     );
 };
@@ -106,6 +107,7 @@ class Reviews extends React.Component{
 					axios.post(this.apiUrl, comment)
 					.then((res) => {
 						console.log(res.data.user)
+						{window.location.reload();}
             // this.state.data.push(res.data);
             this.setState({data: res.data.user});
 					});
