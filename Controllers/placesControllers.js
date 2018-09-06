@@ -74,8 +74,8 @@ exports.getPlaceByParams = (req, res, next) => {
 }
 // 'reviews categoryId', 'commentBody user_id categoryName'
 exports.getAllPlaces = (req, res, next) => {
-    Place.find({})
-    .select('_id name image description date categoryId')
+    Place.find({}).populate('user_id', 'image username email')
+    .select('_id name image description date categoryId user_id')
     .exec()
     .then(place => {
         res.status(200).json({place});

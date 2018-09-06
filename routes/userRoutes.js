@@ -55,7 +55,7 @@ router.post('/select', checkAuth.AuthMiddeWare, userController.userAddInterest);
 router.post('/create', userController.signup);
 router.post('/signin', userController.login);
 router.get('/profile/:user_id', userController.userProfil);
-router.patch('/profile/:user_id/edit', checkAuth.AuthMiddeWare, upload.upload.single('image'), userController.editProfile);
+router.patch('/profile/:user_id/edit', upload.upload.single('image'), userController.editProfile);
 router.get('/search/:user_id', userController.searchUser);
 router.post('/profile/:user_id/follow', checkAuth.AuthMiddeWare, userController.addFriend);
 router.post('/profile/:user_id/unfollow', checkAuth.AuthMiddeWare, userController.unfollowFriends);

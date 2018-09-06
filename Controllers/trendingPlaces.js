@@ -3,7 +3,7 @@ const Place = require('../Models/Places');
 
 // we have a function that add places to Trending
 const addPlaceToTrend = (req, res) => {
-    Place.find().exec((err, places) => {
+    Place.find().populate('user_id categoryId', 'username image').select('-reviews').exec((err, places) => {
         if(err) res.status(304).jsom({message: err});
         const sortedPlaces = places.sort(function(a, b) {
             if(a.trendVol > b.trendVol) {

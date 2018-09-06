@@ -218,8 +218,8 @@ exports.editProfile = (req, res, next) => {
         image : req.file.path,
         imageID: ''
     }
-    User.findOne(new mongoose.Types.ObjectId(req.userData.id)).exec((err, result) => {
-        console.log(result);
+    User.findOne(user_id).exec((err, result) => {
+        res.json(result);
     })
     // cloud.upload(data.image).then(result => {
     //     data.image = result.url;
