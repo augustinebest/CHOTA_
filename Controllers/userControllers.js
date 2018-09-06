@@ -218,18 +218,25 @@ exports.editProfile = (req, res, next) => {
         image : req.file.path,
         imageID: ''
     }
-    User.findOne(user_id).exec((err, result) => {
-        res.json(result);
-    })
-    // cloud.upload(data.image).then(result => {
-    //     data.image = result.url;
-    //     data.imageID = result.Id;
-    //     User.update(user_id, data).exec((err, result) => {
-    //         if(err) res.status(301).json({message: err});
-    //         if(!result) res.status(404).json({message: 'This user does not exists!'});
-    //         res.json({message: 'This user have been updated!'});
-    //     })
-    // })
+    try {
+        User.findOne(user_id).exec((err, user) => {
+            if(!user) {
+                res.status(404).json({message: 'This user cannot be found!'});
+            } else {
+                cloud.upload(data.image).then(result => {
+                    data.image = result.url;
+                    data.imageID = result.Id;
+                    User.update(user_id, data).exec((err, result) => {
+                        if(err) res.status(301).json({message: err});
+                        if(!result) res.status(404).json({message: 'This user does not exists!'});
+                        res.json({message: 'This user have been updated!'});
+                    })
+                })
+            }
+        })
+    } catch(error) {
+        res.json({message: error})
+    }
 }
 
 // follow friends
