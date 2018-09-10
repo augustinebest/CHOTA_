@@ -17,7 +17,7 @@ class Profile extends React.Component {
    componentDidMount(){
         const user = sessionStorage.getItem('userId')
         console.log(user)
-        axios.get(`http://chota1.herokuapp.com/auth/profile/${user}`)
+        axios.get(`https://chota1.herokuapp.com/auth/profile/${user}`)
         .then(res=>{
             console.log(res.data.user.pinedPlaces)
             this.setState({userpins: res.data.user.pinedPlaces})
