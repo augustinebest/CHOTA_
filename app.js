@@ -1,23 +1,45 @@
 const express = require('express');
+const expressSession = require('express-session');
 const bodyparser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
-// const cookieParser = require('cookie-parser');
-// const MongoStore = require('connect-mongo')(cookieSession);
 const passport = require('passport');
 const app = express();
+
+
+//CORS ERRORS
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+        "Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    );
+    if(req.method === 'OPTIONS') {
+        res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, PATCH, DELETE');
+      
+    }
+    next();
+})
+
 const passportSetup = require('./Controllers/userControllers');
 const keys = require('./config/keys');
+const auth = require("./functions/checkAuth");
+
+
 
 //require routes
 const itemRoutes = require('./routes/item');
 const userRoutes = require('./routes/userRoutes');
 const profileRoutes = require('./routes/profileRoutes');
+const interestRoutes = require('./routes/interestRoutes');
+const placeRoutes = require('./routes/placeRoutes');
+const categoryRoutes = require('./routes/categoryRoutes');
+const reviewRoutes = require('./routes/reviews');
 
 //Connecting to the local database
+
 mongoose.Promise = global.Promise;
-// mongoose.connect('mongodb://localhost:27017/mernCart', { useNewUrlParser: true }); 
+// mongoose.connect('mongodb://localhost:27017/Chota', { useNewUrlParser: true }); 
 
 // Connection to mlab
 mongoose.connect(keys.mongodb, { useNewUrlParser: true });
@@ -32,6 +54,12 @@ app.set('view engine', 'ejs');
 //Set public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(expressSession({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true
+}));
+
 // Initializing passport
 app.use(passport.initialize());
 app.use(passport.session());
@@ -40,23 +68,19 @@ app.use(passport.session());
 app.use('/item', itemRoutes);
 app.use('/auth', userRoutes);
 app.use('/profile', profileRoutes);
+app.use('/interest', interestRoutes);
+app.use('/place', placeRoutes);
+app.use('/category', categoryRoutes);
+app.use('/reviews', reviewRoutes);
 
 
-//CORS ERRORS
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-        "Access-Conrol-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-    );
-    if(req.method === 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE');
-        return res.status(200).json({});
-    }
-    next();
-})
 
 app.get('/', function(req, res) {
-    res.send('<h1>Hello World1133!</h1>');
+    res.json({message: 'This is my backend!'});
+})
+
+app.get('/be', function(req, res) {
+    res.json({message: 'this is working fine'});
 })
 
 app.use((req, res, next) => {

@@ -1,13 +1,18 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 
 const userSchema = mongoose.Schema({
-   g_username: { type: String, default: null },
-   googleId: { type: String, default: null },
-   g_image: { type: String, default: null },
-   f_username: { type: String, default: null },
-   facebookId: { type: String, default: null },
-   f_image: { type: String, default: null },
+    username: { type: String},
+    email: {type: String, 
+        required: true, 
+        unique: true,
+        match: /[a-zs0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+    },
+    image: { type: String, default:'../uploads/1.jpg' },
+    facebookId: { type: String},
+    googleId: { type: String},
+    interest: [{ type: mongoose.Schema.Types.ObjectId }],
+    friends: [{ type: mongoose.Schema.Types.ObjectId }],
+    password: {type:String, required:true}
 });
 
 
