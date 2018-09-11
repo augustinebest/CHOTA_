@@ -1,0 +1,19 @@
+#Admin{
+    padding: 20px;
+    display: inline-flex;
+    /* background-color: #F2F2F2; */
+}
+#profile{
+    margin: 9px;
+}
+#followButton{
+    border: 1px solid red;
+    color: red;
+    background-color: inherit;
+    width: auto;
+    height: 30px;
+    margin: 9px;
+}
+#recentPlaces{
+    padding: 10px;
+}

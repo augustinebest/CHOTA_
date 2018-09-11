@@ -13,5 +13,12 @@ module.exports = {
         clientID: '432976223876763',
         clientSecret: 'f47fe851330cbf0187d0a2836263010d'
     },
-    mongodb: 'mongodb://chotaapp:chota123@ds033484.mlab.com:33484/chota'
+    mongodb: 'mongodb://chotaapp:chota123@ds033484.mlab.com:33484/chota',
+
+    cloudinary: {
+         cloudName: 'chota',
+         apiKey: "454241471689352",
+         apiSecret: "pCWnCq-cSSiM4UEcBrnI2EGTguQ"
+    }
+    
 }
