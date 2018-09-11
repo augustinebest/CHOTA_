@@ -30,13 +30,15 @@ const upload = multer({
     fileFilter: fileFilter
  });
  
-router.post('/', upload.any(), placeController.addPlaces);
+router.post('/', upload.single('image'), placeController.addPlaces);
 router.get('/', placeController.getAllPlaces);
-// router.get('/:placeId', placeController.getById);
+router.get('/latest/:value', placeController.getLatest);
+router.get('/single/:placeId', placeController.getPlaceByParams);
 router.patch('/:placeId', placeController.patchPlaces);
 router.get('/search/:name', placeController.searchPlaces);
 router.delete('/:placeId', placeController.deletePlaces);
-
+router.delete('/', placeController.deleteAllPlaces);
+router.post('/single/:placeId/review', placeController.addReview);
 
 
 

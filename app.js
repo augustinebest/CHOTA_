@@ -16,7 +16,6 @@ app.use((req, res, next) => {
     );
     if(req.method === 'OPTIONS') {
         res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, PATCH, DELETE');
-      
     }
     next();
 })
@@ -28,13 +27,14 @@ const auth = require("./functions/checkAuth");
 
 
 //require routes
-const itemRoutes = require('./routes/item');
 const userRoutes = require('./routes/userRoutes');
 const profileRoutes = require('./routes/profileRoutes');
 const interestRoutes = require('./routes/interestRoutes');
 const placeRoutes = require('./routes/placeRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const reviewRoutes = require('./routes/reviews');
+const trendRoutes = require('./routes/trend');
+const feedbackRoutes = require('./routes/feedback');
 
 //Connecting to the local database
 
@@ -42,7 +42,7 @@ mongoose.Promise = global.Promise;
 // mongoose.connect('mongodb://localhost:27017/Chota', { useNewUrlParser: true }); 
 
 // Connection to mlab
-mongoose.connect(keys.mongodb, { useNewUrlParser: true });
+mongoose.connect(keys.mongodb, { useNewUrlParser: true })
 
 //Body-parser Middleware
 app.use(bodyparser.urlencoded({extended: false}));
@@ -65,13 +65,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Use routes
-app.use('/item', itemRoutes);
 app.use('/auth', userRoutes);
 app.use('/profile', profileRoutes);
 app.use('/interest', interestRoutes);
 app.use('/place', placeRoutes);
 app.use('/category', categoryRoutes);
 app.use('/reviews', reviewRoutes);
+app.use('/trending', trendRoutes);
+app.use('/feedback', feedbackRoutes);
 
 
 

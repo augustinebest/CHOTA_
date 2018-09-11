@@ -5,7 +5,7 @@ const userController = require('../Controllers/userControllers');
 var jwt = require('jsonwebtoken');
 const checkAuth = require('../functions/checkAuth');
 const secret = 'secretkey';
-
+const upload = require('../functions/uploads');
 
 // For google
 router.get('/login', (req, res) => {
@@ -49,10 +49,17 @@ router.get('/facebook/redirect', passport.authenticate('facebook'), (req, res) =
 
 // User Add Interest
 router.post('/select', checkAuth.AuthMiddeWare, userController.userAddInterest);
-router.post('/select', checkAuth.AuthMiddeWare, userController.addFriend);
+// router.post('/select', checkAuth.AuthMiddeWare, userController.addFriend);
 
 // local signup
 router.post('/create', userController.signup);
 router.post('/signin', userController.login);
+router.get('/profile/:user_id', userController.userProfil);
+router.patch('/profile/:user_id/edit', upload.upload.single('image'), userController.editProfile);
+router.get('/search/:user_id', userController.searchUser);
+router.post('/profile/:user_id/follow', checkAuth.AuthMiddeWare, userController.addFriend);
+router.post('/profile/:user_id/unfollow', checkAuth.AuthMiddeWare, userController.unfollowFriends);
+router.post('/recoverpassword', userController.userForgotPassword);
+router.post('/recover', userController.getUserToken);
 
 module.exports = router;
